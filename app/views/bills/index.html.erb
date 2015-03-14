@@ -7,6 +7,7 @@
     <th>Amount</th>
     <th>Due Date</th>
     <th>Status</th>
+    <th>&nbsp;</th>
   </tr>
 
   <% @bills.each do |bill| %>
@@ -19,18 +20,26 @@
         <td><%= bill.due_date %></td>
         <td><%= bill.status %></td>
         <td>
-          <%= form_for(bill, url: paid_path) do |f| %>
-              <%= f.hidden_field(:id, value: bill.id) %>
-              <p>
-                <%= f.submit 'Paid' %>
-              </p>
+          <% if bill.status != 'paid' %>
+              <%= form_for(bill, url: paid_path) do |f| %>
+                  <%= f.hidden_field(:id, value: bill.id) %>
+
+                  <%= f.submit 'Paid' %>
+
+              <% end %>
+          <% else %>
+              Done
           <% end %>
         </td>
-        <td><%= link_to('Edit', edit_bill_path(bill)) %></td>
+        <td><%= link_to(edit_bill_path(bill)) do %>
+              <%= image_tag('pencil.png') %>
+          <% end %></td>
         <td><%= link_to('Show', bill_path(bill)) %></td>
-        <td><%= link_to 'Delete', bill_path(bill),
+        <td><%= link_to(bill_path(bill),
                         method: :delete,
-                        data: { confirm: 'Are you sure?' } %></td>
+                        data: {confirm: 'Are you sure?'}) do %>
+              <%= image_tag('trash.png') %>
+              <% end %></td>
       </tr>
   <% end %>
 </table>
