@@ -1,2 +1,36 @@
-<h1>Bills#index</h1>
-<p>Find me in app/views/bills/index.html.erb</p>
+<table>
+  <tr>
+    <th>Issuer</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Cycle</th>
+    <th>Amount</th>
+    <th>Due Date</th>
+    <th>Status</th>
+  </tr>
+
+  <% @bills.each do |bill| %>
+      <tr class="<%= bill.status %>">
+        <td><%= bill.issuer %></td>
+        <td><%= bill.bill_type %></td>
+        <td><%= bill.description %></td>
+        <td><%= bill.cycle %></td>
+        <td><%= number_to_currency bill.amount %></td>
+        <td><%= bill.due_date %></td>
+        <td><%= bill.status %></td>
+        <td>
+          <%= form_for(bill, url: paid_path) do |f| %>
+              <%= f.hidden_field(:id, value: bill.id) %>
+              <p>
+                <%= f.submit 'Paid' %>
+              </p>
+          <% end %>
+        </td>
+        <td><%= link_to('Edit', edit_bill_path(bill)) %></td>
+        <td><%= link_to('Show', bill_path(bill)) %></td>
+        <td><%= link_to 'Delete', bill_path(bill),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
