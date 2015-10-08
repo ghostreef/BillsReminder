@@ -11,35 +11,29 @@
   </tr>
 
   <% @bills.each do |bill| %>
-      <tr class="<%= bill.status %>">
-        <td><%= bill.issuer %></td>
-        <td><%= bill.bill_type %></td>
-        <td><%= bill.description %></td>
-        <td><%= bill.cycle %></td>
-        <td><%= number_to_currency bill.amount %></td>
-        <td><%= bill.due_date %></td>
-        <td><%= bill.status %></td>
-        <td>
-          <% if bill.status != 'paid' %>
-              <%= form_for(bill, url: paid_path) do |f| %>
-                  <%= f.hidden_field(:id, value: bill.id) %>
+    <tr class="<%= bill.status %>">
+      <td><%= bill.issuer %></td>
+      <td><%= bill.bill_type %></td>
+      <td><%= bill.description %></td>
+      <td><%= bill.cycle %></td>
+      <td><%= number_to_currency bill.amount %></td>
+      <td><%= bill.due_date %></td>
+      <td><%= bill.status %></td>
+      <td>
+        <% if bill.status != 'paid' %>
+          <%= form_for(bill, url: paid_path) do |f| %>
+            <%= f.hidden_field(:id, value: bill.id) %>
 
-                  <%= f.submit 'Paid' %>
+            <%= f.submit 'Paid' %>
 
-              <% end %>
-          <% else %>
-              Done
           <% end %>
-        </td>
-        <td><%= link_to(edit_bill_path(bill)) do %>
-              <%= image_tag('pencil.png') %>
-          <% end %></td>
-        <td><%= link_to('Show', bill_path(bill)) %></td>
-        <td><%= link_to(bill_path(bill),
-                        method: :delete,
-                        data: {confirm: 'Are you sure?'}) do %>
-              <%= image_tag('trash.png') %>
-              <% end %></td>
-      </tr>
+        <% else %>
+          Done
+        <% end %>
+      </td>
+      <td class='taiga'><%= link_to('h', edit_bill_path(bill)) %></td>
+      <td class='taiga'><%= link_to('W', bill_path(bill)) %></td>
+      <td class='taiga'><%= link_to('j', bill_path(bill), method: :delete, data: {confirm: 'Are you sure?'}) %></td>
+    </tr>
   <% end %>
 </table>
