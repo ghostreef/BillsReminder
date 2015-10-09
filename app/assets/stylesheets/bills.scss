@@ -54,3 +54,14 @@ $black: #1e1e1e;
   }
 }
 
+.taiga {
+  a {
+    text-decoration: none;
+    color: $black;
+    opacity: .2;
+    transition: opacity .5s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

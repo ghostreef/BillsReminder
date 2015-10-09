@@ -15,14 +15,31 @@
  */
 
 body {
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 @font-face {
-    font-family: 'taiga';
-    src: url("/taiga.woff") format('woff');
+  font-family: 'taiga';
+  src: url("/taiga.woff") format('woff');
 }
 
 .taiga {
-    font-family: taiga, sans-serif;;
+  font-family: taiga, sans-serif;
+}
+
+button, input[type='submit'] {
+  width: 5em;
+  outline: none;
+  border: none;
+  padding: 0.3em;
+  background: cadetblue;
+  border-radius: .25em;
+  box-shadow: 1px 1px 1px #888, inset -1px -1px 1px #528f91;
+  color: whitesmoke;
+  cursor: pointer;
+  &:disabled {
+    opacity: .5;
+    background: grey;
+    box-shadow: 1px 1px 1px #797979, inset -1px -1px 1px #969696;
+  }
 }

@@ -23,12 +23,10 @@
         <% if bill.status != 'paid' %>
           <%= form_for(bill, url: paid_path) do |f| %>
             <%= f.hidden_field(:id, value: bill.id) %>
-
             <%= f.submit 'Paid' %>
-
           <% end %>
         <% else %>
-          Done
+          <%= button_tag('Done', disabled: true) %>
         <% end %>
       </td>
       <td class='taiga'><%= link_to('h', edit_bill_path(bill)) %></td>
