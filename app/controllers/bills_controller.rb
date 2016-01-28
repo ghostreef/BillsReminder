@@ -11,13 +11,8 @@ class BillsController < ApplicationController
   def paid
     bill = Bill.find(params[:bill][:id].to_i)
 
-    new_bill = bill.dup
-    new_bill.due_date += 1.month
-    new_bill.paid = false
-    new_bill.save
+    bill.pay
 
-    bill.paid = true
-    bill.save
     # without action rails runs this action 6 times ??
     redirect_to action: 'dashboard'
   end
@@ -47,13 +42,7 @@ class BillsController < ApplicationController
 
   def update
     @bill = Bill.find(params[:id].to_i)
-
-    if bill_params[:paid]
-      new_bill = @bill.dup
-      new_bill.due_date += 1.month
-      new_bill.save
-    end
-
+    
     if @bill.update(bill_params)
       redirect_to @bill
     else
