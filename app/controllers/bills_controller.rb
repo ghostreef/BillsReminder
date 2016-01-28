@@ -72,7 +72,7 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:issuer, :bill_type, :amount, :cycle, :due_date, :description, :paid, :auto_pay)
+    params.require(:bill).permit(:issuer, :bill_type, :amount, :term_number, :term_unit, :due_date, :description, :paid, :auto_pay)
   end
 
 end

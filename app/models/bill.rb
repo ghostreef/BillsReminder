@@ -1,11 +1,13 @@
 class Bill < ActiveRecord::Base
-  validates :issuer, :bill_type, :amount, :cycle, :due_date, presence: true
-  validates :amount, :cycle, numericality: { greater_than: 0 }
-  validates :cycle, numericality: { only_integer: true }
+  validates :issuer, :bill_type, :amount, :term_unit, :term_number, :due_date, presence: true
+  validates :amount, :term_number, numericality: { greater_than: 0 }
+  validates :term_number, numericality: { only_integer: true }
 
   validate :date_cannot_be_in_the_past, on: :create
 
   before_create :set_default_values
+
+  enum term_unit: { daily: 0, weekly: 1, monthly: 2, yearly: 3 }
 
   def date_cannot_be_in_the_past
     if due_date.present? && due_date < Date.today

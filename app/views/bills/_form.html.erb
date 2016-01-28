@@ -41,8 +41,13 @@
     </p>
 
     <p>
-      <%= f.label :cycle %><br>
-      <%= f.number_field :cycle %>
+      <%= f.label :term_number %><br>
+      <%= f.number_field :term_number %>
+    </p>
+
+    <p>
+      <%= f.label :term_unit %><br>
+      <%= f.select :term_unit, Bill.term_unit.keys %>
     </p>
 
     <p>

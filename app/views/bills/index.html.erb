@@ -3,7 +3,7 @@
     <th>Issuer</th>
     <th>Type</th>
     <th>Description</th>
-    <th>Cycle</th>
+    <th>Term</th>
     <th>Amount</th>
     <th>Due Date</th>
     <th>Status</th>
@@ -15,7 +15,7 @@
       <td><%= bill.issuer %></td>
       <td><%= bill.bill_type %></td>
       <td><%= bill.description %></td>
-      <td><%= bill.cycle %></td>
+      <td><%= bill.term_number %> <%= bill.term_unit %></td>
       <td><%= number_to_currency bill.amount %></td>
       <td><%= bill.due_date %></td>
       <td><%= bill.status %></td>
