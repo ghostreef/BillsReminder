@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308151100) do
+ActiveRecord::Schema.define(version: 20160128141654) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer"
     t.string   "bill_type"
     t.decimal  "amount"
-    t.integer  "cycle"
     t.date     "due_date"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "paid"
     t.boolean  "auto_pay"
+    t.integer  "term_unit"
+    t.integer  "term_number"
   end
 
 end
