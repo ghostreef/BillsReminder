@@ -7,7 +7,8 @@ class Bill < ActiveRecord::Base
 
   before_create :set_default_values
 
-  enum term_unit: { daily: 0, weekly: 1, monthly: 2, yearly: 3 }
+  # these enums match date object attributes
+  enum term_unit: { days: 0, weeks: 1, months: 2, years: 3 }
 
   def date_cannot_be_in_the_past
     if due_date.present? && due_date < Date.today
@@ -29,6 +30,18 @@ class Bill < ActiveRecord::Base
     else
       'later'
     end
+  end
+
+  # all or none atm
+  def pay(final_bill=false)
+
+    unless final_bill
+      next_bill = dup
+      next_bill.due_date = due_date.advance({ term_unit => term_number }.symbolize_keys)
+      next_bill.save
+    end
+
+    update(paid: true)
   end
 
   private
