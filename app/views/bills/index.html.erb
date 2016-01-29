@@ -24,6 +24,9 @@
           <%= form_for(bill, url: paid_path) do |f| %>
             <%= f.hidden_field(:id, value: bill.id) %>
             <%= f.submit 'Paid' %>
+
+            <%= f.label :last_bill, 'Final Bill?' %>
+            <%= f.check_box :last_bill %>
           <% end %>
         <% else %>
           <%= button_tag('Done', disabled: true) %>
