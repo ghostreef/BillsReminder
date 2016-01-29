@@ -4,6 +4,9 @@ class BillsController < ApplicationController
   end
 
   def dashboard
+
+    # dashboard gets unpaid bills
+    # or -1 week - +2 weeks
     @bills = Bill.where{((paid.eq false) & (due_date <= Date.today)) | ({due_date: (Date.today - 1.week)..(Date.today + 2.weeks) }) }.order(:due_date)
     render 'index'
   end
