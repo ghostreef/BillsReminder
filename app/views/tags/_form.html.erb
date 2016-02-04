@@ -1,0 +1,14 @@
+<%= form_for @tag do |f| %>
+
+  <% if @tag.errors.any? %>
+  <% end %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :regex %>
+    <%= f.text_field :regex %>
+  </p>
+  <%= f.submit %>
+<% end %>
