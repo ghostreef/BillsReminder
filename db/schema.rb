@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128143952) do
+ActiveRecord::Schema.define(version: 20160129134252) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20160128143952) do
     t.integer  "term_unit"
     t.integer  "term_number"
     t.boolean  "last_bill"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "regex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
 end
