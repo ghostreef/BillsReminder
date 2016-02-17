@@ -29,3 +29,17 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
+
+input:disabled {
+  outline: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+// how come shake problems
+input {
+  padding: 0;
+}
