@@ -1,0 +1,8 @@
+<ul class='horizontal_menu tag_list'>
+  <% @sources.each do |source| %>
+  <li><%= source.name %>
+    <%= link_to('W', source_path(source), class: 'taiga view_icon icon') %>
+    <%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga delete_icon icon') %>
+  </li>
+  <% end %>
+</ul>

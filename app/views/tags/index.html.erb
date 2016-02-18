@@ -1,8 +1,0 @@
-<ul class='horizontal_menu tag_list'>
-  <% @tags.each do |tag| %>
-  <li><%= tag.name %>
-    <%= link_to('W', tag_path(tag), class: 'taiga view_icon icon') %>
-    <%= link_to('j', tag_path(tag), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga delete_icon icon') %>
-  </li>
-  <% end %>
-</ul>
