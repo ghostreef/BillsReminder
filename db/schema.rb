@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129134252) do
+ActiveRecord::Schema.define(version: 20160210000327) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 20160129134252) do
     t.integer  "term_unit"
     t.integer  "term_number"
     t.boolean  "last_bill"
+  end
+
+  create_table "purposes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
