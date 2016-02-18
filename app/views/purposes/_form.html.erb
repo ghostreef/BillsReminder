@@ -1,0 +1,9 @@
+<%= form_for @purpose, remote: true do |f| %>
+  <% if @purpose.errors.any? %>
+  <% end %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <%= f.submit %>
+<% end %>

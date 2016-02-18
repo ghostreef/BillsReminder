@@ -1,0 +1,27 @@
+<div class='purposes'>
+  <% if defined?(@results) %>
+    <div>
+      <% @results.each do |result| %>
+        <%= result %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <ul class='horizontal_menu purpose_list tag_list'>
+    <% @purposes.each do |purpose| %>
+      <li>
+        <%= form_for purpose, remote: true, html: {class: "js-purpose_form js-purpose_form_#{purpose.id} edit_purpose"} do |f| %>
+          <%= f.text_field :name, disabled: true, class: 'js-input purpose_name' %>
+          <%= f.submit 'F', class: 'taiga icon hide js-submit' %>
+        <% end %>
+        <%= link_to('h', '#', remote: true, class: "js-edit_purpose js-edit_purpose_form_#{purpose.id} taiga icon", data: {id: purpose.id}) %>
+        <%= link_to('j', purpose_path(purpose), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga delete_icon icon') %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= form_tag create_many_purposes_path do %>
+    <%= text_field_tag('purposes[][name]', nil, id: nil, class: 'js-new_purpose') %>
+    <%= submit_tag('submit', class: 'blue_button') %>
+  <% end %>
+</div>
