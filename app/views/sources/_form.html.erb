@@ -2,13 +2,22 @@
 
   <% if @source.errors.any? %>
   <% end %>
+
   <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
   </p>
+
   <p>
     <%= f.label :regex %>
     <%= f.text_field :regex %>
   </p>
+
+  <p>
+    <%= f.label :purpose %>
+    <%= f.collection_select(:purpose_id, Purpose.all, :id, :name) %>
+  </p>
+
   <%= f.submit %>
+
 <% end %>
