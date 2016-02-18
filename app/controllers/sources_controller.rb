@@ -43,12 +43,12 @@ class SourcesController < ApplicationController
     begin
       @source = Source.find(params[:id].to_i)
     rescue
-
+      # what
     end
   end
 
   def source_params
-    params.require(:source).permit(:name, :regex)
+    params.require(:source).permit(:name, :regex, :purpose_id)
   end
 
 end
