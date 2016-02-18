@@ -20,21 +20,12 @@ class SourcesController < ApplicationController
 
   def create
     @source = Source.new(source_params)
-
-    if @source.save
-      redirect_to @source
-    else
-      render 'new'
-    end
+    @source.save ? redirect_to(@source) : render(:new)
   end
 
 
   def update
-    if @source.update(source_params)
-      redirect_to @source
-    else
-      render 'edit'
-    end
+    @source.update(source_params) ? redirect_to(@source) : render(:edit)
   end
 
 
@@ -42,15 +33,18 @@ class SourcesController < ApplicationController
     if @source.destroy
       redirect_to sources_url, notice: 'Source successfully destroyed.'
     else
-      flash[:error] = 'Failed to destroy source.'
-      redirect_to sources_path
+      redirect_to sources_path, flash: { error: 'Failed to destroy source.' }
     end
   end
 
   private
 
   def find_source
-    @source = Source.find(params[:id].to_i)
+    begin
+      @source = Source.find(params[:id].to_i)
+    rescue
+
+    end
   end
 
   def source_params
