@@ -1,0 +1,12 @@
+.purposes {
+  .purpose_list {
+    li {
+      width: 12em;
+      float: left;
+      .purpose_name {
+        width: 7.8125rem;
+        font-size: .8125em;
+      }
+    }
+  }
+}

@@ -68,7 +68,7 @@ $black: #1e1e1e;
 
 .tag_list {
   li {
-    float: left;
+
     margin: 0 .5em .5em 0;
     border-radius: 0.1875em;
 
@@ -127,4 +127,8 @@ $black: #1e1e1e;
       background-color: #008CBA;
     }
   }
+}
+
+.edit_purpose {
+  display: inline-block;
 }
