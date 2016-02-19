@@ -10,9 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+@import "base/*";
+@import "pages/*";
+@import "patterns/*";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -27,15 +29,7 @@ body {
   font-family: taiga, sans-serif;
 }
 
-button, input[type='submit'] {
-  outline: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: inherit;
-  background: none;
-  font-size: inherit;
-}
+
 
 
 

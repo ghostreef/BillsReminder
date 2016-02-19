@@ -1,0 +1,18 @@
+.button {
+  cursor: pointer;
+
+  &.salmon_button {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    background: #E76857;
+    color: white;
+    padding: 3px 20px;
+    //  border 1px solid #F2C3BE;:
+    border-radius: 3px;
+    box-shadow: 0 1px  #F2C3BE, 0 2px 1px #9E9D9D;
+    //  #D35C4F
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+}
+
