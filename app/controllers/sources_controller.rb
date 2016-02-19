@@ -23,6 +23,14 @@ class SourcesController < ApplicationController
     @source.save ? redirect_to(@source) : render(:new)
   end
 
+  def create_many
+    results = params[:sources].map do |source|
+      s = Source.create(source_hash(source))
+      s.errors.empty? ? "#{s.name} created successfully." : s.custom_error_messages
+    end
+
+    redirect_to sources_url, notice: results.flatten
+  end
 
   def update
     @source.update(source_params) ? redirect_to(@source) : render(:edit)

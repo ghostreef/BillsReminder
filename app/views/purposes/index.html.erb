@@ -9,7 +9,7 @@
 
   <%= form_tag create_many_purposes_path, class: 'create_purpose_form' do %>
     <%= text_field_tag('purposes[][name]', nil, id: nil, class: 'js-new_purpose') %>
-    <%= submit_tag('SUBMIT', class: 'salmon_button') %>
+    <%= submit_tag('SUBMIT', class: 'salmon_button button') %>
   <% end %>
 
   <ul class='horizontal_menu purpose_list tag_list'>

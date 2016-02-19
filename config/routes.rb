@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :sources do
     collection do
       post 'update_many'
+      post 'create_many'
     end
   end
 

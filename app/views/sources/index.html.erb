@@ -7,8 +7,15 @@
   </div>
 <% end %>
 
-<%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
-  <%= submit_tag('UPDATE', class: 'salmon_button') %>
+<%= form_tag create_many_sources_path do %>
+  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button')%>
+  <%= submit_tag('CREATE', class: 'salmon_button button') %>
+
+  <%= field_set_tag nil, class: 'js-source_fieldset' do %>
+    <%= text_field_tag('sources[]name') %>
+    <%= text_field_tag('sources[]regex') %>
+    <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose') %>
+  <% end %>
 <% end %>
 
 <table class='js-sources_table'>
@@ -27,10 +34,10 @@
   <% @sources.each do |source| %>
     <tr>
       <td><%= source.id %></td>
-      <td><%= text_field_tag("sources[#{source.id}]name", source.name, class: '') %></td>
-      <td><%= text_field_tag("sources[#{source.id}]regex", source.regex, class: '') %></td>
+      <td><%= text_field_tag("sources[#{source.id}]name", source.name) %></td>
+      <td><%= text_field_tag("sources[#{source.id}]regex", source.regex) %></td>
       <td><%= select_tag("sources[#{source.id}]purpose_id",
-                         options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose', class: '') %></td>
+                         options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose') %></td>
       <td><%= source.total %></td>
       <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
       <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
@@ -38,3 +45,7 @@
   <% end %>
   </tbody>
 </table>
+
+<%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
+  <%= submit_tag('UPDATE', class: 'salmon_button button') %>
+<% end %>

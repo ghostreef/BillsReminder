@@ -9,4 +9,10 @@ $(document).ready(function () {
         $(this).append($('.js-modified').remove().hide());
         this.submit();
     });
+
+    $('.js-add_fieldset').on('click', function(event) {
+        var $fieldset = $('.js-source_fieldset:first').clone();
+        $('input, select', $fieldset).val('');
+        $(this).parent().append($fieldset);
+    });
 });
