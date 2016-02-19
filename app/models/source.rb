@@ -1,5 +1,5 @@
 class Source < ActiveRecord::Base
-  validates :name, :regex, presence: true, length: { minimum: 1 }
+  validates :name, :regex, length: { minimum: 1 }
   validates :name, uniqueness: true
 
   # in my head this is backwards, but the fk goes in this table
@@ -12,7 +12,7 @@ class Source < ActiveRecord::Base
 
   def custom_error_messages
     errors.map do |attribute, error|
-      "'#{send(attribute)}' #{error}."
+      "#{attribute} '#{send(attribute)}' #{error}."
     end
   end
 end

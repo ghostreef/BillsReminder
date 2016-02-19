@@ -6,7 +6,7 @@ class Purpose < ActiveRecord::Base
 
   def custom_error_messages
     errors.map do |attribute, error|
-      "'#{send(attribute)}' #{error}."
+      "#{attribute} '#{send(attribute)}' #{error}."
     end
   end
 end

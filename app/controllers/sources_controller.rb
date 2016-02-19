@@ -40,7 +40,7 @@ class SourcesController < ApplicationController
     results = params[:sources].map do |k,v|
       source = Source.find(k.to_i)
       source.update(source_hash(v))
-      source.errors.empty? ? "Source #{source.id} successfully updated." : "Source #{source.id} did not update."
+      source.errors.empty? ? "Source #{source.id} successfully updated." : "Source #{source.id} did not update. #{source.custom_error_messages.join(', ')}"
     end
 
     redirect_to sources_url, notice: results
