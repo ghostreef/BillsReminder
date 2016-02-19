@@ -1,25 +1,38 @@
-<table>
+<% unless flash[:notice].nil? %>
+  <div>
+    <% flash[:notice].each do |notice| %>
+      <%= notice %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
+  <%= submit_tag('UPDATE', class: 'salmon_button') %>
+<% end %>
+
+<table class='js-sources_table'>
   <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Regex</th>
-      <th>Purpose</th>
-      <th>Total</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Regex</th>
+    <th>Purpose</th>
+    <th>Total</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
   </thead>
   <tbody>
   <% @sources.each do |source| %>
     <tr>
       <td><%= source.id %></td>
-      <td><%= source.name %></td>
-      <td><%= source.regex %></td>
-      <td><%= source.purpose.nil? ? 'uh oh' : source.purpose.name %></td>
+      <td><%= text_field_tag("sources[#{source.id}]name", source.name, class: '') %></td>
+      <td><%= text_field_tag("sources[#{source.id}]regex", source.regex, class: '') %></td>
+      <td><%= select_tag("sources[#{source.id}]purpose_id",
+                         options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose', class: '') %></td>
       <td></td>
-      <td><%= link_to('W', source_path(source), class: '') %></td>
-      <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: '') %></td>
+      <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
+      <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
     </tr>
   <% end %>
   </tbody>

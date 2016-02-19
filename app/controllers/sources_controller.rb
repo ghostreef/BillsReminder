@@ -28,6 +28,15 @@ class SourcesController < ApplicationController
     @source.update(source_params) ? redirect_to(@source) : render(:edit)
   end
 
+  def update_many
+    results = params[:sources].map do |k,v|
+      source = Source.find(k.to_i)
+      source.update(source_hash(v))
+      source.errors.empty? ? "Source #{source.id} successfully updated." : "Source #{source.id} did not update."
+    end
+
+    redirect_to sources_url, notice: results
+  end
 
   def destroy
     if @source.destroy
@@ -48,7 +57,10 @@ class SourcesController < ApplicationController
   end
 
   def source_params
-    params.require(:source).permit(:name, :regex, :purpose_id)
+    source_hash(params.require(:source))
   end
 
+  def source_hash(source)
+    source.permit(:name, :regex, :purpose_id)
+  end
 end
