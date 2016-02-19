@@ -1,20 +1,21 @@
 class PurposesController < ApplicationController
 
+  before_action :find_source, only: [:edit, :update, :destroy]
+
   def index
     @purposes = Purpose.all.order(:name)
   end
 
   def create_many
-    @results = params[:purposes].map do |purpose|
-      p = Purpose.create(purpose.permit(:name))
+    results = params[:purposes].map do |purpose|
+      p = Purpose.create(purpose_hash(purpose))
       p.errors.empty? ? "#{p.name} successfully created." : p.custom_error_messages
     end
 
-    redirect_to purposes_path
+    redirect_to purposes_path, notice: results
   end
 
   def edit
-    @purpose = Purpose.find(params[:id].to_i)
     respond_to do |format|
       format.js
       format.html
@@ -22,7 +23,6 @@ class PurposesController < ApplicationController
   end
 
   def update
-    @purpose = Purpose.find(params[:id].to_i)
     response = {}
 
     if @purpose.update(purpose_params)
@@ -38,11 +38,8 @@ class PurposesController < ApplicationController
       format.html
     end
   end
-
-
-
+  
   def destroy
-    @purpose = Purpose.find(params[:id].to_i)
     if @purpose.destroy
       redirect_to purposes_url, notice: 'Purpose successfully destroyed.'
     else
@@ -53,7 +50,19 @@ class PurposesController < ApplicationController
 
   private
 
+  def find_purpose
+    begin
+      @purpose = Purpose.find(params[:id].to_i)
+    rescue
+      # what
+    end
+  end
+
   def purpose_params
-    params.require(:purpose).permit(:name)
+    purpose_hash(params.require(:purpose))
+  end
+
+  def purpose_hash(hash)
+    hash.permit(:name)
   end
 end

@@ -60,7 +60,7 @@ class SourcesController < ApplicationController
     source_hash(params.require(:source))
   end
 
-  def source_hash(source)
-    source.permit(:name, :regex, :purpose_id)
+  def source_hash(hash)
+    hash.permit(:name, :regex, :purpose_id)
   end
 end
