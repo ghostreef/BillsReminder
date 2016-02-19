@@ -1,4 +1,5 @@
 <% unless flash[:notice].nil? %>
+  <% flash[:notice] = Array(flash[:notice]) if flash[:notice].is_a?(String) %>
   <div>
     <% flash[:notice].each do |notice| %>
       <%= notice %>
@@ -30,7 +31,7 @@
       <td><%= text_field_tag("sources[#{source.id}]regex", source.regex, class: '') %></td>
       <td><%= select_tag("sources[#{source.id}]purpose_id",
                          options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose', class: '') %></td>
-      <td></td>
+      <td><%= source.total %></td>
       <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
       <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
     </tr>

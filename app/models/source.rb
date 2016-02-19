@@ -5,4 +5,8 @@ class Source < ActiveRecord::Base
   # in my head this is backwards, but the fk goes in this table
   belongs_to :purpose
   # also note if a purpose is deleted, purpose_id remains, but .purpose will return nil
+
+  def total
+
+  end
 end
