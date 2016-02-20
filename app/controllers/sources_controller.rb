@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
   before_action :find_source, only: [:show, :edit, :update, :destroy]
 
   def index
-    @sources = Source.all.order(:name)
+    @sources = Source.order(:name)
   end
 
   def show

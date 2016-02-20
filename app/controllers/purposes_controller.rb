@@ -3,7 +3,7 @@ class PurposesController < ApplicationController
   before_action :find_source, only: [:edit, :update, :destroy]
 
   def index
-    @purposes = Purpose.all.order(:name)
+    @purposes = Purpose.order(:name)
   end
 
   def create_many
