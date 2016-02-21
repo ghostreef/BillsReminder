@@ -13,6 +13,11 @@
     <%= f.collection_select :source_ids, Source.order(:name), :id, :name, {}, { multiple: true } %>
   </p>
 
+  <p>
+    <%= f.label :purpose_ids, 'Purposes' %>
+    <%= f.collection_select :purpose_ids, Purpose.order(:name), :id, :name, {}, { multiple: true } %>
+  </p>
+
   <%= f.submit 'SUBMIT', class: 'button salmon_button' %>
 
 <% end %>
