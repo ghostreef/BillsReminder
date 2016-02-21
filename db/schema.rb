@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221171241) do
+ActiveRecord::Schema.define(version: 20160221200552) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer"
@@ -57,5 +57,19 @@ ActiveRecord::Schema.define(version: 20160221171241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "transactions", force: :cascade do |t|
+    t.date     "date"
+    t.decimal  "amount"
+    t.string   "raw_description"
+    t.string   "description"
+    t.integer  "source_id"
+    t.integer  "purpose_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id"
+  add_index "transactions", ["source_id"], name: "index_transactions_on_source_id"
 
 end
