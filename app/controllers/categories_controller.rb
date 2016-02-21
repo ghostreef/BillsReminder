@@ -50,6 +50,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_hash(hash)
-    hash.permit(:name, source_ids: [], category_ids: [])
+    hash.permit(:name, source_ids: [], purpose_ids: [])
   end
 end
