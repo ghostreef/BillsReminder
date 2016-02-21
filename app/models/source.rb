@@ -8,6 +8,8 @@ class Source < ActiveRecord::Base
   belongs_to :purpose
   # also note if a purpose is deleted, purpose_id remains, but .purpose will return nil
 
+  alias_attribute :default_purpose, :purpose
+
   def total
 
   end
