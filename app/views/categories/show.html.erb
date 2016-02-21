@@ -1,9 +1,20 @@
-<p>ID: <%= @category.id %></p>
-<p>Name: <%= @category.name %></p>
+<p>Category ID: <%= @category.id %></p>
 
-<p>Sources: </p>
-<ul>
-  <% @category.sources.each do |source| %>
-    <li><%= source.name %></li>
+<%= form_for @category do |f| %>
+
+  <% if @category.errors.any? %>
   <% end %>
-</ul>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :source_ids, 'Sources' %>
+    <%= f.collection_select :source_ids, Source.order(:name), :id, :name, {}, { multiple: true } %>
+  </p>
+
+  <%= f.submit 'SUBMIT', class: 'button salmon_button' %>
+
+<% end %>
