@@ -1,3 +1,20 @@
-<% @categories.each do |category| %>
-  <p><%= category.inspect %></p>
-<% end %>
+<ul class='categories_list'>
+  <% @categories.each do |category| %>
+    <li>
+      <p><%= category.name %></p>
+
+      <p><%= number_to_currency(0) %></p>
+
+      <div class='overlay'></div>
+
+      <div class='actions_container'>
+        <div class='actions'>
+          <%= link_to('u', category_path(category), class: 'taiga') %>
+          <%= link_to('E', category_path(category), class: 'taiga') %>
+          <%= link_to('W', category_path(category), class: 'taiga') %>
+        </div>
+      </div>
+
+    </li>
+  <% end %>
+</ul>
