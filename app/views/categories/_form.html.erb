@@ -10,7 +10,7 @@
 
   <p>
     <%= f.label :source_ids, 'Sources' %>
-    <%= f.collection_check_boxes :source_ids, Source.order(:name), :id, :name, {}, { multiple: true } %>
+    <%= f.collection_select :source_ids, Source.order(:name), :id, :name, {}, { multiple: true } %>
   </p>
 
   <%= f.submit 'SUBMIT', class: 'button salmon_button' %>
