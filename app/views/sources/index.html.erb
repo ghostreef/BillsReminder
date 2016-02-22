@@ -8,12 +8,12 @@
 <% end %>
 
 <%= form_tag create_many_sources_path do %>
-  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button')%>
+  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
   <%= submit_tag('CREATE', class: 'salmon_button button') %>
 
   <%= field_set_tag nil, class: 'js-source_fieldset' do %>
-    <%= text_field_tag('sources[]name') %>
-    <%= text_field_tag('sources[]regex') %>
+    <%= text_field_tag('sources[]name', nil, class: 'js-name') %><%= button_tag('D', class: 'taiga js-fill_in_name', type: 'button') %>
+    <%= text_field_tag('sources[]regex', nil, class: 'js-regex') %>
     <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose') %>
   <% end %>
 <% end %>
@@ -32,7 +32,7 @@
   </thead>
   <tbody>
   <% @sources.each do |source| %>
-    <tr>
+    <tr class="<%= 'highlight' if source.purpose.nil? %>">
       <td><%= source.id %></td>
       <td><%= text_field_tag("sources[#{source.id}]name", source.name) %></td>
       <td><%= text_field_tag("sources[#{source.id}]regex", source.regex) %></td>
