@@ -14,62 +14,64 @@
 ActiveRecord::Schema.define(version: 20160221200552) do
 
   create_table "bills", force: :cascade do |t|
-    t.string   "issuer"
-    t.string   "bill_type"
-    t.decimal  "amount"
+    t.string   "issuer",      limit: 255
+    t.string   "bill_type",   limit: 255
+    t.decimal  "amount",                    precision: 10
     t.date     "due_date"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.boolean  "paid"
     t.boolean  "auto_pay"
-    t.integer  "term_unit"
-    t.integer  "term_number"
+    t.integer  "term_unit",   limit: 4
+    t.integer  "term_number", limit: 4
     t.boolean  "last_bill"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "categories_purposes", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "purpose_id",  null: false
+    t.integer "category_id", limit: 4, null: false
+    t.integer "purpose_id",  limit: 4, null: false
   end
 
   create_table "categories_sources", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "source_id",   null: false
+    t.integer "category_id", limit: 4, null: false
+    t.integer "source_id",   limit: 4, null: false
   end
 
   create_table "purposes", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "sources", force: :cascade do |t|
-    t.string   "name"
-    t.string   "regex"
-    t.integer  "purpose_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.string   "regex",      limit: 255
+    t.integer  "purpose_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "transactions", force: :cascade do |t|
     t.date     "date"
-    t.decimal  "amount"
-    t.string   "raw_description"
-    t.string   "description"
-    t.integer  "source_id"
-    t.integer  "purpose_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.decimal  "amount",                      precision: 10
+    t.string   "raw_description", limit: 255
+    t.string   "description",     limit: 255
+    t.integer  "source_id",       limit: 4
+    t.integer  "purpose_id",      limit: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
-  add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id"
-  add_index "transactions", ["source_id"], name: "index_transactions_on_source_id"
+  add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id", using: :btree
+  add_index "transactions", ["source_id"], name: "index_transactions_on_source_id", using: :btree
 
+  add_foreign_key "transactions", "purposes"
+  add_foreign_key "transactions", "sources"
 end
