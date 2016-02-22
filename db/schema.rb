@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221200552) do
+ActiveRecord::Schema.define(version: 20160222143201) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer",      limit: 255
     t.string   "bill_type",   limit: 255
-    t.decimal  "amount",                    precision: 10
+    t.decimal  "amount",                    precision: 8, scale: 2
     t.date     "due_date"
     t.text     "description", limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.boolean  "paid"
     t.boolean  "auto_pay"
     t.integer  "term_unit",   limit: 4
@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(version: 20160221200552) do
 
   create_table "transactions", force: :cascade do |t|
     t.date     "date"
-    t.decimal  "amount",                      precision: 10
+    t.decimal  "amount",                      precision: 8, scale: 2
     t.string   "raw_description", limit: 255
     t.string   "description",     limit: 255
     t.integer  "source_id",       limit: 4
     t.integer  "purpose_id",      limit: 4
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id", using: :btree
