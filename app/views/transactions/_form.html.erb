@@ -1,1 +1,9 @@
-
+<%= simple_form_for @transaction do |f| %>
+  <%= f.input :date %>
+  <%= f.input :amount %>
+  <%= f.input :raw_description %>
+  <%= f.input :description %>
+  <%= f.association :source %>
+  <%= f.association :purpose %>
+  <%= f.button :submit %>
+<% end %>

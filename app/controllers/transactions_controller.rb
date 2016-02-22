@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def transactions_params
+  def transaction_params
     transaction_hash(params.require(:transaction))
   end
 
