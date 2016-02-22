@@ -17,5 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions
+  resources :transactions do
+    collection do
+      post 'import'
+    end
+  end
 end

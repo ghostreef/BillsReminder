@@ -7,6 +7,8 @@
     </div>
   <% end %>
 
+  <div>tab it</div>
+
   <%= form_tag create_many_purposes_path, class: 'create_purpose_form' do %>
     <%= text_field_tag('purposes[][name]', nil, id: nil, class: 'js-new_purpose') %>
     <%= submit_tag('SUBMIT', class: 'salmon_button button') %>

@@ -1,3 +1,35 @@
-<% @transactions.each do |transaction| %>
-  <p><%= transaction.inspect %></p>
+<% unless flash[:notice].nil? %>
+  <% flash[:notice] = Array(flash[:notice]) if flash[:notice].is_a?(String) %>
+  <div>
+    <% flash[:notice].each do |notice| %>
+      <%= notice %>
+    <% end %>
+  </div>
 <% end %>
+
+<%= form_tag(import_transactions_path, multipart: true) do %>
+    <%= file_field_tag 'file' %>
+    <%= submit_tag 'UPLOAD', class: 'button salmon_button' %>
+<% end %>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.id %></td>
+      <td><%= transaction.date %></td>
+      <td><%= transaction.description %></td>
+      <td><%= transaction.amount %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

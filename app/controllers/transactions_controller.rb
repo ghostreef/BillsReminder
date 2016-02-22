@@ -35,6 +35,47 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def import
+    if params[:file].nil?
+      redirect_to transactions_path, notice: 'No file uploaded.' and return
+    end
+
+    unless params[:file].original_filename =~ /\.csv$/
+      redirect_to transactions_path, notice: 'Invalid format.' and return
+    end
+
+    require 'CSV'
+    file_path = params[:file].tempfile
+
+    success = error = 0
+    error_line_numbers = []
+    CSV.foreach(file_path, headers: true) do |row|
+      r = row.to_hash
+
+      begin
+        date = Date.strptime(r['Date'], '%m/%d/%Y')
+      rescue
+        error+=1
+        error_line_numbers << $.
+        next
+      end
+
+      amount = r['Amount'].tr('-$','').to_f.abs.round(2)
+      raw_description = r['Description']
+
+      t = Transaction.create(date: date, amount: amount, raw_description: raw_description)
+
+      if t.errors.empty?
+        success+=1
+      else
+        error+=1
+        error_line_numbers << $.
+      end
+    end
+
+    redirect_to transactions_path, notice: "#{success} transactions added. Error adding #{error} transaction on line numbers #{error_line_numbers.join(', ')}"
+  end
+
   private
 
   def find_transaction
