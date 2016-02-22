@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222143201) do
+ActiveRecord::Schema.define(version: 20160222144251) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer",      limit: 255
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20160222143201) do
     t.integer  "purpose_id",      limit: 4
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
+    t.string   "locality",        limit: 255
+    t.string   "region",          limit: 255
   end
 
   add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id", using: :btree
