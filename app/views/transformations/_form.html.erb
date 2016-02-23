@@ -1,0 +1,23 @@
+<%= form_for @transformation do |f| %>
+
+  <% if @transformation.errors.any? %>
+  <% end %>
+
+  <p>
+    <%= f.label :pattern %>
+    <%= f.text_field :pattern %>
+  </p>
+
+  <p>
+    <%= f.label :transform %>
+    <%= f.text_field :transform%>
+  </p>
+
+  <p>
+    <%= f.label :value %>
+    <%= f.text_field :value %>
+  </p>
+
+  <%= f.submit %>
+
+<% end %>

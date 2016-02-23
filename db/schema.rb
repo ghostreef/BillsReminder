@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222144251) do
+ActiveRecord::Schema.define(version: 20160223133611) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer",      limit: 255
@@ -73,6 +73,14 @@ ActiveRecord::Schema.define(version: 20160222144251) do
 
   add_index "transactions", ["purpose_id"], name: "index_transactions_on_purpose_id", using: :btree
   add_index "transactions", ["source_id"], name: "index_transactions_on_source_id", using: :btree
+
+  create_table "transformations", force: :cascade do |t|
+    t.string   "pattern",    limit: 255
+    t.string   "transform",  limit: 255
+    t.string   "value",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   add_foreign_key "transactions", "purposes"
   add_foreign_key "transactions", "sources"

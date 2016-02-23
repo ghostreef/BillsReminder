@@ -1,0 +1,18 @@
+<table>
+  <thead>
+  <tr>
+    <th>Pattern</th>
+    <th>Transform</th>
+    <th>Value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @transformations.each do |transformation| %>
+    <tr>
+      <td><%= transformation.pattern %></td>
+      <td><%= transformation.transform %></td>
+      <td><%= transformation.value %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
