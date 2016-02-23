@@ -1,18 +1,37 @@
-<table>
+<%= form_tag create_many_transformations_path do %>
+  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
+  <%= submit_tag('CREATE', class: 'salmon_button button') %>
+
+  <%= field_set_tag nil, class: 'js-source_fieldset' do %>
+    <%= text_field_tag('transformations[]pattern') %>
+    <%= text_field_tag('transformations[]transform') %>
+    <%= text_field_tag('transformations[]value') %>
+  <% end %>
+<% end %>
+
+
+
+<table class='js-transformations_table'>
   <thead>
   <tr>
     <th>Pattern</th>
     <th>Transform</th>
     <th>Value</th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>
   <% @transformations.each do |transformation| %>
     <tr>
-      <td><%= transformation.pattern %></td>
-      <td><%= transformation.transform %></td>
-      <td><%= transformation.value %></td>
+      <td><%= text_field_tag("transformations[#{transformation.id}]pattern", transformation.pattern) %></td>
+      <td><%= text_field_tag("transformations[#{transformation.id}]transform", transformation.transform) %></td>
+      <td><%= text_field_tag("transformations[#{transformation.id}]value ", transformation.value ) %></td>
+      <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= form_tag update_many_transformations_path, class: 'js-update_many_transformations_form' do %>
+  <%= submit_tag('UPDATE', class: 'salmon_button button') %>
+<% end %>

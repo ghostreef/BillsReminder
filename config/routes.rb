@@ -23,5 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transformations
+  resources :transformations do
+    collection do
+      post 'update_many'
+      post 'create_many'
+    end
+  end
 end
