@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
   
   def destroy
     if @transaction.destroy
-      redirect_to transactions_url, notice: 'Transaction successfully destroyed.'
+      redirect_to transactions_path, notice: 'Transaction successfully destroyed.'
     else
       redirect_to transactions_path, flash: { error: 'Failed to destroy transaction.' }
     end

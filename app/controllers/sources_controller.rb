@@ -29,7 +29,7 @@ class SourcesController < ApplicationController
       s.errors.empty? ? "#{s.name} created successfully." : s.custom_error_messages
     end
 
-    redirect_to sources_url, notice: results.flatten
+    redirect_to sources_path, notice: results.flatten
   end
 
   def update
@@ -43,12 +43,12 @@ class SourcesController < ApplicationController
       source.errors.empty? ? "Source #{source.id} successfully updated." : "Source #{source.id} did not update. #{source.custom_error_messages.join(', ')}"
     end
 
-    redirect_to sources_url, notice: results
+    redirect_to sources_path, notice: results
   end
 
   def destroy
     if @source.destroy
-      redirect_to sources_url, notice: 'Source successfully destroyed.'
+      redirect_to sources_path, notice: 'Source successfully destroyed.'
     else
       redirect_to sources_path, flash: { error: 'Failed to destroy source.' }
     end

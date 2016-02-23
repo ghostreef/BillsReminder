@@ -29,7 +29,7 @@ class TransformationsController < ApplicationController
       t.errors.empty? ? "#{t.name} created successfully." : t.custom_error_messages
     end
 
-    redirect_to transformations_url, notice: results.flatten
+    redirect_to transformations_path, notice: results.flatten
   end
 
   def update
@@ -43,12 +43,12 @@ class TransformationsController < ApplicationController
       transformation.errors.empty? ? "Transformation #{transformation.id} successfully updated." : "Transformation #{transformation.id} did not update. #{transformation.custom_error_messages.join(', ')}"
     end
 
-    redirect_to transformations_url, notice: results
+    redirect_to transformations_path, notice: results
   end
 
   def destroy
     if @transformation.destroy
-      redirect_to transformations_url, notice: 'Transformation successfully destroyed.'
+      redirect_to transformations_path, notice: 'Transformation successfully destroyed.'
     else
       redirect_to transformations_path, flash: { error: 'Failed to destroy transformation.' }
     end

@@ -41,7 +41,7 @@ class PurposesController < ApplicationController
   
   def destroy
     if @purpose.destroy
-      redirect_to purposes_url, notice: 'Purpose successfully destroyed.'
+      redirect_to purposes_path, notice: 'Purpose successfully destroyed.'
     else
       flash[:error] = 'Failed to destroy purpose.'
       redirect_to purposes_path
