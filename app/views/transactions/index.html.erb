@@ -1,35 +1,35 @@
-<% unless flash[:notice].nil? %>
-  <% flash[:notice] = Array(flash[:notice]) if flash[:notice].is_a?(String) %>
-  <div>
-    <% flash[:notice].each do |notice| %>
-      <%= notice %>
-    <% end %>
-  </div>
-<% end %>
+<%= render 'layouts/flash_messages' %>
 
 <%= form_tag(import_transactions_path, multipart: true) do %>
     <%= file_field_tag 'file' %>
     <%= submit_tag 'UPLOAD', class: 'button salmon_button' %>
 <% end %>
 
-
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @transactions.each do |transaction| %>
+<% unless @transactions.empty? %>
+  <table>
+    <thead>
     <tr>
-      <td><%= transaction.id %></td>
-      <td><%= transaction.date %></td>
-      <td><%= transaction.description %></td>
-      <td><%= transaction.amount %></td>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Locality</th>
+      <th>Region</th>
+      <th>Amount</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%#= transaction.id %></td>
+        <td><%#= l(transaction.date) %></td>
+        <% x= '  ' %>
+        <td><%= transaction.raw_description.gsub('Debit Card Purchase','').gsub('ACH Withdrawal', '')
+                .gsub('ATM withdrawal', '').gsub('ACH deposit', '').gsub('Recur', '').gsub('Intl', '').split(x).delete_if(&:empty?)  %></td>
+        <td></td>
+        <td></td>
+        <td><%#= number_to_currency(transaction.amount) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

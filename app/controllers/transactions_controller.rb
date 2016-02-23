@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   before_action :find_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transactions = Transaction.order(:date).limit(30)
+    @transactions = Transaction.order(:date).limit(50)
   end
 
   def show
@@ -47,33 +47,43 @@ class TransactionsController < ApplicationController
     require 'CSV'
     file_path = params[:file].tempfile
 
-    success = error = 0
-    error_line_numbers = []
+    success_count = error_count = 0
+    flash[:successes] = []
+    flash[:errors] = []
     CSV.foreach(file_path, headers: true) do |row|
       r = row.to_hash
 
       begin
         date = Date.strptime(r['Date'], '%m/%d/%Y')
       rescue
-        error+=1
-        error_line_numbers << $.
+        error_count+=1
+        flash[:errors] << "#{$.} #{row}"
         next
       end
 
       amount = r['Amount'].tr('-$','').to_f.abs.round(2)
+
       raw_description = r['Description']
 
       t = Transaction.create(date: date, amount: amount, raw_description: raw_description)
 
       if t.errors.empty?
-        success+=1
+        success_count+=1
       else
-        error+=1
-        error_line_numbers << $.
+        error_count+=1
+        flash[:errors] << "#{$.} #{row}"
       end
     end
 
-    redirect_to transactions_path, notice: "#{success} transactions added. Error adding #{error} transaction on line numbers #{error_line_numbers.join(', ')}"
+    if error_count > 0
+      flash[:error] = "Error adding #{error_count} transactions."
+    end
+
+    if success_count > 0
+      flash[:success] = "#{success_count} transactions added."
+    end
+
+    redirect_to transactions_path
   end
 
   private

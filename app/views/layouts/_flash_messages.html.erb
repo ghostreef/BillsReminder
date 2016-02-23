@@ -1,0 +1,26 @@
+<%= content_tag(:p, flash[:error]) if flash[:error].present? %>
+<% if flash[:errors].present? %>
+  <div class='errors'>
+    <% flash[:errors].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= content_tag(:p, flash[:success]) if flash[:success].present? %>
+<% if flash[:successes].present? %>
+  <div class='success'>
+    <% flash[:successes].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= content_tag(:p, flash[:notice]) if flash[:notice].present? %>
+<% if flash[:notices].present? %>
+  <div class='notices'>
+    <% flash[:notices].each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
