@@ -16,15 +16,17 @@ $(document).ready(function () {
         $(this).parent().append($fieldset);
     });
 
-    $('.js-fill_in_name').on('click', function(event) {
-        var regex = $(this).siblings('.js-regex').val().split(' ');
+});
 
-        for(var i = 0; i < regex.length; i++) {
-            regex[i] = regex[i][0].toUpperCase() + regex[i].substr(1).toLowerCase();
-        }
+// on tab open another input field
+$(document).on('click', '.js-fill_in_name', function () {
+    var regex = $(this).siblings('.js-regex').val().split(' ');
 
-        regex = regex.join(' ');
+    for(var i = 0; i < regex.length; i++) {
+        regex[i] = regex[i][0].toUpperCase() + regex[i].substr(1).toLowerCase();
+    }
 
-        $(this).siblings('.js-name').val(regex);
-    });
+    regex = regex.join(' ');
+
+    $(this).siblings('.js-name').val(regex);
 });
