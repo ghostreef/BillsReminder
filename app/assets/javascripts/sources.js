@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    // for update form
     $('.js-sources_table input, .js-sources_table select').change(function () {
         $(this).addClass('js-modified');
     });
@@ -10,12 +12,13 @@ $(document).ready(function () {
         this.submit();
     });
 
+    // NOTE transformations uses this too       make generic later
+    // for create form
     $('.js-add_fieldset').on('click', function(event) {
         var $fieldset = $('.js-source_fieldset:first').clone();
         $('input, select', $fieldset).val('');
         $(this).parent().append($fieldset);
     });
-
 });
 
 // on tab open another input field
