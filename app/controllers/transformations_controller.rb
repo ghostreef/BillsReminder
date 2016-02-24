@@ -26,10 +26,10 @@ class TransformationsController < ApplicationController
   def create_many
     results = params[:transformations].map do |transformation|
       t = Transformation.create(transformation_hash(transformation))
-      t.errors.empty? ? "#{t.name} created successfully." : t.custom_error_messages
+      t.errors.empty? ? "#{t.pattern} created successfully." : t.custom_error_messages
     end
 
-    redirect_to transformations_path, notice: results.flatten
+    redirect_to transformations_path, flash: { notices: [results.flatten] }
   end
 
   def update
