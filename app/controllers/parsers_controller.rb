@@ -1,0 +1,55 @@
+class ParsersController < ApplicationController
+
+  before_action :find_parser, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @parsers = Parser.order(:name)
+  end
+
+  def show
+
+  end
+
+  def new
+    @parser = Parser.new
+  end
+
+  def edit
+
+  end
+
+  def create
+    @parser = Parser.new(parser_params)
+    @parser.save ? redirect_to(@parser) : render(:new)
+  end
+
+  def update
+    @parser.update(parser_params) ? redirect_to(@parser) : render(:edit)
+  end
+  
+  def destroy
+    if @parser.destroy
+      redirect_to parsers_path, notice: 'Parser successfully destroyed.'
+    else
+      redirect_to parsers_path, flash: { error: 'Failed to destroy parser.' }
+    end
+  end
+
+  private
+
+  def find_parser
+    begin
+      @parser = Parser.find(params[:id].to_i)
+    rescue
+      # what
+    end
+  end
+
+  def parser_params
+    parser_hash(params.require(:parser))
+  end
+
+  def parser_hash(hash)
+    hash.permit(:name, :status, transformation_ids: [])
+  end
+end
