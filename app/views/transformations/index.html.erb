@@ -7,6 +7,7 @@
     <%= check_box_tag('transformations[]case_insensitive') %>
     <%= text_field_tag('transformations[]transform') %>
     <%= text_field_tag('transformations[]value') %>
+    <%= select_tag("transformations[]transformation_type", options_for_select(Transformation.transformation_types.keys), prompt: 'No type') %>
   <% end %>
 <% end %>
 
@@ -19,6 +20,7 @@
     <th>CI</th>
     <th>Transform</th>
     <th>Value</th>
+    <th>Type</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -33,7 +35,8 @@
         </div>
       </td>
       <td><%= text_field_tag("transformations[#{transformation.id}]transform", transformation.transform) %></td>
-      <td><%= text_field_tag("transformations[#{transformation.id}]value ", transformation.value ) %></td>
+      <td><%= text_field_tag("transformations[#{transformation.id}]value", transformation.value ) %></td>
+      <td><%= select_tag("transformations[#{transformation.id}]transformation_type", options_for_select(Transformation.transformation_types.keys, transformation.transformation_type), prompt: 'No type') %></td>
       <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
     </tr>
   <% end %>

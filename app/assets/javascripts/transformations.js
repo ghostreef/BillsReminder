@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // for update form
-    $('.js-transformations_table input').change(function () {
+    $('.js-transformations_table input, .js-transformations_table select').change(function () {
         if($(this).attr('type') == 'checkbox') {
             $(this).parent().addClass('js-modified');
         } else {

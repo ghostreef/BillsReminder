@@ -23,6 +23,11 @@
     <%= f.text_field :value %>
   </p>
 
+  <p>
+    <%= f.label :type %>
+    <%= f.select :transformation_type, Transformation.transformation_types.keys %>
+  </p>
+
   <%= f.submit %>
 
 <% end %>

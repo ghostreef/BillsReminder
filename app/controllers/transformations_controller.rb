@@ -71,6 +71,6 @@ class TransformationsController < ApplicationController
   end
 
   def transformation_hash(hash)
-    hash.permit(:pattern, :transform, :value, :case_insensitive)
+    hash.permit(:pattern, :transform, :value, :case_insensitive, :transformation_type)
   end
 end
