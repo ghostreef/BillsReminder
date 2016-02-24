@@ -5,6 +5,10 @@ class Transformation < ActiveRecord::Base
 
   before_create :set_default_values
 
+  def custom_error_messages
+
+  end
+
   private
 
   def set_default_values

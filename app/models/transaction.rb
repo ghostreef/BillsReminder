@@ -5,4 +5,16 @@ class Transaction < ActiveRecord::Base
 
   validates :date, :raw_description, presence: true
   validates :amount, numericality: { greater_than: 0 }
+
+  def guess_source
+
+  end
+
+  def guess_purpose
+
+  end
+
+  def generate_description
+
+  end
 end
