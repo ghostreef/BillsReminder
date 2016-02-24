@@ -4,6 +4,7 @@
 
   <%= field_set_tag nil, class: 'js-source_fieldset' do %>
     <%= text_field_tag('transformations[]pattern') %>
+    <%= check_box_tag('transformations[]case_insensitive') %>
     <%= text_field_tag('transformations[]transform') %>
     <%= text_field_tag('transformations[]value') %>
   <% end %>
@@ -15,6 +16,7 @@
   <thead>
   <tr>
     <th>Pattern</th>
+    <th>CI</th>
     <th>Transform</th>
     <th>Value</th>
     <th>&nbsp;</th>
@@ -24,6 +26,12 @@
   <% @transformations.each do |transformation| %>
     <tr>
       <td><%= text_field_tag("transformations[#{transformation.id}]pattern", transformation.pattern) %></td>
+      <td>
+        <div>
+          <%= hidden_field_tag("transformations[#{transformation.id}]case_insensitive", 0)%>
+          <%= check_box_tag("transformations[#{transformation.id}]case_insensitive", 1, transformation.case_insensitive ) %>
+        </div>
+      </td>
       <td><%= text_field_tag("transformations[#{transformation.id}]transform", transformation.transform) %></td>
       <td><%= text_field_tag("transformations[#{transformation.id}]value ", transformation.value ) %></td>
       <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>

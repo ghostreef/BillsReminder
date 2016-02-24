@@ -2,7 +2,11 @@ $(document).ready(function () {
 
     // for update form
     $('.js-transformations_table input').change(function () {
-        $(this).addClass('js-modified');
+        if($(this).attr('type') == 'checkbox') {
+            $(this).parent().addClass('js-modified');
+        } else {
+            $(this).addClass('js-modified');
+        }
     });
 
     $('.js-update_many_transformations_form').submit(function (e) {
