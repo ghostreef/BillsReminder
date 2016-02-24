@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224151734) do
+ActiveRecord::Schema.define(version: 20160224152516) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer",      limit: 255
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(version: 20160224151734) do
     t.integer  "status",     limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "parsers_transformations", id: false, force: :cascade do |t|
+    t.integer "parser_id",         limit: 4, null: false
+    t.integer "transformation_id", limit: 4, null: false
   end
 
   create_table "purposes", force: :cascade do |t|

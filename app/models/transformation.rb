@@ -12,6 +12,8 @@ class Transformation < ActiveRecord::Base
      strip: 3
   }
 
+  has_and_belongs_to_many :parsers
+
   def custom_error_messages
 
   end

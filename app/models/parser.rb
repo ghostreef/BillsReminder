@@ -6,4 +6,6 @@ class Parser < ActiveRecord::Base
            disabled: 1,
            incomplete: 2
        }
+
+  has_and_belongs_to_many :transformations
 end
