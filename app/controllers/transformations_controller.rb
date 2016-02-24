@@ -37,6 +37,8 @@ class TransformationsController < ApplicationController
   end
 
   def update_many
+    redirect_to transformations_path and return if params[:transformations].nil?
+
     results = params[:transformations].map do |k,v|
       transformation = Transformation.find(k.to_i)
       transformation.update(transformation_hash(v))

@@ -37,6 +37,8 @@ class SourcesController < ApplicationController
   end
 
   def update_many
+    redirect_to sources_path and return if params[:sources].nil?
+
     results = params[:sources].map do |k,v|
       source = Source.find(k.to_i)
       source.update(source_hash(v))
