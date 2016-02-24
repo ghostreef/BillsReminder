@@ -5,6 +5,13 @@ class Transformation < ActiveRecord::Base
 
   before_create :set_default_values
 
+  enum transformation_type: {
+     date: 0,
+     split: 1,
+     transform: 2,
+     strip: 3
+  }
+
   def custom_error_messages
 
   end
