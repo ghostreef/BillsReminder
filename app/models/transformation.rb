@@ -5,6 +5,7 @@ class Transformation < ActiveRecord::Base
 
   before_create :set_default_values
 
+  # these give us Transformation.date, Transformation.split...
   enum transformation_type: {
      date: 0,
      split: 1,

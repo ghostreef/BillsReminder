@@ -1,0 +1,29 @@
+<%= form_tag parsers_path do |f| %>
+
+  <p>
+    <%= label_tag('parser[name]') %>
+    <%= text_field_tag('parser[name]') %>
+  </p>
+
+  <p>
+    <%= label_tag('parser[status]') %>
+    <%= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
+  </p>
+
+  <p>
+    <%= label_tag(:transformation_date) %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :pattern), prompt: 'Date Pattern') %>
+  </p>
+
+  <p>
+    <%= label_tag(:transformation_split) %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :pattern), prompt: 'Split Pattern') %>
+  </p>
+
+  <p>
+    <%= label_tag(:transformation) %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(transformation_type: [2,3]), :id, :pattern), multiple: true, class: 'js-multiselect') %>
+  </p>
+
+  <%= submit_tag('SUBMIT', class: 'button salmon_button') %>
+<% end %>
