@@ -1,6 +1,9 @@
 class Parser < ActiveRecord::Base
   validates :name, length: { minimum: 1 }
 
+  before_create :set_default_values
+  before_update :update_status
+
   enum status: {
            enabled: 0,
            disabled: 1,
@@ -27,5 +30,20 @@ class Parser < ActiveRecord::Base
     Parser.where(status: Parser.statuses[:enabled]).update_all(status: Parser.statuses[:disabled])
 
     parser.update(status: Parser.statuses[:enabled])
+  end
+
+  def incomplete?
+    date_transformations.count == 0 || split_transformations.count == 0
+  end
+
+  private
+
+  def set_default_values
+    (self.status ||= Parser.statuses[:incomplete]) if self.incomplete?
+    self.status ||= Parser.statuses[:disabled]
+  end
+
+  def update_status
+    self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
   end
 end

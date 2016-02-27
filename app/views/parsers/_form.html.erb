@@ -5,10 +5,11 @@
     <%= text_field_tag('parser[name]') %>
   </p>
 
-  <p>
-    <%= label_tag('parser[status]') %>
-    <%= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
-  </p>
+  <!-- just for reference now -->
+  <!--<p>-->
+    <%#= label_tag('parser[status]') %>
+    <%#= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
+  <!--</p>-->
 
   <p>
     <%= label_tag(:transformation_date) %>
