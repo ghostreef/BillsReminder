@@ -1,4 +1,5 @@
-<%= form_tag parsers_path do |f| %>
+<!-- been using form_for for so long I forgot how to use form_tag -->
+<%= form_tag @parser.new_record? ? parsers_path : parser_path, method: @parser.new_record? ? :post : :patch do |f| %>
 
   <p>
     <%= label_tag('parser[name]') %>
