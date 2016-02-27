@@ -1,1 +1,17 @@
-<%= @parser.inspect %>
+<div><%= link_to('edit', edit_parser_path) %></div>
+<dl>
+  <dt>Name</dt>
+  <dd><%= @parser.name %></dd>
+  <dt>ID</dt>
+  <dd><%= @parser.id %></dd>
+  <dt>Date Transformation (<%= @parser.date_transformations.count %>)</dt>
+  <dd><%= @parser.date_transformations.first.pattern %></dd>
+  <dt>Split Transformation (<%= @parser.split_transformations.count %>)</dt>
+  <dd><%= @parser.split_transformations.first.pattern %></dd>
+  <dt>Status</dt>
+  <dd><%= @parser.status %></dd>
+  <dt>Other Transformations (<%= @parser.other_transformations.count %>)</dt>
+  <% @parser.other_transformations.each do |transformation| %>
+    <dd><%= transformation.pattern %></dd>
+  <% end %>
+</dl>
