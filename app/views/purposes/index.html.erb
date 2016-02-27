@@ -14,7 +14,7 @@
     <%= submit_tag('SUBMIT', class: 'salmon_button button') %>
   <% end %>
 
-  <ul class='horizontal_menu purpose_list tag_list'>
+  <ul class='horizontal_menu purpose_list badge_list'>
     <% @purposes.each do |purpose| %>
       <li>
         <%= form_for purpose, remote: true, html: {class: "js-purpose_form js-purpose_form_#{purpose.id} edit_purpose"} do |f| %>
