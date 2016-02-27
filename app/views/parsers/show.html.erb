@@ -5,9 +5,9 @@
   <dt>ID</dt>
   <dd><%= @parser.id %></dd>
   <dt>Date Transformation (<%= @parser.date_transformations.count %>)</dt>
-  <dd><%= @parser.date_transformations.first.pattern %></dd>
+  <dd><%= @parser.date_transformations.empty? ? 'missing' : @parser.date_transformations.first.pattern %></dd>
   <dt>Split Transformation (<%= @parser.split_transformations.count %>)</dt>
-  <dd><%= @parser.split_transformations.first.pattern %></dd>
+  <dd><%= @parser.split_transformations.empty? ? 'missing' : @parser.split_transformations.first.pattern %></dd>
   <dt>Status</dt>
   <dd><%= @parser.status %></dd>
   <dt>Other Transformations (<%= @parser.other_transformations.count %>)</dt>

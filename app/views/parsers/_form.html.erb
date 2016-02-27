@@ -22,7 +22,7 @@
 
   <p>
     <%= label_tag(:transformation) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(transformation_type: [2,3]), :id, :pattern), multiple: true, class: 'js-multiselect') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(transformation_type: [2,3]), :id, :pattern), multiple: true, class: 'js-multiSelect') %>
   </p>
 
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>

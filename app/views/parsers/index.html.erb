@@ -1,9 +1,5 @@
-<ul class='parser_list'>
+<ul class='badge_list'>
   <% @parsers.each do |parser| %>
-    <li>
-      <%= parser.id %>
-      <%= parser.name %>
-      <%= link_to('W', parser_path(parser), class: 'taiga') %>
-    </li>
+    <li class='<%= parser.status %>'><%= parser.name %> <%= link_to('W', parser_path(parser), class: 'taiga') %></li>
   <% end %>
 </ul>
