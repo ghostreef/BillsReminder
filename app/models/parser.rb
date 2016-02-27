@@ -52,6 +52,8 @@ class Parser < ActiveRecord::Base
   end
 
   def update_status
-    self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
+    unless enabled?
+      self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
+    end
   end
 end

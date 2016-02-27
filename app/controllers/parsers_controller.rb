@@ -1,6 +1,6 @@
 class ParsersController < ApplicationController
 
-  before_action :find_parser, only: [:show, :edit, :update, :destroy]
+  before_action :find_parser, only: [:show, :edit, :update, :destroy, :enable]
 
   def index
     @parsers = Parser.order(:name)
@@ -33,6 +33,11 @@ class ParsersController < ApplicationController
     else
       redirect_to parsers_path, flash: { error: 'Failed to destroy parser.' }
     end
+  end
+
+  def enable
+    Parser.enable(@parser)
+    redirect_to parsers_path
   end
 
   private
