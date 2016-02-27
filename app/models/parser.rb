@@ -24,6 +24,14 @@ class Parser < ActiveRecord::Base
     transformations.where(transformation_type: [2, 3])
   end
 
+  def date_transformation
+    date_transformations.try(:first) || nil
+  end
+
+  def split_transformation
+    split_transformations.try(:first) || nil
+  end
+
   # only one parser can be enabled at a time
   def self.enable(parser)
     # disable all parses
