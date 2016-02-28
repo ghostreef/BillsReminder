@@ -59,9 +59,8 @@
 
 .badge_list {
   li {
-    &.enabled {
-      @extend .green_badge;
-    }
+    @extend .green_badge;
+
     &.disabled {
       @extend .blue_badge
     }
