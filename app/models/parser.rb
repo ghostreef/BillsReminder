@@ -43,7 +43,7 @@ class Parser < ActiveRecord::Base
   # only one parser can be enabled at a time
   def self.enable(parser)
     # disable all parses
-    Parser.where(status: Parser.statuses[:enabled]).update_all(status: Parser.statuses[:disabled])
+    Parser.enabled.update_all(status: Parser.statuses[:disabled])
 
     parser.update(status: Parser.statuses[:enabled])
   end
