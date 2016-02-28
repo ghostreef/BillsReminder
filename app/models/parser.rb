@@ -13,24 +13,23 @@ class Parser < ActiveRecord::Base
   has_and_belongs_to_many :transformations
 
   def date_transformations
-    transformations.where(transformation_type: Transformation.transformation_types[:date])
+    transformations.date
   end
 
   def split_transformations
-    transformations.where(transformation_type: Transformation.transformation_types[:split])
+    transformations.split
   end
 
   def other_transformations
-    transformations.where(transformation_type: [Transformation.transformation_types[:transform],
-                                                Transformation.transformation_types[:strip]])
+    transformations.transform + transformations.strip
   end
 
   def strip_transformations
-    transformations.where(transformation_type: Transformation.transformation_types[:strip])
+    transformations.strip
   end
 
   def transform_transformations
-    transformations.where(transformation_type: Transformation.transformation_types[:transform])
+    transformations.transform
   end
 
   def date_transformation
