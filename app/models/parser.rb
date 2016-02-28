@@ -13,15 +13,24 @@ class Parser < ActiveRecord::Base
   has_and_belongs_to_many :transformations
 
   def date_transformations
-    transformations.where(transformation_type: 0)
+    transformations.where(transformation_type: Transformation.transformation_types[:date])
   end
 
   def split_transformations
-    transformations.where(transformation_type: 1)
+    transformations.where(transformation_type: Transformation.transformation_types[:split])
   end
 
   def other_transformations
-    transformations.where(transformation_type: [2, 3])
+    transformations.where(transformation_type: [Transformation.transformation_types[:transform],
+                                                Transformation.transformation_types[:strip]])
+  end
+
+  def strip_transformations
+    transformations.where(transformation_type: Transformation.transformation_types[:strip])
+  end
+
+  def transform_transformations
+    transformations.where(transformation_type: Transformation.transformation_types[:transform])
   end
 
   def date_transformation
@@ -38,6 +47,10 @@ class Parser < ActiveRecord::Base
     Parser.where(status: Parser.statuses[:enabled]).update_all(status: Parser.statuses[:disabled])
 
     parser.update(status: Parser.statuses[:enabled])
+  end
+
+  def self.parser
+    Parser.find_by_status(Parser.statuses[:enabled])
   end
 
   def incomplete?
