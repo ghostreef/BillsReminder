@@ -7,11 +7,21 @@ class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than: 0 }
 
   def guess_source
+    guess = nil
 
+    Source.all.each do |source|
+      regexp = Regexp.new(source.regex)
+      if regexp.match(raw_description)
+        guess = source
+        break
+      end
+    end
+
+    guess
   end
 
   def guess_purpose
-
+    guess_source.nil? ? nil : guess_source.default_purpose
   end
 
   def generate_description

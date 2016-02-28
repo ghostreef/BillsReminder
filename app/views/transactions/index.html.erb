@@ -10,6 +10,8 @@
       <th>ID</th>
       <th>Date</th>
       <th>Description</th>
+      <th>Source</th>
+      <th>Purpose</th>
       <th>Locality</th>
       <th>Region</th>
       <th>Amount</th>
@@ -18,14 +20,14 @@
     <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%#= transaction.id %></td>
-        <td><%#= l(transaction.date) %></td>
-        <% x= '  ' %>
-        <td><%= transaction.raw_description.gsub('Debit Card Purchase','').gsub('ACH Withdrawal', '')
-                .gsub('ATM withdrawal', '').gsub('ACH deposit', '').gsub('Recur', '').gsub('Intl', '').split(x).delete_if(&:empty?)  %></td>
-        <td></td>
-        <td></td>
-        <td><%#= number_to_currency(transaction.amount) %></td>
+        <td><%= transaction.id %></td>
+        <td><%= l(transaction.date) %></td>
+        <td><%= transaction.generate_description %></td>
+        <td><%= transaction.guess_source.try(:name) || '?' %></td>
+        <td><%= transaction.guess_purpose.try(:name) || '?' %></td>
+        <td><%= transaction.locality || '?' %></td>
+        <td><%= transaction.region || '?' %></td>
+        <td><%= number_to_currency(transaction.amount) %></td>
       </tr>
     <% end %>
     </tbody>
