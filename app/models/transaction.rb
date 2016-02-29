@@ -10,8 +10,7 @@ class Transaction < ActiveRecord::Base
     guess = nil
 
     Source.all.each do |source|
-      regexp = Regexp.new(source.regex)
-      if regexp.match(raw_description)
+      if raw_description =~ /#{source.regex}/i
         guess = source
         break
       end
