@@ -21,7 +21,9 @@ class Parser < ActiveRecord::Base
   end
 
   def other_transformations
-    transformations.transform + transformations.strip
+    # in rails merge uses where and clause, so I have to do this
+    transformations.where(transformation_type: [Transformation.transformation_types[:transform],
+                                                Transformation.transformation_types[:strip]])
   end
 
   def strip_transformations
