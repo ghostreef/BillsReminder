@@ -6,21 +6,22 @@ class Transaction < ActiveRecord::Base
   validates :date, :raw_description, presence: true
   validates :amount, numericality: { greater_than: 0 }
 
+  # I don't want guess methods to set anything for me.
   def guess_source
-    guess = nil
-
     Source.all.each do |source|
       if raw_description =~ /#{source.regex}/i
-        guess = source
+        @source = source
         break
       end
     end
 
-    guess
+    @source
   end
 
+  # Feels wrong that guess_purpose relies on guess_source, but purpose comes from source.
   def guess_purpose
-    guess_source.nil? ? nil : guess_source.default_purpose
+    # use most recent source guess, if none available make the guess, the guess may still be nil
+    (@source || source || guess_source).try(default_purpose)
   end
 
   def generate_description
