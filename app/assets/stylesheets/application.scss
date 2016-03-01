@@ -28,6 +28,7 @@ body {
 
 .taiga {
   font-family: taiga, sans-serif;
+  @extend .icon;
 }
 
 
