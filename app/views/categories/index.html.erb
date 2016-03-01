@@ -3,7 +3,7 @@
     <li>
       <p><%= category.name %></p>
 
-      <p><%= number_to_currency(0) %></p>
+      <p><%= number_to_currency(category.transactions.sum(:amount)) %></p>
 
       <div class='overlay'></div>
 
@@ -12,6 +12,7 @@
           <%= link_to('u', category_path(category), class: 'taiga') %>
           <%= link_to('E', category_path(category), class: 'taiga') %>
           <%= link_to('W', category_path(category), class: 'taiga') %>
+          <%= link_to('j', category_path(category), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
         </div>
       </div>
 

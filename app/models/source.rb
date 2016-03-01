@@ -10,6 +10,8 @@ class Source < ActiveRecord::Base
 
   alias_attribute :default_purpose, :purpose
 
+  scope :not_categorized, -> { where('id not in (select source_id from categories_sources)') }
+
   def total
 
   end

@@ -6,7 +6,10 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :purposes
 
   def transactions
+    s_ids = sources.pluck(:id)
+    p_ids = purposes.pluck(:id)
 
+    Transaction.where{(source_id.in s_ids) | (purpose_id.in p_ids)}
   end
 
   def total

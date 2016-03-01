@@ -10,6 +10,11 @@
 
   <p>
     <%= f.label :source_ids, 'Sources' %>
+    <%= f.collection_select :source_ids, Source.not_categorized, :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
+  </p>
+
+  <p>
+    <%= f.label :source_ids, 'Sources' %>
     <%= f.collection_select :source_ids, Source.order(:name), :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
   </p>
 
