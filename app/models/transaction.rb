@@ -29,12 +29,30 @@ class Transaction < ActiveRecord::Base
   # similarly locality is derived from region, but they are both in the generic object transformations
   # really source and purpose could also transformations, but they loose the association
 
+  # could be faster, calls parser and does not reduce description
   def guess_region
+    parser = Parser.parser
 
+    transformations = parser.transform_transformations.where(value: 'region')
+    patterns = transformations.pluck(:pattern)
+
+    # index into transformation and description
+    t_index, d_index = Transaction.find_pattern_in_words(patterns, split_description, false)
+
+    t_index.nil? ? nil : transformations[t_index]
   end
 
+  # could be faster, calls parser and does not reduce description
   def guess_locality
+    parser = Parser.parser
 
+    transformations = parser.transform_transformations.where(value: 'locality')
+    patterns = transformations.pluck(:pattern)
+
+    # index into transformation and description
+    t_index, d_index = Transaction.find_pattern_in_words(patterns, split_description, false)
+
+    t_index.nil? ? nil : transformations[t_index]
   end
 
   def split_description
@@ -45,7 +63,7 @@ class Transaction < ActiveRecord::Base
   def generate_description
 
   end
-  
+
 
   def faster_parse
     parser = Parser.parser
@@ -62,6 +80,7 @@ class Transaction < ActiveRecord::Base
     t_index, d_index = Transaction.find_pattern_in_words(patterns, parsed_description, false)
 
 
+
     transformations = parser.transform_transformations.where(value: 'locality')
     patterns = transformations.pluck(:pattern)
 
@@ -71,6 +90,7 @@ class Transaction < ActiveRecord::Base
 
 
   # faster than the first try, but could still be better
+  # TODO this could be even faster if it iterated in reverse
   def self.find_pattern_in_words(patterns, words, case_insensitive)
 
     words.each_with_index do |word, index|
