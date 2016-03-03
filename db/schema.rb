@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303164220) do
+ActiveRecord::Schema.define(version: 20160303230215) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "issuer",      limit: 255
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160303164220) do
     t.boolean  "case_insensitive"
     t.integer  "set",               limit: 4
     t.integer  "transformation_id", limit: 4
+    t.integer  "complexity",        limit: 4
   end
 
   add_foreign_key "transactions", "purposes"
