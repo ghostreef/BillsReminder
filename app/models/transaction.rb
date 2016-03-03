@@ -46,6 +46,30 @@ class Transaction < ActiveRecord::Base
 
   end
   
+
+  def faster_parse
+    parser = Parser.parser
+
+    regexp = Regexp.new(parser.split_transformation.pattern)
+    parsed_description = raw_description.split(regexp).map(&:strip).delete_if(&:empty?)
+    # parsed description is an array
+
+
+    transformations = parser.transform_transformations.where(value: 'region')
+    patterns = transformations.pluck(:pattern)
+
+    # index into transformation and description
+    t_index, d_index = Transaction.find_pattern_in_words(patterns, parsed_description, false)
+
+
+    transformations = parser.transform_transformations.where(value: 'locality')
+    patterns = transformations.pluck(:pattern)
+
+    # index into transformation and description
+    t_index, d_index = Transaction.find_pattern_in_words(patterns, parsed_description, false)
+  end
+
+
   # faster than the first try, but could still be better
   def self.find_pattern_in_words(patterns, words, case_insensitive)
 
