@@ -27,4 +27,22 @@ class Transaction < ActiveRecord::Base
   def generate_description
 
   end
+
+  # faster than the first try, but could still be better
+  def self.find_pattern_in_words(patterns, words, case_insensitive)
+
+    words.each_with_index do |word, index|
+
+      which_pattern = patterns.each_with_index do |pattern, index|
+        break index if word =~ /\A#{pattern}\z/
+        break index if case_insensitive && word =~ /\A#{pattern}\z/i
+      end
+
+      # this will be immediate if which_pattern is a number
+      break which_pattern, index if which_pattern.is_a?(Fixnum)
+      break [nil, nil] if index == (words.length - 1) && which_pattern.is_a?(Array)
+    end
+
+  end
+
 end
