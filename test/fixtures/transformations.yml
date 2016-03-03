@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  pattern: MyString
-  transform: MyString
+  regex: MyString
+  derives: MyString
   value: MyString
+  transformation:
+  set: 1
+  complexity: 1
 
 two:
-  pattern: MyString
-  transform: MyString
+  regex: MyString
+  derives: MyString
   value: MyString
+  transformation:
+  set: 1
+  complexity: 1
