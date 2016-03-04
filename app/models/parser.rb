@@ -3,6 +3,7 @@ class Parser < ActiveRecord::Base
 
   before_create :set_default_values
   before_update :update_status
+  after_destroy :clean_join_table
 
   enum status: {
            enabled: 0,
@@ -68,5 +69,10 @@ class Parser < ActiveRecord::Base
     unless enabled?
       self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
     end
+  end
+
+  # well this sucks, another drawback to habtm association
+  def clean_join_table
+    ActiveRecord::Base.connection.execute("DELETE FROM parsers_transformations WHERE parser_id = #{id}")
   end
 end
