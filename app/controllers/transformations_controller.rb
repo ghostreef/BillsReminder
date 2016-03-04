@@ -26,7 +26,7 @@ class TransformationsController < ApplicationController
   def create_many
     results = params[:transformations].map do |transformation|
       t = Transformation.create(transformation_hash(transformation))
-      t.errors.empty? ? "#{t.pattern} created successfully." : t.custom_error_messages
+      t.errors.empty? ? "#{t.regex} created successfully." : t.custom_error_messages
     end
 
     redirect_to transformations_path, flash: { notices: [results.flatten] }
@@ -71,6 +71,6 @@ class TransformationsController < ApplicationController
   end
 
   def transformation_hash(hash)
-    hash.permit(:regex, :derives, :value, :implies, :set, :case_insensitive)
+    hash.permit(:regex, :derives, :value, :implies, :set, :case_insensitive, :transformation_id)
   end
 end

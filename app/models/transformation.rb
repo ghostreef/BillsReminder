@@ -6,6 +6,7 @@ class Transformation < ActiveRecord::Base
   alias_attribute :implies, :transformation
 
   before_create :set_default_values
+  before_save :evaluate_complexity
 
 
   # these give us Transformation.date, Transformation.split...
@@ -30,7 +31,10 @@ class Transformation < ActiveRecord::Base
 
   def set_default_values
     self.value ||= ''
-    self.complexity = (self.regex =~ /\*\[\]\(\)\+\\\$\^\?\{\}\.\|/) ? 3 : 1
+  end
+
+  def evaluate_complexity
+    self.complexity = (self.regex =~ /\*|\[|\]|\(|\)|\+|\\|\$|\^|\?|\{|\}|\.|\|/) ? 3 : 1
   end
 
 end

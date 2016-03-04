@@ -4,8 +4,8 @@
   <% end %>
 
   <p>
-    <%= f.label :pattern %>
-    <%= f.text_field :pattern %>
+    <%= f.label :regex %>
+    <%= f.text_field :regex %>
   </p>
 
   <p>
@@ -14,8 +14,8 @@
   </p>
 
   <p>
-    <%= f.label :transform %>
-    <%= f.text_field :transform%>
+    <%= f.label :derives %>
+    <%= f.text_field :derives %>
   </p>
 
   <p>
@@ -24,8 +24,14 @@
   </p>
 
   <p>
-    <%= f.label :type %>
-    <%= f.select :transformation_type, Transformation.transformation_types.keys %>
+    <%= f.label :set %>
+    <%= f.select :set, Transformation.sets.keys %>
+  </p>
+
+  <p>
+    <%= f.label :implies %>
+    <%# f.collection_select :purpose_ids, Purpose.order(:name), :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
+    <%= f.collection_select :transformation_id, Transformation.transform, :id, :value, prompt: 'implies nothing' %>
   </p>
 
   <%= f.submit %>
