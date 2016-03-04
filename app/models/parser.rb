@@ -54,8 +54,9 @@ class Parser < ActiveRecord::Base
     Parser.find_by_status(Parser.statuses[:enabled])
   end
 
+  # this overrides the enum method
   def incomplete?
-    date_transformations.count == 0 || split_transformations.count == 0
+    date_transformations.count == 0 || split_transformations.count == 0 || other_transformations.count == 0
   end
 
   private
@@ -66,6 +67,7 @@ class Parser < ActiveRecord::Base
   end
 
   def update_status
+    # damn I forgot why I did this
     unless enabled?
       self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
     end

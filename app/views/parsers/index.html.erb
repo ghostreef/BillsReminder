@@ -4,7 +4,7 @@
       <%= parser.name %>
       <%= link_to('W', parser_path(parser), class: 'taiga') %>
       <%= link_to('j', parser_path(parser), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
-      <%= link_to('r', enable_parser_path(parser), class: 'taiga') unless parser.enabled? || parser.incomplete? %>
+      <%= link_to('r', enable_parser_path(parser), class: 'taiga') if !parser.enabled? && parser.disabled? %>
     </li>
   <% end %>
 </ul>
