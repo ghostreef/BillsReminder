@@ -34,7 +34,7 @@ class Transformation < ActiveRecord::Base
   end
 
   def evaluate_complexity
-    self.complexity = (self.regex =~ /\*|\[|\]|\(|\)|\+|\\|\$|\^|\?|\{|\}|\.|\|/) ? 3 : 1
+    self.complexity = (self.regex =~ /$|\*|\[|\]|\(|\)|\+|\\|\$|\^|\?|\{|\}|\.|\|/) ? 3 : 1
   end
 
 end

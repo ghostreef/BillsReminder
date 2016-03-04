@@ -14,17 +14,17 @@
 
   <p>
     <%= label_tag(:transformation_date) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :pattern, @parser.date_transformation.try(:id)), prompt: 'Date Pattern') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :regex, @parser.date_transformation.try(:id)), prompt: 'Date Pattern') %>
   </p>
 
   <p>
     <%= label_tag(:transformation_split) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :pattern, @parser.split_transformation.try(:id)), prompt: 'Split Pattern') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :regex, @parser.split_transformation.try(:id)), prompt: 'Split Pattern') %>
   </p>
 
   <p>
     <%= label_tag(:transformation) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(transformation_type: [2,3]), :id, :pattern, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2,3]), :id, :pattern, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
   </p>
 
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>

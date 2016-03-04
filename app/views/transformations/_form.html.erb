@@ -15,7 +15,7 @@
 
   <p>
     <%= f.label :derives %>
-    <%= f.text_field :derives %>
+    <%= f.select :derives, Transaction.derivable, prompt: 'derives nothing' %>
   </p>
 
   <p>
@@ -25,12 +25,11 @@
 
   <p>
     <%= f.label :set %>
-    <%= f.select :set, Transformation.sets.keys %>
+    <%= f.select :set, Transformation.sets.keys, prompt: 'belongs to no set' %>
   </p>
 
   <p>
     <%= f.label :implies %>
-    <%# f.collection_select :purpose_ids, Purpose.order(:name), :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
     <%= f.collection_select :transformation_id, Transformation.transform, :id, :value, prompt: 'implies nothing' %>
   </p>
 

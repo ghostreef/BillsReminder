@@ -8,13 +8,13 @@
     <%= label_tag('CI') %>
     <%= check_box_tag('transformations[]case_insensitive') %>
     <%= label_tag('Derives') %>
-    <%= text_field_tag('transformations[]derives') %>
+    <%= select_tag('transformations[]derives', options_for_select(Transaction.derivable), prompt: 'derives nothing' )%>
     <%= label_tag('Value') %>
     <%= text_field_tag('transformations[]value') %>
     <%= label_tag('Implies') %>
     <%= select_tag("transformations[]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value), prompt: 'implies nothing') %>
     <%= label_tag('Set') %>
-    <%= select_tag("transformations[]set", options_for_select(Transformation.sets.keys), prompt: 'No set') %>
+    <%= select_tag("transformations[]set", options_for_select(Transformation.sets.keys), prompt: 'belongs to no set') %>
   <% end %>
 <% end %>
 
@@ -43,11 +43,12 @@
           <%= check_box_tag("transformations[#{transformation.id}]case_insensitive", 1, transformation.case_insensitive ) %>
         </div>
       </td>
-      <td><%= text_field_tag("transformations[#{transformation.id}]derives", transformation.derives) %></td>
+
+      <td><%= select_tag("transformations[#{transformation.id}]derives", options_for_select(Transaction.derivable, transformation.derives), prompt: 'derives nothing')%></td>
       <td><%= text_field_tag("transformations[#{transformation.id}]value", transformation.value ) %></td>
       <td><%= select_tag("transformations[#{transformation.id}]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value, transformation.implies.try(:id)), prompt: 'implies nothing') %></td>
       <td class="<%= 'highlight' if transformation.set.nil? %>">
-        <%= select_tag("transformations[#{transformation.id}]set", options_for_select(Transformation.sets.keys, transformation.set), prompt: 'no set') %>
+        <%= select_tag("transformations[#{transformation.id}]set", options_for_select(Transformation.sets.keys, transformation.set), prompt: 'belongs to no set') %>
       </td>
       <td><%= transformation.complexity || '-' %></td>
       <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>

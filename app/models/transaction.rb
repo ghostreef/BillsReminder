@@ -6,6 +6,11 @@ class Transaction < ActiveRecord::Base
   validates :date, :raw_description, presence: true
   validates :amount, numericality: { greater_than: 0 }
 
+  # returns the column names a user is allowed to change
+  def self.derivable
+    Transaction.column_names.keep_if { |x| x.scan(/_at\z|_id\z|\Araw_|\Aid\z/).empty? }
+  end
+
   # I don't want guess methods to set anything for me.
   def guess_source
     Source.all.each do |source|
