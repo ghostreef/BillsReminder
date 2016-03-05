@@ -50,6 +50,9 @@ class Transformation < ActiveRecord::Base
 
   # well this sucks, another drawback to habtm association
   def clean_join_table
-    ActiveRecord::Base.connection.execute("DELETE FROM parsers_transformations WHERE transformation_id = #{id}")
+    # these 2 lines run pretty much the same sql, self.parses adds a where in clause
+    self.parsers = []
+    # OR
+    # ActiveRecord::Base.connection.execute("DELETE FROM parsers_transformations WHERE transformation_id = #{id}")
   end
 end
