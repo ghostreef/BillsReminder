@@ -24,7 +24,7 @@
 
   <p>
     <%= label_tag(:transformation) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2,3]), :id, :pattern, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2,3]), :id, :regex, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
   </p>
 
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>
