@@ -39,7 +39,7 @@ class Transformation < ActiveRecord::Base
   def set_default_values
     # value would be nil if there is no input in the form for it
     # have to use self in callbacks
-    self.value ||= '999'
+    self.value ||= ''
   end
 
   def evaluate_complexity
