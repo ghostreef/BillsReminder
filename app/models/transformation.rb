@@ -7,7 +7,9 @@ class Transformation < ActiveRecord::Base
   alias_attribute :implies, :transformation
 
   before_create :set_default_values
-  before_save :evaluate_complexity
+
+  before_save :evaluate_complexity, if: :regex_changed?
+
   after_destroy :clean_join_table
 
   # these give us Transformation.date, Transformation.split...
@@ -30,12 +32,20 @@ class Transformation < ActiveRecord::Base
 
   private
 
+  def regex_changed?
+    changed.include?('regex')
+  end
+
   def set_default_values
-    self.value ||= ''
+    # value would be nil if there is no input in the form for it
+    # have to use self in callbacks
+    self.value ||= '999'
   end
 
   def evaluate_complexity
-    self.complexity = (self.regex =~ /$|\*|\[|\]|\(|\)|\+|\\|\$|\^|\?|\{|\}|\.|\|/) ? 3 : 1
+    self.complexity = (self.regex =~ /%|\*|\[|\]|\(|\)|\+|\\|\$|\^|\?|\{|\}|\.|\|/) ? 3 : 1
+    # Transformation.complexities[:complex]
+    # Transformation.complexities[:simple]
   end
 
   # well this sucks, another drawback to habtm association
