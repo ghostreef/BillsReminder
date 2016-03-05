@@ -1,8 +1,10 @@
 class Parser < ActiveRecord::Base
-  validates :name, length: { minimum: 1 }
+  validates :name, length: {minimum: 1}
 
-  before_create :set_default_values
-  before_update :update_status
+  has_and_belongs_to_many :transformations
+
+  before_save :set_status, unless: :status_changed?
+
   after_destroy :clean_join_table
 
   enum status: {
@@ -11,19 +13,8 @@ class Parser < ActiveRecord::Base
            incomplete: 2
        }
 
-  has_and_belongs_to_many :transformations
-
-  def date_transformations
-    transformations.date
-  end
-
-  def split_transformations
-    transformations.split
-  end
-
-  def other_transformations
-    # in rails merge uses where and clause, so I have to do this
-    transformations.where(set: [Transformation.sets[:transform], Transformation.sets[:strip]])
+  def self.parser
+    Parser.find_by_status(Parser.statuses[:enabled])
   end
 
   def strip_transformations
@@ -34,6 +25,19 @@ class Parser < ActiveRecord::Base
     transformations.transform
   end
 
+  def date_transformations
+    transformations.date
+  end
+
+  def split_transformations
+    transformations.split
+  end
+
+  def other_transformations
+    # rails merge uses 'where and' clause, so I have to do this
+    transformations.where(set: [Transformation.sets[:transform], Transformation.sets[:strip]])
+  end
+
   def date_transformation
     date_transformations.try(:first) || nil
   end
@@ -42,34 +46,35 @@ class Parser < ActiveRecord::Base
     split_transformations.try(:first) || nil
   end
 
-  # only one parser can be enabled at a time
-  def self.enable(parser)
-    # disable all parses
+  def enable
+    # disable all enabled parsers, only one parser can be enabled at a time
     Parser.enabled.update_all(status: Parser.statuses[:disabled])
 
-    parser.update(status: Parser.statuses[:enabled])
+    # mark this parser as enabled
+    update(status: Parser.statuses[:enabled])
   end
 
-  def self.parser
-    Parser.find_by_status(Parser.statuses[:enabled])
-  end
-
-  # this overrides the enum method
-  def incomplete?
+  # checks transformations, runs queries
+  def is_incomplete?
     date_transformations.count == 0 || split_transformations.count == 0 || other_transformations.count == 0
   end
 
   private
 
-  def set_default_values
-    (self.status ||= Parser.statuses[:incomplete]) if self.incomplete?
-    self.status ||= Parser.statuses[:disabled]
+  def status_changed?
+    changed.include?('status')
   end
 
-  def update_status
-    # damn I forgot why I did this
-    unless enabled?
-      self.status = self.incomplete? ? Parser.statuses[:incomplete] : Parser.statuses[:disabled]
+  # make sure to use the active record collection proxy, the relation does not reflect current changes
+  # also worth noting self is not needed with associations...kinda annoying
+  def set_status
+    # important: use map on collection, not relation!
+    list = transformations.map(&:set)
+
+    if list.include?('date') && list.include?('split') && list.include?('transform')
+      self.status = Parser.statuses[:disabled]
+    else
+      self.status = Parser.statuses[:incomplete]
     end
   end
 
