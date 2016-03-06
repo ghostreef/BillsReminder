@@ -36,6 +36,10 @@
   <li><%= active_link_to 'New Parsers', new_parser_path, active: :exact  %></li>
 </ul>
 
+<% if Parser.parser.nil? %>
+  <div class='alert'>There is no enabled parser!</div>
+<% end %>
+
 <%= render 'layouts/flash_messages' %>
 
 <%= yield %>
