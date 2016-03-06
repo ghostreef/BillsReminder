@@ -36,7 +36,7 @@ class ParsersController < ApplicationController
   end
 
   def enable
-    Parser.enable(@parser)
+    @parser.enable
     redirect_to parsers_path
   end
 

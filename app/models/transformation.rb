@@ -12,6 +12,8 @@ class Transformation < ActiveRecord::Base
 
   after_destroy :clean_join_table
 
+  before_destroy :update_parsers
+
   # these give us Transformation.date, Transformation.split...
   enum set: {
            date: 0,
@@ -54,5 +56,12 @@ class Transformation < ActiveRecord::Base
     self.parsers = []
     # OR
     # ActiveRecord::Base.connection.execute("DELETE FROM parsers_transformations WHERE transformation_id = #{id}")
+  end
+
+  def update_parsers
+    parsers.each do |parser|
+      parser.transformations.delete(self)
+      parser.save
+    end
   end
 end
