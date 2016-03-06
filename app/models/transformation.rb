@@ -1,6 +1,7 @@
 class Transformation < ActiveRecord::Base
   # regex, case_insensitive, derives, value, implies, set, complexity
   validates :regex, uniqueness: true, length: {minimum: 1}
+  validate :implies_and_derives_cannot_be_the_same, :cannot_imply_self
 
   has_and_belongs_to_many :parsers
   belongs_to :transformation
@@ -28,11 +29,33 @@ class Transformation < ActiveRecord::Base
            complex: 3
        }
 
-  def custom_error_messages
+  def implies_and_derives_cannot_be_the_same
+    if implies.present? && derives.present? && implies != self && implies.derives == derives
+      errors.add(:base, 'Transformation cannot imply and derive the same attribute')
+    end
+  end
 
+  def cannot_imply_self
+    if implies == self
+      errors.add(:base, 'Transformation cannot imply self')
+    end
+  end
+
+  def custom_error_messages
+    errors.map do |attribute, error|
+      if attribute == :base
+        error
+      else
+      "#{attribute} '#{send(attribute)}' #{error}."
+      end
+    end
   end
 
   private
+
+  def check_for_implication_loops
+
+  end
 
   def regex_changed?
     changed.include?('regex')
