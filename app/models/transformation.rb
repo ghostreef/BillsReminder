@@ -53,8 +53,10 @@ class Transformation < ActiveRecord::Base
 
   private
 
+  # check both parent and child in linked list
+  # meaning if I change derives then I have to check all transformations that imply this one
   def check_for_implication_loops
-
+  #   actually this is tricky
   end
 
   def regex_changed?
