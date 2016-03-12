@@ -7,6 +7,9 @@ class Parser < ActiveRecord::Base
 
   after_destroy :clean_join_table
 
+  serialize :search_order, JSON
+  serialize :expected_order, JSON
+
   enum status: {
            enabled: 0,
            disabled: 1,
