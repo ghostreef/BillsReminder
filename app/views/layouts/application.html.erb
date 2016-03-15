@@ -40,7 +40,7 @@
 
   <li><%= active_link_to 'New Parsers', new_parser_path, active: :exact  %></li>
 
-  <li><%= active_link_to 'Graphs', '', active: :exact  %></li>
+  <li><%= active_link_to 'Graphs', '/trends', active: :exact  %></li>
 </ul>
 
 <% if Parser.parser.nil? %>

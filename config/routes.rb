@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'bills#dashboard'
   get 'bills/dashboard', to: 'bills#dashboard', as: 'dashboard'
+  get 'trends', to: 'categories'
   patch 'bills/paid', to: 'bills#paid', as: 'paid'
   resources :bills, :categories
 
