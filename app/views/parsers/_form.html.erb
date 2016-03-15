@@ -8,8 +8,8 @@
 
   <!-- just for reference now -->
   <!--<p>-->
-    <%#= label_tag('parser[status]') %>
-    <%#= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
+  <%#= label_tag('parser[status]') %>
+  <%#= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
   <!--</p>-->
 
   <p>
@@ -24,7 +24,7 @@
 
   <p>
     <%= label_tag(:transformation) %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2,3]), :id, :regex, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
+    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2, 3]), :id, :regex, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
   </p>
 
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>
