@@ -27,5 +27,27 @@
     <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2, 3]), :id, :regex, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
   </p>
 
+  <div>
+    <%= label_tag(:search_order) %><br/>
+    <ul id='js-search_order_2' class='js-search_connected_sortable sortable_list'></ul>
+  </div>
+
+  <div>
+    <%= label_tag(:expected_order) %><br/>
+    <ul id='js-expected_order_2' class='js-expected_connected_sortable sortable_list'></ul>
+  </div>
+
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>
 <% end %>
+
+<ul id='js-search_order_1' class='js-search_connected_sortable sortable_list'>
+  <% Transaction.derivable.each do |name| %>
+    <li><%= hidden_field_tag('search_order[]', name) %><%= name %></li>
+  <% end %>
+</ul>
+
+<ul id='js-expected_order_1' class='js-expected_connected_sortable sortable_list'>
+  <% Transaction.derivable.each do |name| %>
+    <li><%= hidden_field_tag('expected_order[]', name) %><%= name %></li>
+  <% end %>
+</ul>
