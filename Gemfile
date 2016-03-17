@@ -32,8 +32,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'squeel'
 
-gem 'active_link_to'
-
 gem 'jquery-ui-rails'
 
 # Use ActiveModel has_secure_password
