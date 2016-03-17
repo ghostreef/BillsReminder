@@ -1,0 +1,15 @@
+body {
+  background-color: #f1f1f1;
+}
+
+#wrapper {
+  position: relative;
+}
+
+.main {
+  padding: 1%;
+}
+
+.outer-container {
+  @include outer-container;
+}

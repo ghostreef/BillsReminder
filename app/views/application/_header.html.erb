@@ -1,0 +1,51 @@
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <%= link_to '', dashboard_path, class: 'logo fa fa-home' %>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+
+        <li class="nav-link more"><%= link_to 'Transactions', transactions_path %>
+          <ul class="submenu">
+            <li><%= link_to 'New Transaction', new_transaction_path %></li>
+          </ul>
+        </li>
+
+        <li class="nav-link more"><%= link_to 'Bills', bills_path %>
+          <ul class="submenu">
+            <li><%= link_to 'New Bill', new_bill_path %></li>
+          </ul>
+        </li>
+
+        <li class="nav-link more"><%= link_to 'Categories', categories_path %>
+          <ul class="submenu">
+            <li><%= link_to 'Visualize', '/trends' %></li>
+            <li><%= link_to 'Bubbles', '' %></li>
+            <li><%= link_to 'New Category', new_category_path %></li>
+          </ul>
+        </li>
+
+        <li class="nav-link more"><%= link_to 'Sources', sources_path %>
+          <ul class="submenu">
+            <li><%= link_to 'Visualize', '/trends' %></li>
+          </ul>
+        </li>
+
+        <li class="nav-link"><%= link_to 'Purposes', purposes_path %></li>
+
+        <li class="nav-link more"><%= link_to 'Transformations', transformations_path %>
+          <ul class="submenu">
+            <li><%= link_to 'New Transformation', new_transformation_path %></li>
+          </ul>
+        </li>
+
+        <li class="nav-link more"><%= link_to 'Parsers', parsers_path %>
+          <ul class="submenu">
+            <li><%= link_to 'New Parsers', new_parser_path %></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
