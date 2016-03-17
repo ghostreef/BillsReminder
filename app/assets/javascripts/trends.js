@@ -18,7 +18,7 @@ nv.addGraph(function () {
         // .transition().duration(500)
 
     chart.xAxis     //Chart x-axis settings
-        .axisLabel('Date')
+        .axisLabel('Month')
         //.ticks(d3.time.months)
         .tickValues(tv())
         .tickFormat(function(d) { return d3.time.format('%b')(new Date(d)); }); // is the function required?
@@ -102,11 +102,6 @@ function fakeSpendingActivity() {
     return [
         {
             values: fakeLineData(),
-            key: 'Spent'
-            //,color: '#ff7f0e'
-        }
-        ,{
-            values: fakeLineData(),
             key: 'A'
         }
         ,{
@@ -128,6 +123,11 @@ function fakeSpendingActivity() {
         ,{
             values: fakeLineData(),
             key: 'F'
+        }
+        ,{
+            values: fakeLineData(),
+            key: 'G'
+            //,color: '#ff7f0e'
         }
     ];
 }
