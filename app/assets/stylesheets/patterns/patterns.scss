@@ -75,3 +75,36 @@
   color: #ed2224;
   background-color: #ffe1e3;
 }
+
+@mixin flash($color) {
+  background-color: $color;
+  color: darken($color, 60%);
+  display: block;
+  text-align: center;
+
+  a {
+    color: darken($color, 70%);
+    text-decoration: underline;
+
+    &:focus,
+    &:hover {
+      color: darken($color, 90%);
+    }
+  }
+}
+
+.flash-alert {
+  @include flash($yellow);
+}
+
+.flash-error {
+  @include flash($red);
+}
+
+.flash-notice {
+  @include flash($blue);
+}
+
+.flash-success {
+  @include flash($green);
+}
