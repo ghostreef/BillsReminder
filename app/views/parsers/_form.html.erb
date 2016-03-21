@@ -2,7 +2,7 @@
 <%= form_tag @parser.new_record? ? parsers_path : parser_path, method: @parser.new_record? ? :post : :patch do |f| %>
 
   <p>
-    <%= label_tag('parser[name]') %>
+    <%= label_tag('parser[name]', 'Name') %>
     <%= text_field_tag('parser[name]', @parser.name) %>
   </p>
 
@@ -13,41 +13,50 @@
   <!--</p>-->
 
   <p>
-    <%= label_tag(:transformation_date) %>
+    <%= label_tag(:transformation_date, 'Date Transformation') %>
     <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :regex, @parser.date_transformation.try(:id)), prompt: 'Date Pattern') %>
   </p>
 
   <p>
-    <%= label_tag(:transformation_split) %>
+    <%= label_tag(:transformation_split, 'Split Transformation') %>
     <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :regex, @parser.split_transformation.try(:id)), prompt: 'Split Pattern') %>
   </p>
 
   <p>
-    <%= label_tag(:transformation) %>
+    <%= label_tag(:transformations, 'Transformations') %>
     <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.where(set: [2, 3]), :id, :regex, @parser.other_transformations.pluck(:id)), multiple: true, class: 'js-multiSelect') %>
   </p>
 
+
+
   <div>
-    <%= label_tag(:search_order) %><br/>
-    <ul id='js-search_order_2' class='js-search_connected_sortable sortable_list'></ul>
+    <%= label_tag(:search_order, 'Search Order') %><br/>
+    <div class='js-better-select'>
+      <ul>
+        <% Transaction.derivable.each do |name| %>
+          <li><%= hidden_field_tag('search_order[]', name, disabled: true) %><%= name %></li>
+        <% end %>
+      </ul>
+
+      <ul class='js-sortable'></ul>
+    </div>
   </div>
 
   <div>
-    <%= label_tag(:expected_order) %><br/>
-    <ul id='js-expected_order_2' class='js-expected_connected_sortable sortable_list'></ul>
+    <%= label_tag(:expected_order, 'Expected Order') %><br/>
+
+    <div class='js-better-select'>
+      <ul>
+        <% Transaction.derivable.each do |name| %>
+          <li><%= hidden_field_tag('expected_order[]', name, disabled: true) %><%= name %></li>
+        <% end %>
+      </ul>
+
+      <ul class='js-sortable'></ul>
+    </div>
   </div>
+
+
 
   <%= submit_tag('SUBMIT', class: 'button salmon_button') %>
 <% end %>
-
-<ul id='js-search_order_1' class='js-search_connected_sortable sortable_list'>
-  <% Transaction.derivable.each do |name| %>
-    <li><%= hidden_field_tag('search_order[]', name) %><%= name %></li>
-  <% end %>
-</ul>
-
-<ul id='js-expected_order_1' class='js-expected_connected_sortable sortable_list'>
-  <% Transaction.derivable.each do |name| %>
-    <li><%= hidden_field_tag('expected_order[]', name) %><%= name %></li>
-  <% end %>
-</ul>
