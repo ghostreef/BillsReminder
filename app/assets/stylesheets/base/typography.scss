@@ -1,3 +1,27 @@
 body {
+  font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
+  font-size: 1em;
+}
+
+.f12 {
+  font-size: .75em;
+}
+
+.f14 {
+  font-size: 0.875em;
+}
+
+.f16 {
+  font-size: 1em;
+}
+
+@font-face {
+  font-family: 'taiga';
+  src: url("/taiga.woff") format('woff');
+}
+
+.taiga {
+  font-family: taiga, sans-serif;
+  @extend .icon;
 }
