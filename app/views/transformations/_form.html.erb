@@ -9,29 +9,35 @@
   </p>
 
   <p>
-    <%= f.label :case_insensitive %>
+    <%= f.label :case_insensitive, 'Case Insensitive?', class: 'inline_label' %>
     <%= f.check_box :case_insensitive %>
   </p>
 
-  <p>
+  <div>
     <%= f.label :derives %>
-    <%= f.select :derives, Transaction.derivable, prompt: 'derives nothing' %>
-  </p>
+    <div class='styled_select'>
+      <%= f.select :derives, Transaction.derivable, prompt: 'derives nothing' %>
+    </div>
+  </div>
 
   <p>
     <%= f.label :value %>
     <%= f.text_field :value %>
   </p>
 
-  <p>
+  <div>
     <%= f.label :set %>
-    <%= f.select :set, Transformation.sets.keys, prompt: 'belongs to no set' %>
-  </p>
+    <div class='styled_select'>
+      <%= f.select :set, Transformation.sets.keys, prompt: 'belongs to no set' %>
+    </div>
+  </div>
 
-  <p>
+  <div>
     <%= f.label :implies %>
-    <%= f.collection_select :transformation_id, Transformation.transform, :id, :value, prompt: 'implies nothing' %>
-  </p>
+    <div class='styled_select'>
+      <%= f.collection_select :transformation_id, Transformation.transform, :id, :value, prompt: 'implies nothing' %>
+    </div>
+  </div>
 
   <%= f.submit %>
 

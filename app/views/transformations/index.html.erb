@@ -1,62 +1,70 @@
-<%= form_tag create_many_transformations_path do %>
-  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
-  <%= submit_tag('CREATE', class: 'salmon_button button') %>
+<div class='transformations'>
+  <%= form_tag create_many_transformations_path, class: 'inline_form add_transformations' do %>
+    <%= button_tag('ADD', class: 'js-add_fieldset', type: 'button') %>
+    <%= submit_tag('CREATE') %>
 
-  <%= field_set_tag nil, class: 'js-source_fieldset' do %>
-    <%= label_tag('Regex') %>
-    <%= text_field_tag('transformations[]regex') %>
-    <%= label_tag('CI') %>
-    <%= check_box_tag('transformations[]case_insensitive') %>
-    <%= label_tag('Derives') %>
-    <%= select_tag('transformations[]derives', options_for_select(Transaction.derivable), prompt: 'derives nothing' )%>
-    <%= label_tag('Value') %>
-    <%= text_field_tag('transformations[]value') %>
-    <%= label_tag('Implies') %>
-    <%= select_tag("transformations[]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value), prompt: 'implies nothing') %>
-    <%= label_tag('Set') %>
-    <%= select_tag("transformations[]set", options_for_select(Transformation.sets.keys), prompt: 'belongs to no set') %>
+    <%= field_set_tag nil, class: 'js-source_fieldset' do %>
+      <%= text_field_tag('transformations[]regex', nil, placeholder: 'Regex') %>
+      <%= label_tag('CI') %>
+      <%= check_box_tag('transformations[]case_insensitive') %>
+      <div class='styled_select'>
+        <%= select_tag('transformations[]derives', options_for_select(Transaction.derivable), prompt: 'derives nothing') %>
+      </div>
+      <%= text_field_tag('transformations[]value', nil, placeholder: 'Value') %>
+      <div class='styled_select'>
+        <%= select_tag("transformations[]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value), prompt: 'implies nothing') %>
+      </div>
+      <div class='styled_select'>
+        <%= select_tag("transformations[]set", options_for_select(Transformation.sets.keys), prompt: 'belongs to no set') %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-
-
-<table class='js-transformations_table'>
-  <thead>
-  <tr>
-    <th>Regex</th>
-    <th>CI</th>
-    <th>Derives</th>
-    <th>Value</th>
-    <th>Implies</th>
-    <th>Type</th>
-    <th>Complexity</th>
-    <th>&nbsp;</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @transformations.each do |transformation| %>
+  <table class='js-transformations_table'>
+    <thead>
     <tr>
-      <td><%= text_field_tag("transformations[#{transformation.id}]regex", transformation.regex) %></td>
-      <td>
-        <div>
-          <%= hidden_field_tag("transformations[#{transformation.id}]case_insensitive", 0)%>
-          <%= check_box_tag("transformations[#{transformation.id}]case_insensitive", 1, transformation.case_insensitive ) %>
-        </div>
-      </td>
-
-      <td><%= select_tag("transformations[#{transformation.id}]derives", options_for_select(Transaction.derivable, transformation.derives), prompt: 'derives nothing')%></td>
-      <td><%= text_field_tag("transformations[#{transformation.id}]value", transformation.value ) %></td>
-      <td><%= select_tag("transformations[#{transformation.id}]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value, transformation.implies.try(:id)), prompt: 'implies nothing') %></td>
-      <td class="<%= 'highlight' if transformation.set.nil? %>">
-        <%= select_tag("transformations[#{transformation.id}]set", options_for_select(Transformation.sets.keys, transformation.set), prompt: 'belongs to no set') %>
-      </td>
-      <td><%= transformation.complexity || '-' %></td>
-      <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
+      <th>Regex</th>
+      <th>CI</th>
+      <th>Derives</th>
+      <th>Value</th>
+      <th>Implies</th>
+      <th>Type</th>
+      <th>Complexity</th>
+      <th>&nbsp;</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @transformations.each do |transformation| %>
+      <tr>
+        <td><%= text_field_tag("transformations[#{transformation.id}]regex", transformation.regex) %></td>
+        <td>
+          <div>
+            <%= hidden_field_tag("transformations[#{transformation.id}]case_insensitive", 0) %>
+            <%= check_box_tag("transformations[#{transformation.id}]case_insensitive", 1, transformation.case_insensitive) %>
+          </div>
+        </td>
 
-<%= form_tag update_many_transformations_path, class: 'js-update_many_transformations_form' do %>
-  <%= submit_tag('UPDATE', class: 'salmon_button button') %>
-<% end %>
+        <td>
+          <div class='styled_select'><%= select_tag("transformations[#{transformation.id}]derives", options_for_select(Transaction.derivable, transformation.derives), prompt: 'derives nothing') %></div>
+        </td>
+        <td><%= text_field_tag("transformations[#{transformation.id}]value", transformation.value) %></td>
+        <td>
+          <div class='styled_select'><%= select_tag("transformations[#{transformation.id}]transformation_id", options_from_collection_for_select(Transformation.transform, :id, :value, transformation.implies.try(:id)), prompt: 'implies nothing') %></div>
+        </td>
+        <td class="<%= 'highlight' if transformation.set.nil? %>">
+          <div class='styled_select'>
+            <%= select_tag("transformations[#{transformation.id}]set", options_for_select(Transformation.sets.keys, transformation.set), prompt: 'belongs to no set') %>
+          </div>
+        </td>
+        <td><%= transformation.complexity || '-' %></td>
+        <td><%= link_to('j', transformation_path(transformation), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= form_tag update_many_transformations_path, class: 'js-update_many_transformations_form' do %>
+    <%= submit_tag('UPDATE', class: 'salmon_button button') %>
+  <% end %>
+
+</div>
