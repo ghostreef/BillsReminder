@@ -13,10 +13,12 @@
     <%= f.text_field :regex %>
   </p>
 
-  <p>
+  <div>
     <%= f.label :purpose %>
-    <%= f.collection_select(:purpose_id, Purpose.all, :id, :name) %>
-  </p>
+    <div class='styled_select'>
+      <%= f.collection_select(:purpose_id, Purpose.all, :id, :name) %>
+    </div>
+  </div>
 
   <%= f.submit %>
 
