@@ -92,7 +92,7 @@ nav ul {
   li {
     a {
       transition: 0.2s linear;
-      &:hover {
+      &:hover, &.active {
         background-color: $dark_mint;
       }
     }

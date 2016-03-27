@@ -6,37 +6,37 @@
 
   <nav class='js-nav'>
     <ul>
-      <li class='hide_on_mobile hide_on_tablet'><%= link_to '', dashboard_path, class: 'desktop_home fa fa-home' %></li>
-      <li class='more'><%= link_to 'Transactions', transactions_path %>
+      <li class='hide_on_mobile hide_on_tablet'><%= active_link_to '', dashboard_path, class: 'desktop_home fa fa-home' %></li>
+      <li class='more'><%= active_link_to 'Transactions', transactions_path %>
         <ul>
           <li><%= link_to 'New Transaction', new_transaction_path %></li>
         </ul>
       </li>
-      <li class='more'><%= link_to 'Bills', bills_path %>
+      <li class='more'><%= active_link_to 'Bills', bills_path %>
         <ul>
           <li><%= link_to 'New Bill', new_bill_path %></li>
         </ul>
       </li>
-      <li class='more'><%= link_to 'Categories', categories_path %>
+      <li class='more'><%= active_link_to 'Categories', categories_path %>
         <ul>
           <li><%= link_to 'Visualize', '/trends' %></li>
           <li><%= link_to 'Bubbles', '' %></li>
           <li><%= link_to 'New Category', new_category_path %></li>
           </ul>
       </li>
-      <li class='more'><%= link_to 'Sources', sources_path %>
+      <li class='more'><%= active_link_to 'Sources', sources_path %>
         <ul>
           <li><%= link_to 'Bubbles', '' %></li>
           <li><%= link_to 'New Source', new_source_path %></li>
         </ul>
       </li>
-      <li><%= link_to 'Purposes', purposes_path %></li>
-      <li class='more'><%= link_to 'Transformations', transformations_path %>
+      <li><%= active_link_to 'Purposes', purposes_path %></li>
+      <li class='more'><%= active_link_to 'Transformations', transformations_path %>
         <ul>
           <li><%= link_to 'New Transformation', new_transformation_path %></li>
         </ul>
       </li>
-      <li class='more'><%= link_to 'Parsers', parsers_path %>
+      <li class='more'><%= active_link_to 'Parsers', parsers_path %>
         <ul>
           <li><%= link_to 'New Parsers', new_parser_path %></li>
         </ul>

@@ -38,6 +38,8 @@ gem 'neat'
 
 gem 'font-awesome-sass'
 
+gem 'active_link_to'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
