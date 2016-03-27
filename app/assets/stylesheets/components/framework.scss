@@ -1,0 +1,26 @@
+body {
+  position: relative;
+}
+
+.main {
+  padding: 1%;
+}
+
+.outer-container {
+  @include outer-container;
+}
+
+@include media($desktop) {
+  .half_column {
+    border: 1px solid black;
+    @include span-columns(6);
+  }
+
+  .last_column {
+    @include omega();
+  }
+
+  .whole_column {
+    @include span-columns(12);
+  }
+}

@@ -10,19 +10,19 @@
 </head>
 <body>
 
-  <div id="wrapper">
-    <% if Parser.parser.nil? %>
-      <div class='alert'>There is no enabled parser!</div>
-    <% end %>
+  <% if Parser.parser.nil? %>
+    <div class='alert'>There is no enabled parser!</div>
+  <% end %>
 
+  <div class="outer-container">
     <%= render 'header' %>
+  </div>
 
-    <%= render 'flash_messages' %>
+  <%= render 'flash_messages' %>
 
-    <div class="outer-container">
-      <div class="outer-container main">
-        <%= yield %>
-      </div>
+  <div class="outer-container">
+    <div class="outer-container main">
+      <%= yield %>
     </div>
   </div>
 
