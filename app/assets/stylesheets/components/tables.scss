@@ -1,0 +1,29 @@
+table {
+  color: $dark_slate;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 0.2em .4em;
+  }
+
+  thead tr {
+    background-color: darken($dark_steel_blue, 2%);
+    border: 1px solid darken($dark_steel_blue, 2%);
+    color: white;
+  }
+
+  tbody {
+    border: 1px solid darken($background_gray, 9%);
+    border-top-color: darken($dark_steel_blue, 2%);
+
+    tr {
+      &:nth-child(even) {
+        background-color: darken($background_gray, 3%);
+      }
+
+      &:nth-child(odd) {
+        background-color: darken($background_gray, 6%);
+      }
+    }
+  }
+}
