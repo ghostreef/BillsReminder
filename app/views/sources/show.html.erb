@@ -1,2 +1,14 @@
-<p>Need this?</p>
-<%= @source.inspect %>
+<div>
+  <%= link_to(edit_source_path, class: 'link') do %>
+    <span>Edit Source</span>
+    <span class='taiga'>h</span>
+  <% end %>
+</div>
+<dl>
+  <dt>Name</dt>
+  <dd><%= @source.name%></dd>
+  <dt>Regex</dt>
+  <dd><%= @source.regex %></dd>
+  <dt>Purpose</dt>
+  <dd><%= @source.purpose.name %></dd>
+</dl>

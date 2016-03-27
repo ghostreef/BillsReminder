@@ -1,2 +1,20 @@
-<p>Need this?</p>
-<%= @transformation.inspect %>
+<div>
+  <%= link_to(edit_transformation_path, class: 'link') do %>
+    <span>Edit Transformation</span>
+    <span class='taiga'>h</span>
+  <% end %>
+</div>
+<dl>
+  <dt>Regex</dt>
+  <dd><%= @transformation.regex %></dd>
+  <dt>Case Insensitive?</dt>
+  <dd><%= @transformation.case_insensitive %></dd>
+  <dt>Derives</dt>
+  <dd><%= @transformation.derives %></dd>
+  <dt>Value</dt>
+  <dd><%= @transformation.value %></dd>
+  <dt>Set</dt>
+  <dd><%= @transformation.set || 'does not beling to any set' %></dd>
+  <dt>Implies</dt>
+  <dd><%= @transformation.implies || 'implies nothing' %></dd>
+</dl>

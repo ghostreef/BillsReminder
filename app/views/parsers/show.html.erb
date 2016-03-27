@@ -1,4 +1,9 @@
-<div><%= link_to('edit', edit_parser_path) %></div>
+<div>
+  <%= link_to(edit_parser_path, class: 'link') do %>
+  <span>Edit Parser</span>
+  <span class='taiga'>h</span>
+  <% end %>
+</div>
 <dl>
   <dt>Name</dt>
   <dd><%= @parser.name %></dd>
