@@ -12,15 +12,19 @@
   <%#= select_tag('parser[status]', options_for_select(Parser.statuses.keys)) %>
   <!--</p>-->
 
-  <p>
+  <div>
     <%= label_tag(:transformation_date, 'Date Transformation') %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :regex, @parser.date_transformation.try(:id)), prompt: 'Date Pattern') %>
-  </p>
+    <div class='styled_select'>
+      <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.date, :id, :regex, @parser.date_transformation.try(:id)), prompt: 'Date Pattern') %>
+    </div>
+  </div>
 
-  <p>
+  <div>
     <%= label_tag(:transformation_split, 'Split Transformation') %>
-    <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :regex, @parser.split_transformation.try(:id)), prompt: 'Split Pattern') %>
-  </p>
+    <div class='styled_select'>
+      <%= select_tag('parser[transformation_ids][]', options_from_collection_for_select(Transformation.split, :id, :regex, @parser.split_transformation.try(:id)), prompt: 'Split Pattern') %>
+    </div>
+  </div>
 
   <p>
     <%= label_tag(:transformations, 'Transformations') %>
@@ -30,7 +34,8 @@
 
 
   <div>
-    <%= label_tag(:search_order, 'Search Order') %><br/>
+    <%= label_tag(:search_order, 'Search Order') %>
+
     <div class='js-better-select'>
       <ul>
         <% Transaction.derivable.each do |name| %>
@@ -43,7 +48,7 @@
   </div>
 
   <div>
-    <%= label_tag(:expected_order, 'Expected Order') %><br/>
+    <%= label_tag(:expected_order, 'Expected Order') %>
 
     <div class='js-better-select'>
       <ul>
