@@ -1,0 +1,42 @@
+.purposes {
+  .edit_purpose {
+    display: inline-block;
+    min-width: 13.8em;
+
+    .purpose_name {
+      width: 12em;
+      min-width: initial;
+      font-size: 1em;
+    }
+  }
+
+  .actions {
+    display: inline-block;
+  }
+
+  .create_purpose_form {
+    input[type='text'] {
+      margin: 0 .5em 1em 0;
+      font-size: 14px;
+    }
+
+    .submit {
+      margin: 0 0 1em 0;
+      display: block;
+    }
+  }
+//
+//    .purpose_list {
+//
+//
+//      li {
+//        width: 18em;
+//
+//        .purpose_name {
+//          width: 7.8125rem;
+//          font-size: 1em;
+//        }
+//      }
+//    }
+
+}
