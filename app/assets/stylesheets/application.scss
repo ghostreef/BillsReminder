@@ -24,3 +24,7 @@
 @import "nv.d3.min";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+body {
+  background-color: $background_gray;
+}
