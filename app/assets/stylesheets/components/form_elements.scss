@@ -1,0 +1,103 @@
+abbr {
+  color: $dark_bittersweet;
+}
+
+label {
+  padding: 0.625em 0;
+  display: block;
+  color: $dark_slate;
+  font-weight: bold;
+
+  &.inline_label {
+    display: inline-block;
+    margin-right: .5em;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  background: $white;
+}
+
+input, select {
+  padding: .3em;
+  border: 1px solid $input_grey;
+  border-radius: 2px;
+  outline: none;
+
+  transition: all 0.2s ease-in-out;
+}
+
+input[type=text], input[type=number], select {
+  &:focus {
+    border-color: $steel_blue;
+  }
+}
+
+form {
+  input[type=text], input[type=number], select {
+    &:not(.date) {
+      min-width: 14em;
+    }
+  }
+}
+
+.styled_select {
+  position: relative;
+  display: inline-block;
+
+  select {
+    padding-right: 2em;
+  }
+
+  &:before {
+    content: "\f0dc";
+    position: absolute;
+    right: 5%;
+    top: 16%;
+
+    font-family: FontAwesome;
+    color: $dark_slate;
+    pointer-events: none;
+  }
+
+  // for simple form, also need to wrap in a div
+  &.input:before {
+    top: 70%;
+  }
+}
+
+button:not(.default), input[type=submit]:not(.default) {
+  font-family: 'Oswald', sans-serif;
+  @extend .f14;
+  text-transform: uppercase;
+  background-color: $dark_steel_blue;
+  color: white;
+
+  margin: 1em .5em .5em 0;
+  padding: 0.57em 1.14em 0.71em 1.14em;
+
+  border-radius: 4px;
+  box-shadow: inset 0 -0.1875em 0 rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: $steel_blue;
+  }
+
+  &.red_button {
+    background-color: $dark_bittersweet;
+    &:hover {
+      background-color: $bittersweet;
+    }
+  }
+}
+
+@include media($desktop) {
+  .inline_form {
+    label {
+      display: inline-block;
+      margin-right: .5em;
+      padding: 0;
+    }
+  }
+}
