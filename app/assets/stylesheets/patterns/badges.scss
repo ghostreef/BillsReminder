@@ -1,0 +1,47 @@
+@mixin badge($color) {
+  display: inline-block;
+  margin: 0 .5em .5em 0;
+  border-radius: 0.1875em;
+  padding: 0.1875em .75em;
+
+  background-color: $color;
+  color: darken($color, 60%);
+  border-bottom: 0.125em solid darken($color, 12%);
+
+  -webkit-font-smoothing: initial;
+  opacity: 0.8;
+
+  // green should be .9
+  // I will adjust in the color
+
+  a {
+    &:hover {
+      color: darken($color, 80%);
+    }
+  }
+}
+
+.blue_badge {
+  @include badge($blue);
+}
+
+.green_badge {
+  @include badge($green);
+}
+
+.red_badge {
+  @include badge($red);
+}
+
+.badge_list {
+  li {
+    @extend .green_badge;
+
+    &.disabled {
+      @extend .blue_badge
+    }
+    &.incomplete {
+      @extend .red_badge
+    }
+  }
+}

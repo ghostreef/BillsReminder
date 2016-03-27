@@ -1,0 +1,61 @@
+@include media($mobile) {
+  .hide_on_mobile {
+    display: none;
+  }
+}
+
+@include media($tablet) {
+  .hide_on_tablet {
+    display: none;
+  }
+}
+
+@include media($desktop) {
+  .hide_on_desktop {
+    display: none;
+  }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.overflow {
+  overflow: auto;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd + dt {
+  margin-top: .5em;
+}
+
+.link {
+  padding-bottom: 1px;
+  border-bottom: 1px solid darken($dark_steel_blue, 10%);
+  color: darken($dark_steel_blue, 10%);
+
+  .taiga {
+    vertical-align: bottom;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #BBB;
+  opacity: .5;
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  color: $dark_slate;
+}
