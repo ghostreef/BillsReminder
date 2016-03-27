@@ -1,0 +1,158 @@
+.mobile_nav_headers {
+  overflow: auto;
+
+  .home {
+    float: left;
+  }
+
+  .menu {
+    float: right;
+  }
+}
+
+nav {
+  text-align: right;
+
+  a {
+    display: block;
+    padding: 15px 20px;
+  }
+
+  // initially hidden on mobile
+  display: none;
+
+  li {
+    &.more {
+      > a:after {
+        content: "\f107";
+        padding-left: .25em;
+        font-family: "FontAwesome";
+      }
+    }
+
+    > ul {
+      display: none;
+    }
+
+    &:hover, &:focus {
+      ul {
+        display: block;
+      }
+    }
+  }
+}
+
+@include media($desktop) {
+  nav {
+    text-align: center;
+
+    ul {
+      overflow: auto;
+    }
+
+    li {
+      float: left;
+
+      > ul {
+        // this works as long as you leave it in the static position
+        position: absolute;
+        text-align: start;
+        li {
+          float: none;
+          text-indent: -4px;
+        }
+      }
+    }
+
+    // meaning it cannot be hidden
+    display: block !important;
+  }
+}
+
+// PRESENTATION
+header {
+  color: $white;
+  background-color: $mint;
+  z-index: 1;
+  position: relative;
+}
+
+.home, .menu {
+  padding: .4em;
+  @extend .f22;
+}
+
+.desktop_home:before {
+  vertical-align: sub;
+}
+
+nav ul {
+  background: #48cfad;
+
+  li {
+    a {
+      transition: 0.2s linear;
+      &:hover {
+        background-color: $dark_mint;
+      }
+    }
+
+    > ul {
+      background-color: $light_black;
+
+      li a {
+        border-left: .25em solid $light_black;
+        &:hover {
+          background-color: $black;
+          border-left: .25em solid $mint;
+        }
+      }
+    }
+  }
+}
+
+@include media($desktop) {
+  nav ul {
+    li > ul {
+      width: 11.5em;
+      border-bottom: .25em solid $mint;
+    }
+  }
+}
+
+
+
+// DESIGN
+nav {
+  font-size: 14px;
+  max-height: 46px;
+}
+
+
+nav ul li > ul {
+//  width: 240px;
+    width: 180px;
+}
+
+
+nav ul li > ul li a {
+  padding: 10px 15px;
+}
+
+nav ul li > ul {
+  border-bottom: 4px solid #48CFAD;
+}
+
+nav ul li > ul li a:hover {
+  background-color: #333;
+  border-left: 4px solid #48CFAD;
+}
+
+nav ul li > ul li a {
+
+  border-left: 4px solid $light_black;
+}
+
+nav li > ul li {
+  text-indent: 2px;
+}
