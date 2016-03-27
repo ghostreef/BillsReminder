@@ -1,5 +1,6 @@
-<table class='bill_table'>
-  <tr class='header'>
+<table>
+  <thead>
+  <tr>
     <th>Issuer</th>
     <th>Type</th>
     <th>Description</th>
@@ -9,7 +10,8 @@
     <th>Status</th>
     <th>&nbsp;</th>
   </tr>
-
+  </thead>
+  <tbody>
   <% @bills.each do |bill| %>
     <tr class="<%= bill.status %>">
       <td><%= bill.issuer %></td>
@@ -37,4 +39,5 @@
       <td class='taiga'><%= link_to('j', bill_path(bill), method: :delete, data: {confirm: 'Are you sure?'}) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
