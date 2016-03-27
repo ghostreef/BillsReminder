@@ -7,22 +7,24 @@
     </div>
   <% end %>
 
-  <div>tab it</div>
+  <p><i class="fa fa-info-circle"></i> TIP: Press tab after typing to add another purpose.</p>
 
   <%= form_tag create_many_purposes_path, class: 'create_purpose_form' do %>
     <%= text_field_tag('purposes[][name]', nil, id: nil, class: 'js-new_purpose') %>
-    <%= submit_tag('SUBMIT', class: 'salmon_button button') %>
+    <%= submit_tag('SUBMIT', class: 'submit') %>
   <% end %>
 
-  <ul class='horizontal_menu purpose_list badge_list'>
+  <ul class='badge_list'>
     <% @purposes.each do |purpose| %>
       <li>
         <%= form_for purpose, remote: true, html: {class: "js-purpose_form js-purpose_form_#{purpose.id} edit_purpose"} do |f| %>
           <%= f.text_field :name, disabled: true, class: 'js-input purpose_name' %>
-          <%= f.submit 'F', class: 'taiga icon hide js-submit' %>
+          <%= f.submit 'F', class: 'taiga default hide js-submit' %>
         <% end %>
-        <%= link_to('h', '#', remote: true, class: "js-edit_purpose js-edit_purpose_form_#{purpose.id} taiga icon", data: {id: purpose.id}) %>
-        <%= link_to('j', purpose_path(purpose), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga delete_icon icon') %>
+        <div class='actions'>
+          <%= link_to('h', '#', remote: true, class: "js-edit_purpose js-edit_purpose_form_#{purpose.id} taiga", data: {id: purpose.id}) %>
+          <%= link_to('j', purpose_path(purpose), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
+        </div>
       </li>
     <% end %>
   </ul>
