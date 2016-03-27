@@ -21,7 +21,7 @@ $(document).ready(function () {
     });
 });
 
-// on tab open another input field
+// copy text from regex field and move over to name field
 $(document).on('click', '.js-fill_in_name', function () {
     var regex = $(this).siblings('.js-regex').val().split(' ');
 
