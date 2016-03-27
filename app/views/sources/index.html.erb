@@ -1,44 +1,54 @@
-<%= form_tag create_many_sources_path do %>
-  <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
-  <%= submit_tag('CREATE', class: 'salmon_button button') %>
+<div class='sources'>
+  <%= form_tag create_many_sources_path, class: 'create_many_form' do %>
+    <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
+    <%= submit_tag('CREATE', class: 'salmon_button button') %>
 
-  <%= field_set_tag nil, class: 'js-source_fieldset' do %>
-    <%= text_field_tag('sources[]name', nil, class: 'js-name') %><%= button_tag('D', class: 'taiga js-fill_in_name', type: 'button') %>
-    <%= text_field_tag('sources[]regex', nil, class: 'js-regex') %>
-    <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose') %>
+    <%= field_set_tag nil, class: 'js-source_fieldset' do %>
+      <%= text_field_tag('sources[]name', nil, class: 'js-name', placeholder: 'Name') %>
+      <i class="fa fa-arrow-circle-o-left js-fill_in_name"></i>
+      <%= text_field_tag('sources[]regex', nil, class: 'js-regex', placeholder: 'Regex') %>
+      <div class='styled_select'>
+        <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose') %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
 
 
-<table class='js-sources_table'>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Regex</th>
-    <th>Purpose</th>
-    <th>Total</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @sources.each do |source| %>
-    <tr class="<%= 'highlight' if source.purpose.nil? %>">
-      <td><%= source.id %></td>
-      <td><%= text_field_tag("sources[#{source.id}]name", source.name) %></td>
-      <td><%= text_field_tag("sources[#{source.id}]regex", source.regex) %></td>
-      <td><%= select_tag("sources[#{source.id}]purpose_id",
-                         options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose') %></td>
-      <td><%= source.total %></td>
-      <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
-      <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
+  <table class='js-sources_table'>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Regex</th>
+      <th>Purpose</th>
+      <th>Total</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @sources.each do |source| %>
+      <tr class="<%= 'highlight' if source.purpose.nil? %>">
+        <td><%= source.id %></td>
+        <td><%= text_field_tag("sources[#{source.id}]name", source.name) %></td>
+        <td><%= text_field_tag("sources[#{source.id}]regex", source.regex) %></td>
+        <td>
+          <div class='styled_select'>
+            <%= select_tag("sources[#{source.id}]purpose_id",
+                           options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose') %>
+          </div>
+        </td>
+        <td><%= number_to_currency(source.total) %></td>
+        <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
+        <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
-  <%= submit_tag('UPDATE', class: 'salmon_button button') %>
-<% end %>
+  <%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
+    <%= submit_tag('UPDATE', class: 'salmon_button button') %>
+    <%= button_tag('REFRESH', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
+  <% end %>
+</div>
