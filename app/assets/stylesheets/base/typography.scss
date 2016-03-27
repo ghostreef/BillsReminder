@@ -16,6 +16,14 @@ body {
   font-size: 1em;
 }
 
+.f22 {
+  font-size: 1.375em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 @font-face {
   font-family: 'taiga';
   src: url("/taiga.woff") format('woff');
@@ -23,5 +31,5 @@ body {
 
 .taiga {
   font-family: taiga, sans-serif;
-  @extend .icon;
+  vertical-align: middle;
 }
