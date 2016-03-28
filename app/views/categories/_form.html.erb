@@ -23,6 +23,6 @@
     <%= f.collection_select :purpose_ids, Purpose.order(:name), :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
   </p>
 
-  <%= f.submit 'SUBMIT', class: 'button salmon_button' %>
+  <%= f.submit 'SUBMIT' %>
 
 <% end %>

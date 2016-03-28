@@ -1,6 +1,6 @@
 <%= form_tag(import_transactions_path, multipart: true) do %>
     <%= file_field_tag 'file' %>
-    <%= submit_tag 'UPLOAD', class: 'button salmon_button' %>
+    <%= submit_tag 'UPLOAD' %>
 <% end %>
 
 <% unless @transactions.empty? %>

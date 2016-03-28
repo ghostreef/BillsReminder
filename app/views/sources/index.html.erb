@@ -1,7 +1,7 @@
 <div class='sources'>
   <%= form_tag create_many_sources_path, class: 'create_many_form' do %>
-    <%= button_tag('ADD', class: 'salmon_button button js-add_fieldset', type: 'button') %>
-    <%= submit_tag('CREATE', class: 'salmon_button button') %>
+    <%= button_tag('ADD', class: 'js-add_fieldset', type: 'button') %>
+    <%= submit_tag('CREATE') %>
 
     <%= field_set_tag nil, class: 'js-source_fieldset' do %>
       <%= text_field_tag('sources[]name', nil, class: 'js-name', placeholder: 'Name') %>
@@ -50,7 +50,7 @@
   </table>
 
   <%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
-    <%= submit_tag('UPDATE', class: 'salmon_button button') %>
+    <%= submit_tag('UPDATE') %>
     <%= button_tag('REFRESH', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
   <% end %>
 </div>
