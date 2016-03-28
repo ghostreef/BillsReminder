@@ -8,6 +8,8 @@ class Bill < ActiveRecord::Base
 
   validate :date_cannot_be_in_the_past, on: :create
 
+  validate :description_or_source_required, on: :create
+
   before_create :set_default_values
 
   # these enums match date object attributes
@@ -16,6 +18,14 @@ class Bill < ActiveRecord::Base
   def date_cannot_be_in_the_past
     if due_date.present? && due_date < Date.today
       errors.add(:due_date, "can't be in the past")
+    end
+  end
+
+  # if there is no source given, then description is required
+  # source cannot be required because it may not be possible to derive it
+  def description_or_source_required
+    if source.nil?
+      errors.add(:description, 'is required if source is not provided')
     end
   end
 
