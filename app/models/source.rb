@@ -16,6 +16,10 @@ class Source < ActiveRecord::Base
     0
   end
 
+  def popularity
+    0
+  end
+
   def custom_error_messages
     errors.map do |attribute, error|
       "#{attribute} '#{send(attribute)}' #{error}."
