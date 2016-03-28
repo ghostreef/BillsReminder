@@ -1,8 +1,8 @@
 <table>
   <thead>
   <tr>
-    <th>Issuer</th>
-    <th>Type</th>
+    <th>Source</th>
+    <th>Purpose</th>
     <th>Description</th>
     <th>Term</th>
     <th>Amount</th>
@@ -14,8 +14,8 @@
   <tbody>
   <% @bills.each do |bill| %>
     <tr class="<%= bill.status %>">
-      <td><%= bill.issuer %></td>
-      <td><%= bill.bill_type %></td>
+      <td><%= bill.source.name %></td>
+      <td><%= bill.purpose.name %></td>
       <td><%= bill.description %></td>
       <td><%= bill.term_number %> <%= bill.term_unit %></td>
       <td><%= number_to_currency bill.amount %></td>
@@ -27,8 +27,8 @@
             <%= f.hidden_field(:id, value: bill.id) %>
             <%= f.submit 'Paid' %>
 
-            <%= f.label :last_bill, 'Final Bill?' %>
-            <%= f.check_box :last_bill %>
+            <%= f.label :final_bill, 'Final Bill?' %>
+            <%= f.check_box :final_bill %>
           <% end %>
         <% else %>
           <%= button_tag('Done', disabled: true) %>
