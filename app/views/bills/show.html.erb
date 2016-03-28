@@ -1,13 +1,1 @@
-<div>
-  <p>Issuer: <%= @bill.issuer %></p>
-  <p>Bill Type: <%= @bill.bill_type %></p>
-  <p>Description: <%= @bill.description %></p>
-  <p>Term: <%= @bill.term_number %> <%= @bill.term_unit %></p>
-  <p>Amount: <%= number_to_currency @bill.amount %></p>
-  <p>Due Date: <%= @bill.due_date %></p>
-  <p>Status: <%= @bill.status %></p>
-  <p><%= link_to('Edit', edit_bill_path(@bill)) %></p>  
-  <p><%= link_to 'Delete', bill_path(@bill),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %></p>
-</div>
+<%= @bill.inspect %>
