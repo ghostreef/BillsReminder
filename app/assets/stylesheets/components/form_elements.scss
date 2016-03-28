@@ -19,7 +19,7 @@ select {
   background: $white;
 }
 
-input, select {
+input, select, textarea {
   padding: .3em;
   border: 1px solid $input_grey;
   border-radius: 2px;
@@ -28,7 +28,13 @@ input, select {
   transition: all 0.2s ease-in-out;
 }
 
-input[type=text], input[type=number], select {
+textarea {
+  // maybe
+  min-width: 20em;
+  min-height: 6em;
+}
+
+input[type=text], input[type=number], select, textarea {
   &:focus {
     border-color: $steel_blue;
   }
