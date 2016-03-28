@@ -11,11 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316152223) do
+ActiveRecord::Schema.define(version: 20160328111347) do
 
   create_table "bills", force: :cascade do |t|
-    t.string   "issuer",      limit: 255
-    t.string   "bill_type",   limit: 255
     t.decimal  "amount",                    precision: 8, scale: 2
     t.date     "due_date"
     t.text     "description", limit: 65535
@@ -25,7 +23,9 @@ ActiveRecord::Schema.define(version: 20160316152223) do
     t.boolean  "auto_pay"
     t.integer  "term_unit",   limit: 4
     t.integer  "term_number", limit: 4
-    t.boolean  "last_bill"
+    t.boolean  "final_bill"
+    t.integer  "source_id",   limit: 4
+    t.integer  "purpose_id",  limit: 4
   end
 
   create_table "categories", force: :cascade do |t|
