@@ -1,5 +1,8 @@
 class Bill < ActiveRecord::Base
-  validates :issuer, :bill_type, :amount, :term_unit, :term_number, :due_date, presence: true
+  belongs_to :source
+  belongs_to :purpose
+
+  validates :amount, :term_unit, :term_number, :due_date, presence: true
   validates :amount, :term_number, numericality: { greater_than: 0 }
   validates :term_number, numericality: { only_integer: true }
 
@@ -20,6 +23,7 @@ class Bill < ActiveRecord::Base
     self.auto_pay ? 'yes' : 'no'
   end
 
+  #  I should convert this to enum...
   def status
     if self.paid
       'paid'

@@ -1,71 +1,63 @@
 <%= form_for @bill do |f| %>
 
-    <% if @bill.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved: </h2>
-          <ul>
-            <% @bill.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+  <% if @bill.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@bill.errors.count, 'error') %> prohibited this bill from being saved: </h2>
+      <ul>
+        <% @bill.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <p>
-      <%= f.label :issuer %><br>
-      <%= f.text_field :issuer %>
-    </p>
+  <div>
+    <%= f.label :source %>
+    <div class='styled_select'>
+      <%= f.collection_select(:source_id, Source.all, :id, :name, prompt: 'Guess for me') %>
+    </div>
+  </div>
 
-    <p>
-      <%= f.label :bill_type %><br/>
+  <div>
+    <%= f.label :purpose %>
+    <div class='styled_select'>
+      <%= f.collection_select(:purpose_id, Purpose.all, :id, :name, prompt: 'Guess for me') %>
+    </div>
+  </div>
 
-      <%= f.radio_button(:bill_type, 'credit card') %>
-      <%= f.label :bill_type, 'Credit Card' %><br/>
+  <p>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </p>
 
+  <p>
+    <%= f.label :term_number %>
+    <%= f.number_field :term_number %>
+  </p>
 
-      <%= f.radio_button(:bill_type, 'service') %>
-      <%= f.label :bill_type, 'Service' %><br/>
-
-
-      <%= f.radio_button(:bill_type, 'loan') %>
-      <%= f.label :bill_type, 'Loan' %><br/>
-
-
-      <%= f.radio_button(:bill_type, 'other') %>
-      <%= f.label :bill_type, 'Other' %><br/>
-    </p>
-
-    <p>
-      <%= f.label :amount %><br>
-      <%= f.text_field :amount %>
-    </p>
-
-    <p>
-      <%= f.label :term_number %><br>
-      <%= f.number_field :term_number %>
-    </p>
-
-    <p>
-      <%= f.label :term_unit %><br>
+  <div>
+    <%= f.label :term_unit %>
+    <div class='styled_select'>
       <%= f.select :term_unit, Bill.term_units.keys %>
-    </p>
+    </div>
+  </div>
 
-    <p>
-      <%= f.label :due_date %><br>
-      <%= f.date_field :due_date %><br>
-    </p>
+  <p>
+    <%= f.label :due_date %>
+    <%= f.date_field :due_date %>
+  </p>
 
-    <p>
-      <%= f.label :description %><br>
-      <%= f.text_area :description %>
-    </p>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
 
-    <p>
-      <%= f.label :auto_pay %>?
-      <%= f.check_box :auto_pay, value: true %><br>
-    </p>
+  <p>
+    <%= f.label :auto_pay, 'Auto Pay?', class: 'inline_label' %>
+    <%= f.check_box :auto_pay, value: true %>
+  </p>
 
-    <p>
-      <%= f.submit %>
-    </p>
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>
