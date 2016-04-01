@@ -1,1 +1,33 @@
-<%= @bill.inspect %>
+<div>
+  <%= link_to(edit_bill_path, class: 'link') do %>
+    <span>Edit Bill</span>
+    <span class='taiga'>h</span>
+  <% end %>
+</div>
+<dl>
+  <dt>Amount</dt>
+  <dd><%= number_to_currency(@bill.amount) %></dd>
+  <dt>Due Date</dt>
+  <dd><%= @bill.due_date %></dd>
+  <dt>Description</dt>
+  <dd><%= @bill.description || 'no description' %></dd>
+  <dt>Paid?</dt>
+  <dd><%= @bill.paid %></dd>
+  <dt>Auto Pay</dt>
+  <dd><%= @bill.auto_pay %></dd>
+
+  <dt>Term Unit</dt>
+  <dd><%= @bill.term_unit %></dd>
+
+  <dt>Term Number</dt>
+  <dd><%= @bill.term_number %></dd>
+
+  <dt>Final Bill?</dt>
+  <dd><%= @bill.final_bill %></dd>
+
+  <dt>Source</dt>
+  <dd><%= @bill.source.try(:name) %></dd>
+
+  <dt>Purpose</dt>
+  <dd><%= @bill.purpose.try(:name) %></dd>
+</dl>
