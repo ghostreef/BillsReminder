@@ -1,4 +1,4 @@
-<table>
+<table class='bills_table'>
   <thead>
   <tr>
     <th>Source</th>
@@ -8,6 +8,10 @@
     <th>Amount</th>
     <th>Due Date</th>
     <th>Status</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
@@ -19,21 +23,10 @@
       <td><%= bill.description %></td>
       <td><%= bill.term_number %> <%= bill.term_unit %></td>
       <td><%= number_to_currency bill.amount %></td>
-      <td><%= bill.due_date %></td>
+      <td><%= l(bill.due_date) %></td>
       <td><%= bill.status %></td>
-      <td>
-        <% if bill.status != 'paid' %>
-          <%= form_for(bill, url: paid_path) do |f| %>
-            <%= f.hidden_field(:id, value: bill.id) %>
-            <%= f.submit 'Paid' %>
-
-            <%= f.label :final_bill, 'Final Bill?' %>
-            <%= f.check_box :final_bill %>
-          <% end %>
-        <% else %>
-          <%= button_tag('Done', disabled: true) %>
-        <% end %>
-      </td>
+      <td><i class="fa fa-calendar-times-o"></i></td>
+      <td><%= link_to('', edit_bill_path(bill), class: 'fa fa-check-square-o') %></td>
       <td class='taiga'><%= link_to('h', edit_bill_path(bill)) %></td>
       <td class='taiga'><%= link_to('W', bill_path(bill)) %></td>
       <td class='taiga'><%= link_to('j', bill_path(bill), method: :delete, data: {confirm: 'Are you sure?'}) %></td>

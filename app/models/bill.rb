@@ -46,6 +46,10 @@ class Bill < ActiveRecord::Base
     end
   end
 
+  def unpaid?
+    status != 'paid'
+  end
+
   # all or none atm
   def pay(final_bill=false)
 
