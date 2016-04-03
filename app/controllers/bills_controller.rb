@@ -17,7 +17,7 @@ class BillsController < ApplicationController
     bill.pay
 
     # without action rails runs this action 6 times ??
-    redirect_to action: 'dashboard'
+    redirect_to bills_path
   end
 
   def show
@@ -47,7 +47,7 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id].to_i)
     
     if @bill.update(bill_params)
-      redirect_to @bill
+      redirect_to bills_path
     else
       render 'edit'
     end
