@@ -1,0 +1,14 @@
+.transactions {
+  .import_transactions {
+    margin: 0 0 1em -0.4em;
+
+    input[type='submit'] {
+      margin: 0 .5em;
+    }
+
+    .file_input {
+      font-size: 14px;
+      padding: 0.5em;
+    }
+  }
+}

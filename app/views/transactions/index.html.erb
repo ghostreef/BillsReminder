@@ -1,37 +1,45 @@
-<%= render 'date_range', start_date: @start_date, end_date: @end_date %>
-
-<%= form_tag(import_transactions_path, multipart: true) do %>
-    <%= file_field_tag 'file' %>
-    <%= submit_tag 'UPLOAD' %>
-<% end %>
-
-<% unless @transactions.empty? %>
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Date</th>
-      <th>Description</th>
-      <th>Source</th>
-      <th>Purpose</th>
-      <th>Locality</th>
-      <th>Region</th>
-      <th>Amount</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.id %></td>
-        <td><%= l(transaction.date) %></td>
-        <td><%= transaction.generate_description %></td>
-        <td><%= transaction.guess_source.try(:name) || '?' %></td>
-        <td><%= transaction.guess_purpose.try(:name) || '?' %></td>
-        <td><%= transaction.locality || '?' %></td>
-        <td><%= transaction.region || '?' %></td>
-        <td><%= number_to_currency(transaction.amount) %></td>
-      </tr>
+<div class='transactions'>
+  <div class='whole_column'>
+    <%= form_tag(import_transactions_path, multipart: true, class: 'import_transactions') do %>
+        <%= file_field_tag 'file', class: 'file_input' %>
+      <%= submit_tag 'UPLOAD' %>
     <% end %>
-    </tbody>
-  </table>
-<% end %>
+  </div>
+
+  <div class='whole_column  last_column'>
+    <%= render 'date_range', start_date: @start_date, end_date: @end_date %>
+  </div>
+
+  <div class='whole_column'>
+    <% unless @transactions.empty? %>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Source</th>
+          <th>Purpose</th>
+          <th>Locality</th>
+          <th>Region</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.id %></td>
+            <td><%= l(transaction.date) %></td>
+            <td><%= transaction.generate_description %></td>
+            <td><%= transaction.guess_source.try(:name) || '?' %></td>
+            <td><%= transaction.guess_purpose.try(:name) || '?' %></td>
+            <td><%= transaction.locality || '?' %></td>
+            <td><%= transaction.region || '?' %></td>
+            <td><%= number_to_currency(transaction.amount) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
