@@ -3,8 +3,16 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'application#dashboard', as: 'dashboard'
 
   get 'trends', to: 'categories'
+
   patch 'bills/paid', to: 'bills#paid', as: 'paid'
-  resources :bills, :categories
+  resources :bills
+
+  resources :categories do
+    member do
+      get 'graph'
+      get 'transactions'
+    end
+  end
 
   resources :purposes, except: [:show, :new] do
     collection do

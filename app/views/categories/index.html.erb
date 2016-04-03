@@ -9,8 +9,8 @@
 
       <div class='actions_container'>
         <div class='actions'>
-          <%= link_to('u', category_path(category), class: 'taiga') %>
-          <%= link_to('E', category_path(category), class: 'taiga') %>
+          <%= link_to('u', transactions_category_path(category), class: 'taiga') %>
+          <%= link_to('E', graph_category_path(category), class: 'taiga') %>
           <%= link_to('W', category_path(category), class: 'taiga') %>
           <%= link_to('j', category_path(category), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
         </div>
