@@ -1,6 +1,6 @@
 <%= form_tag('', class: 'date_range_picker js-date_range_picker', method: 'get', enforce_utf8: false) do %>
-  <%= date_field_tag :start_date %>
+  <%= date_field_tag :start_date, start_date %>
   <span class='to'>TO</span>
-  <%= date_field_tag :end_date %>
+  <%= date_field_tag :end_date, end_date %>
   <%= submit_tag 'GO', class: 'submit', name: '' %>
 <% end %>

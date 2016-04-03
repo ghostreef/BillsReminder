@@ -1,4 +1,4 @@
-<%= render 'date_range' %>
+<%= render 'date_range', start_date: @start_date, end_date: @end_date %>
 
 <%= form_tag(import_transactions_path, multipart: true) do %>
     <%= file_field_tag 'file' %>

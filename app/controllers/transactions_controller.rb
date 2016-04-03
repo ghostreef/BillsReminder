@@ -3,7 +3,10 @@ class TransactionsController < ApplicationController
   before_action :find_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transactions = Transaction.order(:date).limit(50)
+    @start_date = params.fetch(:start_date, Date.today - 1.month)
+    @end_date = params.fetch(:start_date, Date.today)
+
+    @transactions = Transaction.where(date: @start_date..@end_date).order(:date)
   end
 
   def show
