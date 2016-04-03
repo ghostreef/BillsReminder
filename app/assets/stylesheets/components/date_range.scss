@@ -1,0 +1,23 @@
+.date_range_picker {
+  overflow: auto;
+
+  .to, #start_date, #end_date {
+    float: left;
+    font-size: 14px;
+    padding: 0.5em;
+  }
+
+  .to {
+    @extend .oswald;
+
+    background: $medium_gray;
+    color: $white;
+
+    padding: 8px 12px;
+    height: 37px;
+  }
+
+  input[type=submit].submit {
+    margin: 0 .5em;
+  }
+}
