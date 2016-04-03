@@ -10,6 +10,8 @@ class Source < ActiveRecord::Base
 
   alias_attribute :default_purpose, :purpose
 
+  before_create :set_default_values
+  
   scope :not_categorized, -> { where('id not in (select source_id from categories_sources)') }
 
   def total
@@ -24,5 +26,11 @@ class Source < ActiveRecord::Base
     errors.map do |attribute, error|
       "#{attribute} '#{send(attribute)}' #{error}."
     end
+  end
+
+  private
+
+  def set_default_values
+    self.popularity = 0
   end
 end
