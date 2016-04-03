@@ -1,0 +1,61 @@
+<%= content_tag :div, id: "#{@category.name}_graph" do %>
+  <svg style='height:500px'></svg>
+<% end %>
+
+
+<script type="application/javascript">
+
+  $(document).ready(function () {
+    var xaxis = [];
+    var lineData = [];
+
+    <% @coordinates.each do |c| %>
+    xaxis.push(new Date(<%= c.year %>, <%= c.month %>, 1));
+    lineData.push({x: new Date(<%= c.year %>, <%= c.month %>, 1), y: <%= c.total %>});
+    <% end %>
+
+    lineData = [{
+      values: lineData,
+      key: '<%= @category.name %>'
+    }];
+
+    /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
+    nv.addGraph(function () {
+      var chart = nv.models.lineChart()
+        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+        //.transitionDuration(350)  //how fast do you want the lines to transition?
+        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+        .showYAxis(true)        //Show the y-axis
+        .showXAxis(true)        //Show the x-axis
+        .options({
+          transitionDuration: 300,
+          useInteractiveGuideline: true
+        });
+
+
+      chart.xAxis     //Chart x-axis settings
+        .axisLabel('Month Year')
+        .tickValues(xaxis)
+        .tickFormat(function (d) {
+          return d3.time.format('%b %y')(new Date(d));
+        }); // is the function required?
+
+
+      chart.yAxis     //Chart y-axis settings
+        .axisLabel('Spending ($)')
+        .tickFormat(d3.format('d'));
+
+
+      d3.select('<%= "##{@category.name}_graph svg" %>')    //Select the <svg> element you want to render the chart in.
+        .datum(lineData)         //Populate the <svg> element with chart data...
+        .call(chart);          //Finally, render the chart!
+
+      //Update the chart when window resizes.
+      nv.utils.windowResize(function () {
+        chart.update()
+      });
+      return chart;
+    });
+  });
+</script>
