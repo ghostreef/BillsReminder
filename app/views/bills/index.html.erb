@@ -13,6 +13,7 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>
@@ -38,6 +39,7 @@
         <% end %>
       </td>
       <td class='taiga'><%= link_to('h', edit_bill_path(bill)) %></td>
+      <td class='taiga'><%= link_to('', bill.link, class: 'fa fa-link') %></td>
       <td class='taiga'><%= link_to('W', bill_path(bill)) %></td>
       <td class='taiga'><%= link_to('j', bill_path(bill), method: :delete, data: {confirm: 'Are you sure?'}) %></td>
     </tr>
