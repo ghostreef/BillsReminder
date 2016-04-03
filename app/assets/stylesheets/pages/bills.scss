@@ -2,4 +2,20 @@
   thead {
     text-align: left;
   }
+
+  // move to pattern?
+  .paid {
+    background-color: $green;
+    color: darken($green, 70%);
+  }
+
+  .late {
+    background-color: $red;
+    color: darken($red, 70%);
+  }
+
+  .soon {
+    background-color: $yellow;
+    color: darken($yellow, 70%);
+  }
 }
