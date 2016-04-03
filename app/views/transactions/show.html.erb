@@ -1,1 +1,24 @@
-<%= @transaction.inspect %>
+<div>
+  <%= link_to(edit_transaction_path, class: 'link') do %>
+    <span>Edit Transaction</span>
+    <span class='taiga'>h</span>
+  <% end %>
+</div>
+<dl>
+  <dt>Amount</dt>
+  <dd><%= number_to_currency(@transaction.amount) %></dd>
+  <dt>Date</dt>
+  <dd><%= @transaction.date %></dd>
+  <dt>Raw Description</dt>
+  <dd><%= @transaction.raw_description || 'no description' %></dd>
+  <dt>Description</dt>
+  <dd><%= @transaction.description || 'no description' %></dd>
+  <dt>Locality</dt>
+  <dd><%= @transaction.locality || 'unknown location' %></dd>
+  <dt>Region</dt>
+  <dd><%= @transaction.region || 'unknown region' %></dd>
+  <dt>Source</dt>
+  <dd><%= @transaction.source.try(:name) %></dd>
+  <dt>Purpose</dt>
+  <dd><%= @transaction.purpose.try(:name) %></dd>
+</dl>
