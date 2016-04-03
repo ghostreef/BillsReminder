@@ -51,7 +51,7 @@ class Bill < ActiveRecord::Base
   end
 
   # all or none atm
-  def pay(final_bill=false)
+  def pay
 
     unless final_bill
       next_bill = dup
