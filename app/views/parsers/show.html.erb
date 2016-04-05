@@ -15,6 +15,10 @@
   <dd><%= @parser.split_transformations.empty? ? 'missing' : @parser.split_transformations.first.regex %></dd>
   <dt>Status</dt>
   <dd><%= @parser.status %></dd>
+  <dt>Search Order</dt>
+  <dd><%= @parser.search_order || '--' %></dd>
+  <dt>Expected Order</dt>
+  <dd><%= @parser.expected_order || '--' %></dd>
   <dt>Other Transformations (<%= @parser.other_transformations.count %>)</dt>
   <% @parser.other_transformations.each do |transformation| %>
     <dd><%= transformation.regex %></dd>

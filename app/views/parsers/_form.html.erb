@@ -35,29 +35,39 @@
 
   <div>
     <%= label_tag(:search_order, 'Search Order') %>
+    <% columns = Transaction.derivable - @parser.search_order.to_a %>
 
     <div class='js-better-select'>
       <ul>
-        <% Transaction.derivable.each do |name| %>
-          <li><%= hidden_field_tag('search_order[]', name, disabled: true) %><%= name %></li>
+        <% columns.each do |name| %>
+          <li><%= hidden_field_tag('parser[search_order][]', name, disabled: true) %><%= name %></li>
         <% end %>
       </ul>
 
-      <ul class='js-sortable'></ul>
+      <ul class='js-sortable'>
+        <% @parser.search_order.to_a.each do |name| %>
+          <li><%= hidden_field_tag('parser[search_order][]', name) %><%= name %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
   <div>
     <%= label_tag(:expected_order, 'Expected Order') %>
+    <% columns = Transaction.derivable - @parser.expected_order.to_a %>
 
     <div class='js-better-select'>
       <ul>
-        <% Transaction.derivable.each do |name| %>
-          <li><%= hidden_field_tag('expected_order[]', name, disabled: true) %><%= name %></li>
+        <% columns.each do |name| %>
+          <li><%= hidden_field_tag('parser[expected_order][]', name, disabled: true) %><%= name %></li>
         <% end %>
       </ul>
 
-      <ul class='js-sortable'></ul>
+      <ul class='js-sortable'>
+        <% @parser.expected_order.to_a.each do |name| %>
+          <li><%= hidden_field_tag('parser[expected_order][]', name) %><%= name %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 

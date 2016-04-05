@@ -55,6 +55,6 @@ class ParsersController < ApplicationController
   end
 
   def parser_hash(hash)
-    hash.permit(:name, :status, transformation_ids: [])
+    hash.permit(:name, :status, search_order: [], expected_order: [], transformation_ids: [])
   end
 end
