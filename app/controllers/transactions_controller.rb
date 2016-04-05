@@ -51,8 +51,9 @@ class TransactionsController < ApplicationController
     file_path = params[:file].tempfile
 
     success_count = error_count = 0
-    flash[:successes] = []
-    flash[:errors] = []
+    flash[:successes] = flash[:errors] = []
+
+
     CSV.foreach(file_path, headers: true) do |row|
       r = row.to_hash
 
