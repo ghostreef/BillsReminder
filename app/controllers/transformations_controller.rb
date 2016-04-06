@@ -39,6 +39,7 @@ class TransformationsController < ApplicationController
   def update_many
     redirect_to transformations_path and return if params[:transformations].nil?
 
+    # did you know you can't do flash[:success] = flash[:errors] = [] ?
     flash[:success] = []
     flash[:errors] = []
 
