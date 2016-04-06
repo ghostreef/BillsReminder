@@ -41,7 +41,7 @@
                            options_from_collection_for_select(Purpose.all, :id, :name, source.purpose.nil? ? '' : source.purpose.id), prompt: 'No Purpose') %>
           </div>
         </td>
-        <td><%= number_to_currency(source.total) %></td>
+        <td><%= display_price(source.total) %></td>
         <td><%= link_to('h', edit_source_path(source), class: 'taiga') %></td>
         <td><%= link_to('j', source_path(source), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
       </tr>
