@@ -36,6 +36,7 @@ class Transaction < ActiveRecord::Base
     write_attribute(:amount, amount.to_s.delete('-$').to_f.abs.round(2))
   end
 
+  # TODO can I figure out a way for this to work with simple form?
   def date=(date)
     write_attribute(:date, (Date.strptime(date, Transaction.date_format) rescue 'invalid date'))
   end

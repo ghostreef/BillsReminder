@@ -1,13 +1,40 @@
-<%= simple_form_for @transaction do |f| %>
-  <%= f.input :date %>
-  <%= f.input :amount %>
-  <%= f.input :raw_description, label: 'Raw Description' %>
-  <%= f.input :description %>
+<%= form_for @transaction do |f| %>
+
+  <p>
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </p>
+
+  <p>
+    <%= f.label :amount %>
+    <%= f.number_field :amount %>
+  </p>
+
+  <p>
+    <%= f.label :raw_description, 'Raw Description' %>
+    <%= f.text_area :raw_description %>
+  </p>
+  
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
+
   <div>
-    <%= f.association :source, wrapper_html: {class: 'styled_select'} %>
+    <%= f.label :source %>
+    <div class='styled_select'>
+      <%= f.collection_select(:source_id, Source.all, :id, :name, prompt: 'Guess for me') %>
+    </div>
   </div>
+
   <div>
-    <%= f.association :purpose, wrapper_html: {class: 'styled_select'} %>
+    <%= f.label :purpose %>
+    <div class='styled_select'>
+      <%= f.collection_select(:purpose_id, Purpose.all, :id, :name, prompt: 'Guess for me') %>
+    </div>
   </div>
-  <%= f.button :submit %>
+
+  <p>
+    <%= f.submit 'CREATE TRANSACTION' %>
+  </p>
 <% end %>

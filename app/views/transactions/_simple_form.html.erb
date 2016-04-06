@@ -1,0 +1,14 @@
+<%= simple_form_for @transaction do |f| %>
+  <%# here's another problem with simpleform date %>
+  <%= f.input :date %>
+  <%= f.input :amount %>
+  <%= f.input :raw_description, label: 'Raw Description' %>
+  <%= f.input :description %>
+  <div>
+    <%= f.association :source, wrapper_html: {class: 'styled_select'} %>
+  </div>
+  <div>
+    <%= f.association :purpose, wrapper_html: {class: 'styled_select'} %>
+  </div>
+  <%= f.button :submit %>
+<% end %>
