@@ -29,7 +29,7 @@ class TransformationsController < ApplicationController
       t.errors.empty? ? "#{t.regex} created successfully." : t.custom_error_messages
     end
 
-    redirect_to transformations_path, flash: { notices: [results.flatten] }
+    redirect_to transformations_path, flash: { notices: results }
   end
 
   def update
@@ -39,13 +39,23 @@ class TransformationsController < ApplicationController
   def update_many
     redirect_to transformations_path and return if params[:transformations].nil?
 
-    results = params[:transformations].map do |k,v|
+    flash[:success] = []
+    flash[:errors] = []
+
+    params[:transformations].map do |k,v|
       transformation = Transformation.find(k.to_i)
       transformation.update(transformation_hash(v))
-      transformation.errors.empty? ? "Transformation #{transformation.id} successfully updated." : "Transformation #{transformation.id} did not update. #{transformation.custom_error_messages.join(', ')}"
+
+      if transformation.errors.empty?
+        flash[:success] << transformation.id
+      else
+        flash[:errors] << "Transformation #{transformation.id} did not update. Details: #{transformation.custom_error_messages.join(', ')}"
+      end
     end
 
-    redirect_to transformations_path, notice: results
+    flash[:success] = "#{ActionController::Base.helpers.pluralize(flash[:success].count, 'Transformation')} #{flash[:success].join(', ')} successfully updated." unless flash[:success].length == 0
+
+    redirect_to transformations_path
   end
 
   def destroy

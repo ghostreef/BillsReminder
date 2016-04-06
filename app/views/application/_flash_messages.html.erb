@@ -2,7 +2,7 @@
 <% if flash[:errors].present? %>
   <div class='flash-error'>
     <% flash[:errors].each do |msg| %>
-      <p><%= msg %></p>
+      <div><%= msg %></div>
     <% end %>
   </div>
 <% end %>
@@ -11,16 +11,16 @@
 <% if flash[:successes].present? %>
   <div class='flash-success'>
     <% flash[:successes].each do |msg| %>
-      <p><%= msg %></p>
+      <div><%= msg %></div>
     <% end %>
   </div>
 <% end %>
 
 <%= content_tag(:p, flash[:notice], class: 'flash-notice') if flash[:notice].present? %>
 <% if flash[:notices].present? %>
-  <div class='flash-notices'>
+  <div class='flash-notice'>
     <% flash[:notices].each do |msg| %>
-      <p><%= msg %></p>
+      <div><%= msg %></div>
     <% end %>
   </div>
 <% end %>
