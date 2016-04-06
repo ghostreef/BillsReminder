@@ -74,8 +74,8 @@ class TransactionsController < ApplicationController
 
     end
 
-    flash[:error] = "Error adding #{flash[:error]} transactions."
-    flash[:success] = "#{flash[:success]} transactions added successfully."
+    flash[:error] = flash[:error] > 0 ? "Error adding #{flash[:error]} transactions." : nil
+    flash[:success] = "#{flash[:success]} transactions added successfully." if flash[:success] > 0
 
     redirect_to transactions_path
   end
