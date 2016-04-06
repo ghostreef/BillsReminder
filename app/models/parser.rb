@@ -68,6 +68,7 @@ class Parser < ActiveRecord::Base
     changed.include?('status')
   end
 
+  # TODO I can do better here
   # make sure to use the active record collection proxy, the relation does not reflect current changes
   # also worth noting self is not needed with associations...kinda annoying
   def set_status
