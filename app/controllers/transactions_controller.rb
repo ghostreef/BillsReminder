@@ -39,53 +39,43 @@ class TransactionsController < ApplicationController
   end
 
   def import
+    # error check
     if params[:file].nil?
       redirect_to transactions_path, notice: 'No file uploaded.' and return
     end
 
+    # error check
     unless params[:file].original_filename =~ /\.csv$/
       redirect_to transactions_path, notice: 'Invalid format.' and return
     end
 
+    # to be sure
+    flash.clear
+    flash[:success] = flash[:error] = 0
+    flash[:errors] = []
+
+    # begin parsing file
     require 'CSV'
-    file_path = params[:file].tempfile
+    CSV.foreach(params[:file].tempfile, headers: true) do |row|
 
-    success_count = error_count = 0
-    flash[:successes] = flash[:errors] = []
+      # generates a row hash using headers as keys
+      # assumes commas are the delimiters
+      row_hash = row.to_hash
 
+      # the problem with this is that the headers are the keys, and the keys may change
+      transaction = Transaction.new(date: row_hash['Date'], amount: row_hash['Amount'], raw_description: row_hash['Description'])
 
-    CSV.foreach(file_path, headers: true) do |row|
-      r = row.to_hash
-
-      begin
-        date = Date.strptime(r['Date'], '%m/%d/%Y')
-      rescue
-        error_count+=1
-        flash[:errors] << "#{$.} #{row}"
-        next
-      end
-
-      amount = r['Amount'].tr('-$','').to_f.abs.round(2)
-
-      raw_description = r['Description']
-
-      t = Transaction.create(date: date, amount: amount, raw_description: raw_description)
-
-      if t.errors.empty?
-        success_count+=1
+      if transaction.save
+        flash[:success] += 1
       else
-        error_count+=1
+        flash[:error] += 1
         flash[:errors] << "#{$.} #{row}"
       end
+
     end
 
-    if error_count > 0
-      flash[:error] = "Error adding #{error_count} transactions."
-    end
-
-    if success_count > 0
-      flash[:success] = "#{success_count} transactions added."
-    end
+    flash[:error] = "Error adding #{flash[:error]} transactions."
+    flash[:success] = "#{flash[:success]} transactions added successfully."
 
     redirect_to transactions_path
   end
