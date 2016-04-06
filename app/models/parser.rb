@@ -74,8 +74,9 @@ class Parser < ActiveRecord::Base
     # important: use map on collection, not relation!
     list = transformations.map(&:set)
 
-    if list.include?('date') && list.include?('split') && list.include?('transform')
-      self.status = Parser.statuses[:disabled]
+    if list.include?('date') && list.include?('split') && (list.include?('transform') || list.include?('strip'))
+      # this is to update parser from incomplete to disabled, but don't disable the enabled parser
+      self.status = Parser.statuses[:disabled] unless self.enabled?
     else
       self.status = Parser.statuses[:incomplete]
     end
