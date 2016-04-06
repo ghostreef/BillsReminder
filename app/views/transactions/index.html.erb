@@ -1,7 +1,7 @@
 <div class='transactions'>
   <div class='whole_column'>
     <%= form_tag(import_transactions_path, multipart: true, class: 'import_transactions') do %>
-        <%= file_field_tag 'file', class: 'file_input' %>
+        <%= file_field_tag 'file', class: 'file_input', required: true, accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' %>
       <%= submit_tag 'UPLOAD' %>
     <% end %>
   </div>
