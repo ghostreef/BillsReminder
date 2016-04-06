@@ -8,6 +8,8 @@ class Transaction < ActiveRecord::Base
 
   DEFAULT_DATE_FORMAT = '%m/%d/%Y'
 
+  after_create :parse
+
   # returns the column names a user is allowed to change
   def self.changeable
     Transaction.column_names.keep_if { |x| x.scan(/_at\z|_id\z|\Araw_|\Aid\z/).empty? }
@@ -73,10 +75,18 @@ class Transaction < ActiveRecord::Base
   end
 
 
-
-  def derive_all
+  # ok what am I doing
+  def parse
     description = split_description(strip_description)
+
+    guess_source(description[0])
+
+    unless @source.nil?
+      @source.increment(:popularity)
+      @source.total += amount
+      @source.save
+    end
+
+    update(description: description, source: @source, purpose: guess_purpose)
   end
-
-
 end
