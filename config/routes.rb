@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     collection do
       post 'update_many'
       post 'create_many'
+      post 'clear'
+      post 'refresh'
     end
   end
 

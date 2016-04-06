@@ -48,6 +48,18 @@ class SourcesController < ApplicationController
     redirect_to sources_path, notice: results
   end
 
+  def clear
+    Source.update_all(total: 0, popularity: 0)
+    redirect_to sources_path, notice: 'Sources cleared.'
+  end
+
+  def refresh
+    Source.all.each do |source|
+      source.update(total: source.transactions.sum(:amount), popularity: source.transactions.count)
+    end
+    redirect_to sources_path, notice: 'Sources refreshed.'
+  end
+
   def destroy
     if @source.destroy
       redirect_to sources_path, notice: 'Source successfully destroyed.'

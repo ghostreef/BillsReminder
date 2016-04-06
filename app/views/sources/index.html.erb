@@ -51,6 +51,14 @@
 
   <%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
     <%= submit_tag('UPDATE') %>
-    <%= button_tag('REFRESH', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
   <% end %>
+
+  <%= form_tag clear_sources_path do %>
+    <%= submit_tag('clear', class: 'red_button', data: {confirm: 'Are you sure? This will clear all source stats.'}) %>
+  <% end %>
+
+  <%= form_tag refresh_sources_path do %>
+    <%= submit_tag('refresh', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
+  <% end %>
+
 </div>
