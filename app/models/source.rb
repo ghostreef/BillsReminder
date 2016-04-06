@@ -14,14 +14,6 @@ class Source < ActiveRecord::Base
   
   scope :not_categorized, -> { where('id not in (select source_id from categories_sources)') }
 
-  def total
-    0
-  end
-
-  def popularity
-    0
-  end
-
   def custom_error_messages
     errors.map do |attribute, error|
       "#{attribute} '#{send(attribute)}' #{error}."
