@@ -27,21 +27,13 @@ class Transaction < ActiveRecord::Base
     parser.present? && parser.date_transformation.present? ? parser.date_transformation.regex : DEFAULT_DATE_FORMAT
   end
 
-  # override setters for formatting, this way invalid formats will be taken care of with validations, but also
-  # formats are in the model and I can let the model worry about it
-
-  # amount will be cast to string
-  def amount=(amount)
-    # no negative numbers, remove $, absolute value, does rounding fix binary decimal issue (2.490008888999)?
-    write_attribute(:amount, amount.to_s.delete('-$').to_f.abs.round(2))
+  def self.format_date(date)
+    Date.strptime(date, Transaction.date_format) rescue 'invalid date'
   end
 
-  # TODO can I figure out a way for this to work with simple form?
-  def date=(date)
-    write_attribute(:date, (Date.strptime(date, Transaction.date_format) rescue 'invalid date'))
+  def self.format_amount(amount)
+    amount.to_s.delete('-$').to_f.abs.round(2)
   end
-
-
 
   def guess_source(description=raw_description)
     Source.order(popularity: :desc).each do |source|

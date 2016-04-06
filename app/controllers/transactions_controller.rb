@@ -63,7 +63,9 @@ class TransactionsController < ApplicationController
       row_hash = row.to_hash
 
       # the problem with this is that the headers are the keys, and the keys may change
-      transaction = Transaction.new(date: row_hash['Date'], amount: row_hash['Amount'], raw_description: row_hash['Description'])
+      date = Transaction.format_date(row_hash['Date'])
+      amount = Transaction.format_amount(row_hash['Amount'])
+      transaction = Transaction.new(date: date, amount: amount, raw_description: row_hash['Description'])
 
       if transaction.save
         flash[:success] += 1
