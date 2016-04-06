@@ -16,7 +16,7 @@ class Transaction < ActiveRecord::Base
   # returns the attributes that are derived from the 3 main required attributes
   #  date, description, and amount are required for a complete transaction object, maybe not useful
   def self.derivable
-    Transaction.derivable - %w(raw_description date amount)
+    Transaction.changeable - %w(raw_description date amount)
   end
 
   # gets the date format
