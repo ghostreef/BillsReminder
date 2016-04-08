@@ -86,6 +86,6 @@ class Transaction < ActiveRecord::Base
       source.save
     end
 
-    update(description: description, source: source, purpose: source.default_purpose)
+    update(description: description, source: source, purpose: source.try(:default_purpose))
   end
 end
