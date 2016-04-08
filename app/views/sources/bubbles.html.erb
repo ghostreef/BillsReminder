@@ -1,13 +1,20 @@
+<p>
+  <label for="amount">Total range:</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<p id="slider-range"></p>
+
 <div class='bubbles'>
   <% @sources.each do |source|
     next if source.total == 0.0 %>
 
     <% w = ((source.total / @sum).round(5) * 50) + 5 %>
-    
-    <div class='bubble js-bubble' style="<%= "width: #{w}em; height: #{w}em;"%>">
+
+    <div class='bubble js-bubble' style="<%= "width: #{w}em; height: #{w}em;" %>">
       <div class='name'><%= source.name %> <%#= w %></div>
     </div>
   <% end %>
 </div>
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
