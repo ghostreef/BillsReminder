@@ -12,34 +12,7 @@
 
   <div class='whole_column'>
     <% unless @transactions.empty? %>
-      <table>
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Source</th>
-          <th>Purpose</th>
-          <th>Locality</th>
-          <th>Region</th>
-          <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @transactions.each do |transaction| %>
-          <tr>
-            <td><%= transaction.id %></td>
-            <td><%= l(transaction.date) %></td>
-            <td><%= transaction.description %></td>
-            <td><%= transaction.source.try(:name) || '?' %></td>
-            <td><%= transaction.purpose.try(:name) || '?' %></td>
-            <td><%#= transaction.locality || '?' %></td>
-            <td><%#= transaction.region || '?' %></td>
-            <td><%= number_to_currency(transaction.amount) %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+        <%= render 'transactions', transactions: @transactions %>
      <% else %>
       <div class='flash-notice'>No transactions found between <%= l(@start_date.to_date) %> and <%= l(@end_date.to_date) %></div>
     <% end %>
