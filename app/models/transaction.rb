@@ -38,22 +38,22 @@ class Transaction < ActiveRecord::Base
   end
 
   def guess_source(description=raw_description)
+    result = nil
     Source.order(popularity: :desc).each do |source|
       if description =~ /#{source.regex}/i
-        @source = source
+        result = source
         break
       end
     end
 
-    @source
+    result
   end
 
   # Feels wrong that guess_purpose relies on guess_source, but purpose comes from source.
   def guess_purpose
     # use most recent source guess, if none available make the guess, the guess may still be nil
-    (@source || source || guess_source).try(:default_purpose)
+    (source || guess_source).try(:default_purpose)
   end
-
 
 
   def split_description(description=raw_description)
@@ -78,15 +78,14 @@ class Transaction < ActiveRecord::Base
   # ok what am I doing
   def parse
     description = split_description(strip_description)
+    source = guess_source(description[0])
 
-    guess_source(description[0])
-
-    unless @source.nil?
-      @source.increment(:popularity)
-      @source.total += amount
-      @source.save
+    unless source.nil?
+      source.increment(:popularity)
+      source.total += amount
+      source.save
     end
 
-    update(description: description, source: @source, purpose: guess_purpose)
+    update(description: description, source: source, purpose: source.default_purpose)
   end
 end
