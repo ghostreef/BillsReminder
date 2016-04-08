@@ -25,5 +25,6 @@ class Source < ActiveRecord::Base
 
   def set_default_values
     self.popularity = 0
+    self.total = 0.0
   end
 end
