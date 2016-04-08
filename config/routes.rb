@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post 'create_many'
       post 'clear'
       post 'refresh'
+      get 'bubbles'
     end
   end
 

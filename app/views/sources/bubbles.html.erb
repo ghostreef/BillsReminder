@@ -1,0 +1,10 @@
+<div class='bubbles'>
+  <% @sources.each do |source|
+    next if source.total == 0.0 %>
+    <div class='bubble js-bubble'>
+      <div class='name'><%= source.name %></div>
+    </div>
+  <% end %>
+</div>
+
+

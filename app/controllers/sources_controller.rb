@@ -29,7 +29,7 @@ class SourcesController < ApplicationController
       s.errors.empty? ? "#{s.name} created successfully." : s.custom_error_messages
     end
 
-    redirect_to sources_path, notice: results.flatten
+    redirect_to sources_path, notice: results.join(' ')
   end
 
   def update
@@ -58,6 +58,13 @@ class SourcesController < ApplicationController
       source.update(total: source.transactions.sum(:amount), popularity: source.transactions.count)
     end
     redirect_to sources_path, notice: 'Sources refreshed.'
+  end
+
+  def bubbles
+    @sources = Source.select('name, total')
+
+    max = @sources.maximum(:total)
+    min = @sources.minimum(:total)
   end
 
   def destroy
