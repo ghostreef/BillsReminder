@@ -1,10 +1,11 @@
 .bubbles {
   .bubble {
-    height: 8em;
-    width: 8em;
+    height: 6em;
+    width: 6em;
     float: left;
     border-radius: 100%;
     margin: 2px;
+    font-size: 12px;
 
     .name {
       position: relative;

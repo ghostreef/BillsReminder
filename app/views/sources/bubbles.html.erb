@@ -1,8 +1,11 @@
 <div class='bubbles'>
   <% @sources.each do |source|
     next if source.total == 0.0 %>
-    <div class='bubble js-bubble'>
-      <div class='name'><%= source.name %></div>
+
+    <% w = ((source.total / @sum).round(5) * 50) + 5 %>
+    
+    <div class='bubble js-bubble' style="<%= "width: #{w}em; height: #{w}em;"%>">
+      <div class='name'><%= source.name %> <%#= w %></div>
     </div>
   <% end %>
 </div>

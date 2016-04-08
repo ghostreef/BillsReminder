@@ -63,6 +63,7 @@ class SourcesController < ApplicationController
   def bubbles
     @sources = Source.select('name, total')
 
+    @sum = @sources.sum(:total)
     max = @sources.maximum(:total)
     min = @sources.minimum(:total)
   end
