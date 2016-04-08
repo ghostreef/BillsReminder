@@ -1,6 +1,9 @@
 class BillsController < ApplicationController
   def index
-    @bills = Bill.all.order(:due_date)
+    @start_date = params.fetch(:start_date, Date.today - 1.month)
+    @end_date = params.fetch(:end_date, Date.today + 1.month)
+
+    @bills = Bill.where(due_date: @start_date..@end_date).order(:due_date)
   end
 
   def dashboard
