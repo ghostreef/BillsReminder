@@ -2,7 +2,11 @@
   <div class='whole_column'>
     <%= form_tag(import_transactions_path, multipart: true, class: 'import_transactions') do %>
         <%= file_field_tag 'file', class: 'file_input', required: true, accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' %>
-      <%= submit_tag 'UPLOAD' %>
+      <%= submit_tag 'Upload' %>
+    <% end %>
+
+    <%= form_tag(parse_transactions_path(transaction_ids: @transactions.where(source: nil).map(&:id))) do %>
+      <%= submit_tag 'Parse' %>
     <% end %>
   </div>
 

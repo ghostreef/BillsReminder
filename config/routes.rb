@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :transactions do
     collection do
       post 'import'
+      post 'parse'
     end
   end
 
