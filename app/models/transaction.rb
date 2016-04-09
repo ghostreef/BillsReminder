@@ -71,7 +71,8 @@ class Transaction < ActiveRecord::Base
     # as you can see there are so many ways to do this
 
     regex = Parser.parser.strip_transformations.pluck(:regex).map { |r| "(#{r})" }.join('|')
-    description.sub(/#{regex}/, '')
+    # gsub is required to remove multiples
+    description.gsub(/#{regex}/, '')
   end
 
 
