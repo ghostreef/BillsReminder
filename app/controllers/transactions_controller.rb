@@ -83,15 +83,21 @@ class TransactionsController < ApplicationController
   end
 
   def parse
-    # sanitize input
-    ids = params[:transaction_ids].map {|id| id.to_i}
-    transactions = Transaction.find(ids)
+    if params[:all] == 'true'
+      transactions = Transaction.all
+      message = 'Re-parsed all transactions.'
+    else
+      # sanitize input
+      ids = params[:transaction_ids].map {|id| id.to_i}
+      transactions = Transaction.find(ids)
+      message = "Re-parsed these transactions: #{transactions.map(&:id).join(', ')}."
+    end
 
     transactions.each do |transaction|
       transaction.parse
     end
 
-    redirect_to transactions_path, notice: "Re-parsed these transactions: #{transactions.map(&:id).join(', ')}."
+    redirect_to transactions_path, notice: message
   end
 
   private

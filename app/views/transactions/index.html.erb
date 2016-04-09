@@ -8,6 +8,10 @@
     <%= form_tag(parse_transactions_path(transaction_ids: @transactions.where(source: nil).map(&:id))) do %>
       <%= submit_tag 'Parse' %>
     <% end %>
+
+    <%= form_tag parse_transactions_path(all: true) do %>
+      <%= submit_tag('Reparse All', class: 'red_button', data: {confirm: 'Are you sure?'}) %>
+    <% end %>
   </div>
 
   <div class='whole_column  last_column'>
