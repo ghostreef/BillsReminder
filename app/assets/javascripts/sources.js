@@ -19,25 +19,6 @@ $(document).ready(function () {
         $('input, select', $fieldset).val('');
         $(this).parent().append($fieldset);
     });
-
-    $('.js-bubble').each(function() {
-        $(this).css('background-color',getRandomColor());
-    });
-
-
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [75, 300],
-            slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        " - $" + $("#slider-range").slider("values", 1));
-
 });
 
 // copy text from regex field and move over to name field
@@ -52,13 +33,3 @@ $(document).on('click', '.js-fill_in_name', function () {
 
     $(this).siblings('.js-name').val(regex);
 });
-
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
