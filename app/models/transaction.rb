@@ -78,6 +78,14 @@ class Transaction < ActiveRecord::Base
 
   # ok what am I doing
   def parse
+
+    # remove first
+    if source.present?
+      source.decrement(:popularity)
+      source.total -= amount
+      source.save
+    end
+
     description = split_description(strip_description)
     source = guess_source(description[0])
 
@@ -87,6 +95,6 @@ class Transaction < ActiveRecord::Base
       source.save
     end
 
-    update(description: description, source: source, purpose: source.try(:default_purpose))
+    update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
   end
 end
