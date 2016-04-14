@@ -14,7 +14,7 @@
   <% end %>
 
 
-  <%= form_tag guess_sources_path, remote: true do %>
+  <%= form_tag guess_sources_path, remote: true, class: 'js-disable_after_submit' do %>
     <%= submit_tag('Guess') %>
   <% end %>
 
