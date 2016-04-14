@@ -61,11 +61,13 @@ class SourcesController < ApplicationController
   end
 
   def bubbles
-    @sources = Source.select('name, total')
+    sources = Source.select('name, total')
 
     # @sum = @sources.sum(:total)
     # max = @sources.maximum(:total)
     # min = @sources.minimum(:total)
+
+    @data = {children:  sources.map {|s| s.to_d3_json}  }
   end
 
   def destroy

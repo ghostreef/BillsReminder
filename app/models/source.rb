@@ -21,6 +21,10 @@ class Source < ActiveRecord::Base
     end
   end
 
+  def to_d3_json
+    { name: name, value: total.to_f }
+  end
+
   private
 
   def set_default_values
