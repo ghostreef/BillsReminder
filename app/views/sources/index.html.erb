@@ -8,12 +8,15 @@
       <i class="fa fa-arrow-circle-o-left js-fill_in_name"></i>
       <%= text_field_tag('sources[]regex', nil, class: 'js-regex', placeholder: 'Regex') %>
       <div class='styled_select'>
-        <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose') %>
+        <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose', id: nil, class: 'js-purpose') %>
       </div>
     <% end %>
   <% end %>
 
 
+  <%= form_tag guess_sources_path, remote: true do %>
+    <%= submit_tag('Guess') %>
+  <% end %>
 
   <table class='js-sources_table'>
     <thead>

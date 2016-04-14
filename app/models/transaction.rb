@@ -10,6 +10,8 @@ class Transaction < ActiveRecord::Base
 
   after_create :parse
 
+  scope :unknown, -> { where(source: nil) }
+
   # returns the column names a user is allowed to change
   def self.changeable
     Transaction.column_names.keep_if { |x| x.scan(/_at\z|_id\z|\Araw_|\Aid\z/).empty? }

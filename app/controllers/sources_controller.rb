@@ -70,6 +70,19 @@ class SourcesController < ApplicationController
     @data = {children:  sources.map {|s| s.to_d3_json}  }
   end
 
+  # maybe this belongs in transaction controller
+  def guess
+    unknown = Transaction.unknown
+
+    @guesses = unknown.map { |u|
+      u.description.split(/\s\s/).first
+    }.uniq
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     if @source.destroy
       redirect_to sources_path, notice: 'Source successfully destroyed.'

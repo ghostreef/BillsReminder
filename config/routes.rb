@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post 'clear'
       post 'refresh'
       get 'bubbles'
+      post 'guess'
     end
   end
 
