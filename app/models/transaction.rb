@@ -97,6 +97,7 @@ class Transaction < ActiveRecord::Base
       source.save
     end
 
+    # hmmm how do I join with regex
     update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
   end
 end

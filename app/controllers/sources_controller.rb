@@ -74,8 +74,10 @@ class SourcesController < ApplicationController
   def guess
     unknown = Transaction.unknown
 
+    splitter = Parser.parser.split_transformation.regex
+
     @guesses = unknown.map { |u|
-      u.description.split(/\s\s/).first
+      u.description.split(/#{splitter}/).first
     }.uniq
 
     respond_to do |format|
