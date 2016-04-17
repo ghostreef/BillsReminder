@@ -2,7 +2,36 @@
   data-no-turbolink="true"
 <% end %>
 
-<script>
+
+<p>
+  <label for="amount">Price range:</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range"></div>
+
+
+
+
+
+
+
+<button class='js-update'>Update</button>
+<svg></svg>
+
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+
+  function is_node_between(node) {
+    var min = $("#slider-range").slider("values", 0);
+    var max = $("#slider-range").slider("values", 1);
+    return ((node.value >= min) && (node.value <= max));
+  }
+
 
   function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -13,10 +42,11 @@
     return color;
   }
 
-  $(document).ready(function () {
 
+  function draw_2(data) {
 
-    var diameter = 900,
+    // set up stuff
+    var diameter = 500,
       format = d3.format("$,.2f");
 
     var bubble = d3.layout.pack()
@@ -24,33 +54,71 @@
       .size([diameter, diameter])
       .padding(1.5);
 
-    var svg = d3.select("body").append("svg")
-      .attr("width", diameter)
-      .attr("height", diameter)
-      .attr("class", "bubble");
-
-    var data = <%== @data.to_json %>;
 
 
-    var node = svg.selectAll(".node")
-      .data(bubble.nodes(data).filter(function (d) { return !d.children; }))
-      .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+    var nodes = d3.select("svg").attr("width", diameter).attr("height", diameter)
+      .selectAll('g')
+      .data(bubble.nodes(data).filter(function (d) { return !d.children; }));
 
 
-    node.append("title")
-      .text(function (d) { return d.name + ": " + format(d.value); });
+    var gs = nodes.enter().append("g");
+    gs.append("title");
+    gs.append("circle").style("fill", function(d) { return getRandomColor(); });
+    gs.append("text");
 
-    node.append("circle")
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return getRandomColor(); });
 
-    node.append("text")
+    nodes.attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    nodes.select('circle').transition().duration(1000).attr("r", function(d) { return d.r; });
+
+    nodes.select('title').text(function (d) { return d.name + ": " + format(d.value); });
+
+    nodes.select('text')
       .attr("dy", ".3em")
       .style("text-anchor", "middle")
       .text(function (d) { return d.name.substring(0, d.r / 3); });
 
-  });
+    nodes.exit().remove();
+  }
 
+
+  function update_2() {
+    var c = my_data_1.children.filter(is_node_between);
+    draw_2({"children":c});
+
+  }
+
+
+  var my_data_1 = <%== @data.to_json %>;
+
+  window.onload = draw_2(my_data_1);
+
+  d3.select('.js-update').on('click', update_2);
+
+
+
+  $(document).ready(function () {
+
+    $("#slider-range").slider({
+      range: true,
+      min: <%= @min %>,
+      max: <%= @max %>,
+      values: [<%= @min %>, <%= @max %>],
+      slide: function (event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      }
+    });
+
+    // init label text
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+    " - $" + $("#slider-range").slider("values", 1));
+
+
+
+
+
+
+
+
+  });
 </script>
