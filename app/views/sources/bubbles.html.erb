@@ -4,12 +4,11 @@
 
 <p>
   <%= label_tag(:amount, 'Filter by price:', class: 'inline_label')%>
-  <%= text_field_tag(:amount, '', class: 'js-amount', readonly: true) %>
+  <%= text_field_tag(:amount, '', class: 'js-amount amount_text', readonly: true) %>
+  <button class='js-update'>Update</button>
 </p>
 
-<div class='js-slider_range'></div>
-
-<button class='js-update'>Update</button>
+<div class='js-slider_range slider_range'></div>
 
 <svg></svg>
 
@@ -38,7 +37,7 @@
   function draw(data) {
 
     // d3 set up
-    var diameter = 500,
+    var diameter = 800,
       format = d3.format("$,.2f");
 
     var bubble = d3.layout.pack()
@@ -48,7 +47,7 @@
 
 
     // select svg, data join
-    var nodes = d3.select("svg").attr("width", diameter).attr("height", diameter)
+    var nodes = d3.select("svg").attr("width", diameter).attr("height", diameter).attr("class", "bubbles")
       .selectAll('g')
       .data(bubble.nodes(data).filter(function (d) { return !d.children; }));
 
