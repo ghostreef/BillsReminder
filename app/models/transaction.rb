@@ -79,10 +79,16 @@ class Transaction < ActiveRecord::Base
     description.gsub(/#{regex}/, '')
   end
 
+  # ATM parse sets source, purpose, and description using the raw_description
   def parse
     description = split_description(strip_description)
-    source = guess_source(description[0])
 
+    source = nil
+    description.each do |chunk|
+      source = guess_source(chunk)
+      break if source.present?
+    end
+    
     # how do I join with regex
     update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
   end
