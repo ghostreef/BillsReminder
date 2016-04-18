@@ -10,6 +10,8 @@ class Transaction < ActiveRecord::Base
 
   after_create :parse
 
+  after_save :sync_source, if: :source_changed?
+
   scope :unknown, -> { where(source: nil) }
 
   # returns the column names a user is allowed to change
@@ -77,27 +79,21 @@ class Transaction < ActiveRecord::Base
     description.gsub(/#{regex}/, '')
   end
 
-
-  # ok what am I doing
   def parse
-
-    # remove first
-    if source.present?
-      source.decrement(:popularity)
-      source.total -= amount
-      source.save
-    end
-
     description = split_description(strip_description)
     source = guess_source(description[0])
 
-    unless source.nil?
-      source.increment(:popularity)
-      source.total += amount
-      source.save
-    end
-
-    # hmmm how do I join with regex
+    # how do I join with regex
     update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
   end
+
+  def sync_source
+    (Source.find(source_id_was).decrement(:popularity).decrement(:total, amount).save) if source_id_was.present?
+    (Source.find(source_id).increment(:popularity).increment(:total, amount).save) if source_id.present?
+  end
+
+  def source_changed?
+    changed.include?('source_id')
+  end
+
 end
