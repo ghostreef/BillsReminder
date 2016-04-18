@@ -23,14 +23,14 @@
   <div>
     <%= f.label :source %>
     <div class='styled_select'>
-      <%= f.collection_select(:source_id, Source.all, :id, :name, prompt: 'Guess for me') %>
+      <%= f.collection_select(:source_id, Source.all, :id, :name, include_blank: 'Guess for me') %>
     </div>
   </div>
 
   <div>
     <%= f.label :purpose %>
     <div class='styled_select'>
-      <%= f.collection_select(:purpose_id, Purpose.all, :id, :name, prompt: 'Guess for me') %>
+      <%= f.collection_select(:purpose_id, Purpose.all, :id, :name, include_blank: 'Guess for me') %>
     </div>
   </div>
 
