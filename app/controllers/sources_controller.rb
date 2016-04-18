@@ -61,13 +61,27 @@ class SourcesController < ApplicationController
   end
 
   def bubbles
-    sources = Source.select('name, total')
+    sources = Source.select('name, total').where('total > ?', 0) .order(:total)
 
-    # @sum = @sources.sum(:total)
+
+    # here I am looking for the max total within 1 standard deviation
+    average = sources.average(:total)
+
+    totals = sources.pluck(:total)
+
+    squared_difference = totals.map { |num| (num - average) * (num - average)}
+
+    variance = squared_difference.sum / squared_difference.length
+
+    standard_deviation = Math.sqrt(variance)
+
+    @max_standard = (average + standard_deviation).to_f
+
+
     @max = sources.maximum(:total)
     @min = sources.minimum(:total)
 
-    @data = {children:  sources.map {|s| s.to_d3_json}  }
+    @data = {children:  sources.map {|s| s.to_d3_json}}
   end
 
   # maybe this belongs in transaction controller
