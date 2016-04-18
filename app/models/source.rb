@@ -1,6 +1,8 @@
 class Source < ActiveRecord::Base
   validates :name, :regex, length: { minimum: 1 }
   validates :name, uniqueness: true
+  validates :total, :popularity, numericality: { greater_than: 0 }
+  validates :popularity, numericality: { only_integer: true }
 
   has_and_belongs_to_many :categories
   has_many :transactions
@@ -8,6 +10,7 @@ class Source < ActiveRecord::Base
   # in my head this is backwards, but the fk goes in this table
   belongs_to :purpose
   # also note if a purpose is deleted, purpose_id remains, but .purpose will return nil
+  # TODO I think I fixed this ^ check later
 
   alias_attribute :default_purpose, :purpose
 
