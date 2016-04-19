@@ -16,9 +16,10 @@ class CategoriesController < ApplicationController
 
   # months (javascript date) and amount
   def graph
-    @coordinates = @category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
-                                         .where(date: Date.today-2.months..Date.today+6.month)
+    @data = @category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
                                          .group('year, month')
+
+    @series = { values: @data, key: @category.name }
   end
 
   def transactions
