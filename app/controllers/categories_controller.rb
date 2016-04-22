@@ -25,7 +25,19 @@ class CategoriesController < ApplicationController
   end
 
   def trends
-    
+    @series = []
+
+    Category.all.each do |category|
+
+      data = category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
+                                          .group('year, month')
+
+      @series << { values: data, key: category.name }
+    end
+
+    @title = 'Overall spending trends'
+
+    render 'graph'
   end
 
   def transactions
