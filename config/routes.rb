@@ -2,12 +2,13 @@ Rails.application.routes.draw do
   root 'application#dashboard'
   get '/dashboard', to: 'application#dashboard', as: 'dashboard'
 
-  get 'trends', to: 'categories'
-
   patch 'bills/paid', to: 'bills#paid', as: 'paid'
   resources :bills
 
   resources :categories do
+    collection do
+      get 'trends'
+    end
     member do
       get 'graph'
       get 'transactions'

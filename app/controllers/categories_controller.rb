@@ -22,6 +22,10 @@ class CategoriesController < ApplicationController
     @series = { values: @data, key: @category.name }
   end
 
+  def trends
+    
+  end
+
   def transactions
     @transactions = @category.transactions
   end
