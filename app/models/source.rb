@@ -7,6 +7,9 @@ class Source < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :transactions
 
+  # this must be done first or you get a mysql error
+  before_destroy :clean_join_table
+
   # in my head this is backwards, but the fk goes in this table
   belongs_to :purpose
   # also note if a purpose is deleted, purpose_id remains, but .purpose will return nil
@@ -33,5 +36,10 @@ class Source < ActiveRecord::Base
   def set_default_values
     self.popularity = 0
     self.total = 0.0
+  end
+
+  def clean_join_table
+    # source_id is also in bills, categories
+    self.transactions = []
   end
 end
