@@ -2,7 +2,7 @@
   data-no-turbolink="true"
 <% end %>
 
-<h3>Spending for <%= @category.name %></h3>
+<h3><%= @title %></h3>
 
 <script type='text/javascript'>
   var x_axis_values = [];
@@ -19,7 +19,7 @@
       ;
 
     chart.xAxis     //Chart x-axis settings
-      .axisLabel('Date (%b %y)')
+      .axisLabel('Date (Mon YY)')
       .tickValues(x_axis_values)
       .tickFormat(function (d) {
         return d3.time.format('%b %y')(new Date(d));
@@ -49,14 +49,26 @@
   function graphData() {
     var series = <%== @series.to_json %>;
 
-    for (var i = 0; i < series.values.length; i++) {
-      var date = new Date(series.values[i].year, series.values[i].month, 1);
-      series.values[i].x = date;
-      x_axis_values.push(date);
-      series.values[i].y = parseFloat(series.values[i].total)
+    for (var g = 0; g < series.length; g++) {
+
+      var line = series[g];
+      for (var i = 0; i < line.values.length; i++) {
+        var date = new Date(line.values[i].year, line.values[i].month, 1);
+        line.values[i].x = date;
+
+        // this isn't actually necessary, d3 will ignore duplicate values but g * x is a pretty big array
+        if (x_axis_values.map(function (e) {
+            return e.valueOf();
+          }).indexOf(date.valueOf()) == -1) {
+          x_axis_values.push(date);
+        }
+
+        line.values[i].y = parseFloat(line.values[i].total)
+      }
+      
     }
 
-    return [series];
+    return series;
   }
 
 </script>

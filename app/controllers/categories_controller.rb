@@ -19,7 +19,9 @@ class CategoriesController < ApplicationController
     @data = @category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
                                          .group('year, month')
 
-    @series = { values: @data, key: @category.name }
+    @series = [{ values: @data, key: @category.name }]
+
+    @title = "Spending for #{@category.name}"
   end
 
   def trends
