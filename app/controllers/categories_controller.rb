@@ -16,8 +16,7 @@ class CategoriesController < ApplicationController
 
   # months (javascript date) and amount
   def graph
-    @data = @category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
-                                         .group('year, month')
+    @data = @category.d3_graph_points
 
     @series = [{ values: @data, key: @category.name }]
 
@@ -28,9 +27,7 @@ class CategoriesController < ApplicationController
     @series = []
 
     Category.all.each do |category|
-
-      data = category.transactions.select('sum(amount) as total, year(date) as year, month(date) as month')
-                                          .group('year, month')
+      data = category.d3_graph_points
 
       @series << { values: data, key: category.name }
     end

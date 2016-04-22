@@ -12,6 +12,10 @@ class Category < ActiveRecord::Base
     Transaction.where{(source_id.in s_ids) | (purpose_id.in p_ids)}
   end
 
+  def d3_graph_points
+    transactions.select('sum(amount) as total, year(date) as year, month(date) as month').group('year, month')
+  end
+
   def total
 
   end
