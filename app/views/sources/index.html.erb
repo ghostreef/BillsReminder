@@ -1,5 +1,10 @@
 <div class='sources'>
-  <%= form_tag create_many_sources_path, class: 'create_many_form' do %>
+  <div class='whole-margin-bottom'>
+  <%= form_tag guess_sources_path, remote: true, class: 'js-disable_after_submit inline-block half-margin-bottom' do %>
+    <%= submit_tag('Guess') %>
+  <% end %>
+
+  <%= form_tag create_many_sources_path, class: 'create_many_form inline' do %>
     <%= button_tag('ADD', class: 'js-add_fieldset', type: 'button') %>
     <%= submit_tag('CREATE') %>
 
@@ -12,11 +17,21 @@
       </div>
     <% end %>
   <% end %>
+  </div>
 
+  <div class='half-margin-bottom'>
+    <%= form_tag update_many_sources_path, class: 'js-update_many_sources_form inline' do %>
+      <%= submit_tag('UPDATE') %>
+    <% end %>
 
-  <%= form_tag guess_sources_path, remote: true, class: 'js-disable_after_submit' do %>
-    <%= submit_tag('Guess') %>
-  <% end %>
+    <%= form_tag clear_sources_path, class: 'inline' do %>
+      <%= submit_tag('clear', class: 'red_button', data: {confirm: 'Are you sure? This will clear all source stats.'}) %>
+    <% end %>
+
+    <%= form_tag refresh_sources_path, class: 'inline' do %>
+      <%= submit_tag('refresh', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
+    <% end %>
+  </div>
 
   <table class='js-sources_table'>
     <thead>
@@ -51,17 +66,4 @@
     <% end %>
     </tbody>
   </table>
-
-  <%= form_tag update_many_sources_path, class: 'js-update_many_sources_form' do %>
-    <%= submit_tag('UPDATE') %>
-  <% end %>
-
-  <%= form_tag clear_sources_path do %>
-    <%= submit_tag('clear', class: 'red_button', data: {confirm: 'Are you sure? This will clear all source stats.'}) %>
-  <% end %>
-
-  <%= form_tag refresh_sources_path do %>
-    <%= submit_tag('refresh', class: 'red_button', data: {confirm: 'Are you sure? This will recalculate all sources.'}) %>
-  <% end %>
-
 </div>

@@ -28,6 +28,22 @@
   overflow: auto;
 }
 
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.half-margin-bottom {
+  margin-bottom: .5em;
+}
+
+.whole-margin-bottom {
+  margin-bottom: 1em;
+}
+
 dt {
   font-weight: bold;
 }
