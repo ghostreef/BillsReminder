@@ -16,4 +16,6 @@
 //= require jquery-ui
 //= require turbolinks
 //= require jquery.multi-select
+//= require d3.3.5.16
+//= require nv.1.8.1
 //= require_tree .
