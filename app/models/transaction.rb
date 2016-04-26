@@ -3,6 +3,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :source
   belongs_to :purpose
 
+  has_many :categories, through: :source
+
   validates :date, :raw_description, presence: true
   validates :amount, numericality: { greater_than: 0 }
 

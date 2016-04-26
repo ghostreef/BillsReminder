@@ -1,0 +1,43 @@
+<% content_for(:body_attributes) do %>
+  data-no-turbolink="true"
+<% end %>
+
+<div class='breakdown'></div>
+
+<script type="text/javascript">
+
+  var data = <%== @pies.to_json %>;
+
+  for(var i = 0; i < data.length; i++) {
+    drawDonutChart(data[i].title, data[i].points);
+  }
+
+  function drawDonutChart(title, data) {
+    var height = 350;
+    var width = 350;
+
+    nv.addGraph(function() {
+      var chart = nv.models.pieChart()
+        .x(function(d) { return d.key })
+        .y(function(d) { return d.y })
+        .donut(true)
+        .width(width)
+        .height(height)
+        .padAngle(.08)
+        .cornerRadius(5)
+        .noData('No Data Available for ' + title);
+
+      chart.title(title);
+      chart.pie.labelsOutside(true).donut(true);
+
+      d3.select('.breakdown').append('svg')
+        .attr('class', 'svg_breakdown')
+        .datum(data)
+        .transition().duration(1200)
+        .call(chart);
+
+      return chart;
+    });
+  }
+
+</script>

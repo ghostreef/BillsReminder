@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     collection do
       post 'import'
       post 'parse'
+      get 'breakdown'
     end
   end
 

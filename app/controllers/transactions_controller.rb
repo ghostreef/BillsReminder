@@ -100,7 +100,30 @@ class TransactionsController < ApplicationController
     redirect_to transactions_path, notice: message
   end
 
+  def breakdown
+    # lets default to the last 6 months
+    # key: category.name, y: amount
+    # title is month
+
+    @pies = []
+
+    (0..5).step(1) do |num|
+      date = Date.today - num.months
+      data = Transaction.where(date: date.beginning_of_month..date.end_of_month).joins(:categories)
+              .group('categories.name').select('categories.name as name, sum(transactions.amount) as total')
+
+      title = "#{I18n.t("date.abbr_month_names")[date.month]} #{date.year}"
+
+      @pies << {title: title, points: data_to_pie_graph(data)}
+    end
+
+  end
+
   private
+
+  def data_to_pie_graph(data)
+    data.map { |point| { key: point.name, y: point.total.to_f } }
+  end
 
   def find_transaction
     begin

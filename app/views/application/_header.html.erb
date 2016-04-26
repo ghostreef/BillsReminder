@@ -9,6 +9,7 @@
       <li class='hide_on_mobile hide_on_tablet'><%= active_link_to '', dashboard_path, class: 'desktop_home fa fa-home' %></li>
       <li class='more'><%= active_link_to 'Transactions', transactions_path %>
         <ul>
+          <li><%= link_to 'Monthly Breakdown', breakdown_transactions_path %></li>
           <li><%= link_to 'New Transaction', new_transaction_path %></li>
         </ul>
       </li>
