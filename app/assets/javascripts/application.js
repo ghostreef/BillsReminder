@@ -16,8 +16,4 @@
 //= require jquery-ui
 //= require turbolinks
 //= require jquery.multi-select
-
-//= require d3.v3
-//= require nv.d3
-
 //= require_tree .
