@@ -2,7 +2,13 @@
   svg.svg_breakdown {
     height: 350px;
     -webkit-font-smoothing: initial;
+
     width: 33%;
     display: inline-block;
+
+//    @include span-columns(4);
+//    @include omega(3n);
+
+    min-width: 23em;
   }
 }
