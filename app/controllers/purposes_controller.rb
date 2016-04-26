@@ -9,10 +9,10 @@ class PurposesController < ApplicationController
   def create_many
     results = params[:purposes].map do |purpose|
       p = Purpose.create(purpose_hash(purpose))
-      p.errors.empty? ? "#{p.name} successfully created." : p.custom_error_messages
+      p.errors.empty? ? "Purpose '#{p.name}' successfully created." : p.custom_error_messages
     end
 
-    redirect_to purposes_path, notice: results
+    redirect_to purposes_path, flash: { notices: results }
   end
 
   def edit
