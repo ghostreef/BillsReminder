@@ -1,7 +1,7 @@
 class Source < ActiveRecord::Base
   validates :name, :regex, length: { minimum: 1 }
   validates :name, uniqueness: true
-  validates :total, :popularity, numericality: { greater_than: 0 }
+  validates :total, :popularity, numericality: { greater_than_or_equal_to: 0 }
   validates :popularity, numericality: { only_integer: true }
 
   has_and_belongs_to_many :categories
@@ -17,7 +17,7 @@ class Source < ActiveRecord::Base
 
   alias_attribute :default_purpose, :purpose
 
-  before_create :set_default_values
+  before_validation :set_default_values
   
   scope :not_categorized, -> { where('id not in (select source_id from categories_sources)') }
 
