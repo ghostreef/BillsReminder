@@ -8,15 +8,32 @@
     <%= f.text_field :name %>
   </p>
 
-  <p>
-    <%= f.label :source_ids, 'Sources' %>
-    <%= f.collection_select :source_ids, Source.not_categorized, :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
-  </p>
 
-  <p>
+  <div>
     <%= f.label :source_ids, 'Sources' %>
-    <%= f.collection_select :source_ids, Source.order(:name), :id, :name, {}, { multiple: true, class: 'js-multiSelect' } %>
-  </p>
+    <p>Sources highlighted in yellow are uncategorized (not in any category). Sources that are highlighted blue are only categorized in this category.</p>
+    <!-- this field is required so, clearing out sources goes through -->
+    <%= hidden_field_tag 'category[source_ids][]', nil, id: nil %>
+
+    <% selected = @category.sources %>
+    <% sources = Source.order(:name) - selected %>
+    <div class='js-better-select'>
+      <ul>
+        <% sources.each do |source| %>
+          <li class='<%= 'uncategorized' if source.categories.empty? %>'><%= source.name %>
+            <%= hidden_field_tag 'category[source_ids][]', source.id, id: nil, disabled: true %>
+          </li>
+        <% end %>
+      </ul>
+
+      <ul>
+        <% selected.each do |source| %>
+          <li class='<%= 'only_category' if source.categories.length == 1 %>'><%= source.name %>
+            <%= hidden_field_tag 'category[source_ids][]', source.id, id: nil %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 
   <p>
     <%= f.label :purpose_ids, 'Purposes' %>

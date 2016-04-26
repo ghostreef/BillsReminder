@@ -59,3 +59,14 @@
     }
   }
 }
+
+
+.edit_category, .new_category {
+  li.uncategorized {
+    background: $yellow;
+  }
+
+  li.only_category {
+    background: $blue;
+  }
+}
