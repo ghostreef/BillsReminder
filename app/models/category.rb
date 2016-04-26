@@ -2,6 +2,7 @@
 class Category < ActiveRecord::Base
   validates :name, uniqueness: true, length: { minimum: 1 }
 
+  # checked deleting a category with sources and purposes will delete corresponding rows in the mapping tables
   has_and_belongs_to_many :sources
   has_and_belongs_to_many :purposes
 
@@ -17,6 +18,6 @@ class Category < ActiveRecord::Base
   end
 
   def total
-
+    # thinking of caching this value
   end
 end
