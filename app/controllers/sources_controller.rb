@@ -45,7 +45,7 @@ class SourcesController < ApplicationController
       source.errors.empty? ? "Source #{source.id} successfully updated." : "Source #{source.id} did not update. #{source.custom_error_messages.join(', ')}"
     end
 
-    redirect_to sources_path, notice: results
+    redirect_to sources_path, flash: { notices: results }
   end
 
   def clear

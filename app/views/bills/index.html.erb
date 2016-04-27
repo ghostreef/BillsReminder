@@ -21,8 +21,8 @@
   <tbody>
   <% @bills.each do |bill| %>
     <tr class="<%= bill.status %>">
-      <td><%= bill.source.name %></td>
-      <td><%= bill.purpose.name %></td>
+      <td><%= bill.source.try(:name) %></td>
+      <td><%= bill.purpose.try(:name) %></td>
       <td><%= bill.description %></td>
       <td><%= bill.term_number %> <%= bill.term_unit %></td>
       <td><%= number_to_currency bill.amount %></td>
