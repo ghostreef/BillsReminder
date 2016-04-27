@@ -15,6 +15,7 @@
       <div class='styled_select'>
         <%= select_tag('sources[]purpose_id', options_from_collection_for_select(Purpose.all, :id, :name), prompt: 'No Purpose', id: nil, class: 'js-purpose') %>
       </div>
+      <i class="fa fa-times js-remove_source"></i>
     <% end %>
   <% end %>
   </div>

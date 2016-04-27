@@ -33,3 +33,7 @@ $(document).on('click', '.js-fill_in_name', function () {
 
     $(this).siblings('.js-name').val(regex);
 });
+
+$(document).on('click', '.js-remove_source', function () {
+    $(this).parents('.js-source_fieldset').remove();
+});
