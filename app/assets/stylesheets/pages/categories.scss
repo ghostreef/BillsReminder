@@ -5,6 +5,8 @@
     text-align: center;
     width: 10em;
     position: relative;
+    margin-bottom: .5em;
+    margin-right: .5em;
 
     .actions_container {
       position: absolute;
@@ -54,6 +56,10 @@
 
         &:nth-child(3) {
           transition-delay: .4s;
+        }
+
+        &:nth-child(4) {
+          transition-delay: .3s;
         }
       }
     }
