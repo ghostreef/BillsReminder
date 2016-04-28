@@ -5,9 +5,9 @@ To do:
 - rethink associations
 - add relative amounts
 - add within means
-- finish category total caching
+- finish category total caching √
 - add search
-- using locality and region add figued tax paid
+- using locality and region add figured tax paid
 
 
 I think I'm done.

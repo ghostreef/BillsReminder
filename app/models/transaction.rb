@@ -14,6 +14,8 @@ class Transaction < ActiveRecord::Base
 
   after_save :sync_source, if: :source_changed?
 
+  after_save :touch_category, if: :amount_changed?
+
   scope :unknown, -> { where(source: nil) }
 
   # returns the column names a user is allowed to change
@@ -102,6 +104,14 @@ class Transaction < ActiveRecord::Base
 
   def source_changed?
     changed.include?('source_id')
+  end
+
+  def touch_category
+    categories.map(&:touch)
+  end
+
+  def amount_changed?
+    changed.include?('amount')
   end
 
 end
