@@ -3,7 +3,7 @@
     <li>
       <p><%= category.name %></p>
 
-      <p><%= number_to_currency(category.transactions.sum(:amount)) %></p>
+      <p><%= number_to_currency(category.total) %></p>
 
       <div class='overlay'></div>
 
