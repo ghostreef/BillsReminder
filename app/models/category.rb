@@ -30,6 +30,7 @@ class Category < ActiveRecord::Base
 
   private
 
+  # association callbacks must have a param
   def flush_cache(useless_self)
     touch if persisted?
   end
