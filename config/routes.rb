@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       get 'bubbles'
       post 'guess'
     end
+    member do
+      get 'transactions'
+    end
   end
 
   resources :transactions do

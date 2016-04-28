@@ -51,7 +51,7 @@
     <% @sources.each do |source| %>
       <tr class="<%= 'highlight' if source.purpose.nil? %>">
         <td><%= source.id %></td>
-        <td><%= source.popularity %></td>
+        <td><%= link_to(source.popularity, transactions_source_path(id: source.id), class: 'link') %></td>
         <td><%= text_field_tag("sources[#{source.id}]name", source.name) %></td>
         <td><%= text_field_tag("sources[#{source.id}]regex", source.regex) %></td>
         <td>

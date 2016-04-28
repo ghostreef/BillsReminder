@@ -1,0 +1,2 @@
+<p>Total: <%= number_to_currency(@transactions.sum(:amount)) %></p>
+<%= render 'transactions/transactions', transactions: @transactions %>

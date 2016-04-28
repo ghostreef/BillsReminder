@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
 
-  before_action :find_source, only: [:show, :edit, :update, :destroy]
+  before_action :find_source, only: [:show, :edit, :update, :destroy, :transactions]
 
   def index
     @sources = Source.order(:name)
@@ -97,6 +97,11 @@ class SourcesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def transactions
+    @transactions = @source.transactions
+    render 'transactions/transactions'
   end
 
   def destroy
