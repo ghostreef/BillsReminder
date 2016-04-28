@@ -1,0 +1,13 @@
+To do:
+- messages for empty pages
+- add unknown category
+- add location and region
+- rethink associations
+- add relative amounts
+- add within means
+- finish category total caching
+- add search
+- using locality and region add figued tax paid
+
+
+I think I'm done.
