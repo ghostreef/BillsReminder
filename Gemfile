@@ -40,6 +40,9 @@ gem 'font-awesome-sass'
 
 gem 'active_link_to'
 
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
