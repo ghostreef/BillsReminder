@@ -19,3 +19,36 @@
     </li>
   <% end %>
 </ul>
+
+<script type="text/javascript">
+
+  // TODO refactor graphs into partials
+
+  var data = <%== @pies.to_json %>;
+
+  for(var i = 0; i < data.length; i++) {
+    drawPieChart(data[i].points);
+  }
+
+  function drawPieChart(data) {
+    var height = 350;
+    var width = 350;
+
+    nv.addGraph(function() {
+      var chart = nv.models.pieChart()
+        .x(function(d) { return d.key })
+        .y(function(d) { return d.y })
+        .width(width)
+        .height(height);
+
+      d3.select('.main').append('svg')
+        .attr('id', 'categories_pie_chart')
+        .datum(data)
+        .transition().duration(1200)
+        .call(chart);
+
+      return chart;
+    });
+  }
+
+</script>

@@ -1,14 +1,17 @@
+svg {
+  -webkit-font-smoothing: initial;
+}
+
 .breakdown {
   svg.svg_breakdown {
-    height: 350px;
-    -webkit-font-smoothing: initial;
-
-    width: 33%;
     display: inline-block;
-
-//    @include span-columns(4);
-//    @include omega(3n);
-
+    height: 350px;
+    width: 33%;
     min-width: 23em;
   }
+}
+
+#categories_pie_chart {
+  height: 500px;
+  width: 500px;
 }
