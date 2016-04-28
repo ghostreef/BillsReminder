@@ -28,7 +28,9 @@ class Category < ActiveRecord::Base
     Rails.cache.fetch([self, 'total']) { transactions.sum(:amount) }
   end
 
-  def flush_cache
-    touch
+  private
+
+  def flush_cache(useless_self)
+    touch if persisted?
   end
 end
