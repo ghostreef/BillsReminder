@@ -119,6 +119,11 @@ class TransactionsController < ApplicationController
 
   end
 
+  def unknown
+    @transactions = Transaction.where{(source_id.eq nil) | (purpose_id.eq nil)}
+    render 'transactions'
+  end
+
   private
 
   def data_to_pie_graph(data)

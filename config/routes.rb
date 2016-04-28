@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       post 'import'
       post 'parse'
       get 'breakdown'
+      get 'unknown'
     end
   end
 
