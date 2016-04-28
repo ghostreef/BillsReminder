@@ -34,8 +34,8 @@ class Source < ActiveRecord::Base
   private
 
   def set_default_values
-    self.popularity = 0
-    self.total = 0.0
+    self.popularity ||= 0
+    self.total ||= 0.0
   end
 
   def clean_join_table
