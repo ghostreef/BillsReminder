@@ -21,7 +21,6 @@
       var chart = nv.models.pieChart()
         .x(function(d) { return d.key })
         .y(function(d) { return d.y })
-        .donut(true)
         .width(width)
         .height(height)
         .padAngle(.08)
