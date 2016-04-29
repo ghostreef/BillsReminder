@@ -16,3 +16,4 @@
 !/log/.keep
 /tmp
 solr/development/data
+sunspot-solr-development.pid
