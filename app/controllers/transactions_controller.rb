@@ -9,6 +9,19 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.where(date: @start_date..@end_date).order(:date)
   end
 
+  def search
+    @search = Transaction.search do
+      fulltext(params[:search])
+      # doesn't work
+      # any_of do
+      #   with(:amount, params[:search])
+      #   with(:id, params[:search])
+      # end
+    end
+    
+    @transactions = @search.results
+  end
+
   def show
 
   end

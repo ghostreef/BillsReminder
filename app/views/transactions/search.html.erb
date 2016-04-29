@@ -1,0 +1,4 @@
+<%= render 'search_form' %>
+<p>Total Amount: <%= number_to_currency(@transactions.map(&:amount).inject(0, :+)) %></p>
+<p>Count: <%= @transactions.count %></p>
+<%= render 'transactions/transactions', transactions: @transactions %>

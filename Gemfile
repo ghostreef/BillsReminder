@@ -42,6 +42,7 @@ gem 'active_link_to'
 
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'progress_bar' # for sunspot
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

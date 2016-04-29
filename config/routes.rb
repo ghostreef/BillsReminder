@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       post 'parse'
       get 'breakdown'
       get 'unknown'
+      get 'search'
     end
   end
 
