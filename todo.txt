@@ -6,7 +6,7 @@ To do:
 - add relative amounts
 - add within means
 - finish category total caching √
-- add search
+- add search √
 - using locality and region add figured tax paid
 - add accounts
 

@@ -18,10 +18,13 @@ class Transaction < ActiveRecord::Base
 
   scope :unknown, -> { where(source: nil) }
 
+  # we have to create an alias because sunspot uses 'id'
+  alias_attribute :transaction_id, :id
+  
   searchable do
-    text :raw_description
-    integer :id
-    float :amount
+    text :transaction do
+      "#{raw_description} #{amount} #{transaction_id}"
+    end
   end
 
   # returns the column names a user is allowed to change
