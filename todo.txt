@@ -8,7 +8,7 @@ To do:
 - finish category total caching √
 - add search √
 - using locality and region add figured tax paid
-- add accounts
+- add accounts √
 
 
 I think I'm done.
