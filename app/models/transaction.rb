@@ -6,7 +6,7 @@ class Transaction < ActiveRecord::Base
   has_many :categories, through: :source
 
   validates :date, :raw_description, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: true
 
   DEFAULT_DATE_FORMAT = '%m/%d/%Y'
 
@@ -51,7 +51,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.format_amount(amount)
-    amount.to_s.delete('-$').to_f.abs.round(2)
+    amount.to_s.delete('$').to_f.round(2)
   end
 
   def guess_source(description=raw_description)
@@ -104,6 +104,10 @@ class Transaction < ActiveRecord::Base
     
     # how do I join with regex
     update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
+  end
+
+  def absolute_amount
+    amount.abs
   end
 
   def sync_source
