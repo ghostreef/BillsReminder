@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
   end
 
   def d3_graph_points
-    transactions.select('sum(amount) as total, year(date) as year, month(date) as month').group('year, month')
+    transactions.select('abs(sum(amount)) as total, year(date) as year, month(date) as month').group('year, month')
   end
 
   def total
