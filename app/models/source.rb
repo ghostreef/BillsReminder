@@ -1,8 +1,8 @@
 class Source < ActiveRecord::Base
   validates :name, :regex, length: { minimum: 1 }
   validates :name, uniqueness: true
-  validates :total, :popularity, numericality: { greater_than_or_equal_to: 0 }
-  validates :popularity, numericality: { only_integer: true }
+  validates :popularity, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :total, numericality: true
 
   has_and_belongs_to_many :categories
   has_many :transactions
