@@ -2,11 +2,17 @@
   data-no-turbolink="true"
 <% end %>
 
-<p>
-  <%= label_tag(:amount, 'Filter by price:', class: 'inline_label')%>
+<div class='filters'>
+  <%= label_tag(:amount, 'Filter:', class: 'inline_label')%>
   <%= text_field_tag(:amount, '', class: 'js-amount amount_text', readonly: true) %>
   <button class='js-update'>Update</button>
-</p>
+
+  <%= form_tag('', method: 'get', enforce_utf8: false, class: 'inline') do %>
+    <% inverse = @attribute == 'popularity' ? 'total' : 'popularity' %>
+    <%= hidden_field_tag :graph_by,  inverse %>
+    <%= submit_tag 'Graph By ' + inverse, name: '' %>
+  <% end %>
+</div>
 
 <div class='js-slider_range slider_range'></div>
 
@@ -37,8 +43,8 @@
   function draw(data) {
 
     // d3 set up
-    var diameter = 800,
-      format = d3.format("$,.2f");
+    var diameter = 800;
+    var format = d3.format("<%= @attribute == 'total' ? '$,.2f' : ',' %>");
 
     var bubble = d3.layout.pack()
       .sort(null)

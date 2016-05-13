@@ -61,13 +61,15 @@ class SourcesController < ApplicationController
   end
 
   def bubbles
-    sources = Source.select('name, total').where('total > ?', 0) .order(:total)
+    @attribute = params[:graph_by] == 'popularity' ? 'popularity' : 'total'
+
+    sources = Source.select("name, #{@attribute}").order(@attribute)
 
 
     # here I am looking for the max total within 1 standard deviation
-    average = sources.average(:total)
+    average = sources.average(@attribute)
 
-    totals = sources.pluck(:total)
+    totals = sources.pluck(@attribute)
 
     squared_difference = totals.map { |num| (num - average) * (num - average)}
 
@@ -78,10 +80,11 @@ class SourcesController < ApplicationController
     @max_standard = (average + standard_deviation).to_f
 
 
-    @max = sources.maximum(:total)
-    @min = sources.minimum(:total)
+    @max = sources.maximum(@attribute)
+    @min = sources.minimum(@attribute)
 
-    @data = {children:  sources.map {|s| s.to_d3_json}}
+
+    @data = Source.graph_points_by(@attribute, sources)
   end
 
   # maybe this belongs in transaction controller

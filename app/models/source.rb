@@ -27,8 +27,8 @@ class Source < ActiveRecord::Base
     end
   end
 
-  def to_d3_json
-    { name: name, value: total.to_f }
+  def self.graph_points_by(attribute, sources)
+    { children:  sources.map { |source| {name: source.name, value: source.send(attribute).abs.to_f } } }
   end
 
   private
