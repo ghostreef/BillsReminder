@@ -118,7 +118,7 @@ class TransactionsController < ApplicationController
     (0..5).step(1) do |num|
       date = Date.today - num.months
       data = Transaction.where(date: date.beginning_of_month..date.end_of_month).joins(:categories)
-              .group('categories.name').select('categories.name as name, sum(transactions.amount) as total')
+              .group('categories.name').select('categories.name as name, abs(sum(transactions.amount)) as total')
 
       title = "#{I18n.t("date.abbr_month_names")[date.month]} #{date.year}"
 
