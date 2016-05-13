@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :sources, after_add: :flush_cache, after_remove: :flush_cache
   has_and_belongs_to_many :purposes, after_add: :flush_cache, after_remove: :flush_cache
 
+  before_create :set_default_values
+
   def transactions
     s_ids = sources.pluck(:id)
     p_ids = purposes.pluck(:id)
@@ -33,5 +35,10 @@ class Category < ActiveRecord::Base
   # association callbacks must have a param
   def flush_cache(useless_self)
     touch if persisted?
+  end
+
+  # by default all categories should be graph able
+  def set_default_values
+    self.graph ||= '1'
   end
 end
