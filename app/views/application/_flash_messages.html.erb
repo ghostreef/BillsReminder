@@ -1,7 +1,7 @@
 <!-- all or list -->
-<% flash.keys.each do |key| %>
+<% flash.each do |key, value| %>
   <%= content_tag(:div, class: "flash-#{key.singularize}") do %>
-    <% Array(flash[key]).each do |msg| %>
+    <% Array(value).each do |msg| %>
       <div><%= msg %></div>
     <% end %>
   <% end %>
