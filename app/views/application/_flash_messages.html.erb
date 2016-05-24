@@ -1,26 +1,8 @@
-<%= content_tag(:p, flash[:error], class: 'flash-error') if flash[:error].present? %>
-<% if flash[:errors].present? %>
-  <div class='flash-error'>
-    <% flash[:errors].each do |msg| %>
+<!-- all or list -->
+<% flash.keys.each do |key| %>
+  <%= content_tag(:div, class: "flash-#{key.singularize}") do %>
+    <% Array(flash[key]).each do |msg| %>
       <div><%= msg %></div>
     <% end %>
-  </div>
-<% end %>
-
-<%= content_tag(:p, flash[:success], class: 'flash-success') if flash[:success].present? %>
-<% if flash[:successes].present? %>
-  <div class='flash-success'>
-    <% flash[:successes].each do |msg| %>
-      <div><%= msg %></div>
-    <% end %>
-  </div>
-<% end %>
-
-<%= content_tag(:p, flash[:notice], class: 'flash-notice') if flash[:notice].present? %>
-<% if flash[:notices].present? %>
-  <div class='flash-notice'>
-    <% flash[:notices].each do |msg| %>
-      <div><%= msg %></div>
-    <% end %>
-  </div>
+  <% end %>
 <% end %>
