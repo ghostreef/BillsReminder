@@ -1,3 +1,22 @@
-<% @accounts.each do |account| %>
-  <div><%= account.name %> <%= account.username %> <%= account.hint %></div>
-<% end %>
+<%= link_to 'New Account', new_account_path, class: 'link' %>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Hint</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= account.id %></td>
+      <td><%= account.name %></td>
+      <td><%= account.username %></td>
+      <td><%= account.hint  %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
