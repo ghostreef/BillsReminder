@@ -9,6 +9,11 @@ To do:
 - add search √
 - using locality and region add figured tax paid
 - add accounts √
-
+- accounts with add/new combined
+- day to day spending graph because I also want to see rate
+- day to day spending budgeting
+- add category groups, required to add within means and other more advanced analysis
+  group examples: + - <>, states, stores, traditional categories
+- add custom validator
 
 I think I'm done.
