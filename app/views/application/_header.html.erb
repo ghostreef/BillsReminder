@@ -40,10 +40,15 @@
       </li>
       <li class='more'><%= active_link_to 'Parsers', parsers_path %>
         <ul>
-          <li><%= link_to 'New Parsers', new_parser_path %></li>
+          <li><%= link_to 'New Parser', new_parser_path %></li>
         </ul>
       </li>
       <li><%= active_link_to 'Accounts', accounts_path %></li>
+      <li class='more'><%= active_link_to 'Sets', category_sets_path %>
+        <ul>
+          <li><%= link_to 'New Set', new_category_set_path %></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </header>
