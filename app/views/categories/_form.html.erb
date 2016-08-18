@@ -8,6 +8,12 @@
     <%= f.text_field :name %>
   </p>
 
+  <div>
+    <%= f.label :category_set, 'Set' %>
+    <div class='styled_select'>
+      <%= f.collection_select :category_set_id, CategorySet.all, :id, :name, include_blank: true %>
+    </div>
+  </div>
 
   <div>
     <%= f.label :source_ids, 'Sources' %>

@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :sources, after_add: :flush_cache, after_remove: :flush_cache
   has_and_belongs_to_many :purposes, after_add: :flush_cache, after_remove: :flush_cache
 
+  belongs_to :category_set
+
   before_create :set_default_values
 
   def transactions

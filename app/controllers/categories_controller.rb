@@ -78,6 +78,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_hash(hash)
-    hash.permit(:name, :graph, source_ids: [], purpose_ids: [])
+    hash.permit(:name, :graph, :category_set_id, source_ids: [], purpose_ids: [])
   end
 end
