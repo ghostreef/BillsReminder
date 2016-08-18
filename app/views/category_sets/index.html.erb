@@ -1,0 +1,18 @@
+<%= link_to 'New Set', new_category_set_path, class: 'link' %>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sets.each do |set| %>
+    <tr>
+      <td><%= set.id %></td>
+      <td><%= set.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

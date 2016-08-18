@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'application#dashboard', as: 'dashboard'
 
   patch 'bills/paid', to: 'bills#paid', as: 'paid'
-  resources :bills, :accounts
+  resources :bills, :accounts, :category_sets
 
   resources :categories do
     collection do
