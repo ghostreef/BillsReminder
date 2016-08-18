@@ -5,4 +5,9 @@ class CategorySet < ActiveRecord::Base
   def inclusive?
     inclusive
   end
+
+  def total
+    # call flatten so we can use enumerable::sum, total is a virtual attribute
+    categories.flatten.sum(&:total)
+  end
 end

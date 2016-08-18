@@ -1,6 +1,6 @@
 class CategorySetsController < ApplicationController
 
-  before_action :find_set, only: [:show, :edit, :update, :destroy]
+  before_action :find_set, only: [:show, :edit, :update, :destroy, :graph]
 
   def index
     @sets = CategorySet.order(:name)
@@ -34,6 +34,11 @@ class CategorySetsController < ApplicationController
     else
       redirect_to category_sets_path, flash: {error: 'Failed to destroy set.'}
     end
+  end
+
+  def graph
+    points = @set.categories.map { |category| { key: category.name, y: category.total.to_f } }
+    @pies = [title: @set.name, points: points]
   end
 
   private

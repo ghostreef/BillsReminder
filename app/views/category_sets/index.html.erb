@@ -5,6 +5,8 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Total</th>
+    <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
   </tr>
@@ -14,6 +16,8 @@
     <tr>
       <td><%= set.id %></td>
       <td><%= set.name %></td>
+      <td><%= number_to_currency(set.total)%></td>
+      <td><%= link_to('E', graph_category_set_path(set), class: 'taiga') %></td>
       <td><%= link_to('h', edit_category_set_path(set), class: 'taiga') %></td>
       <td><%= link_to('j', category_set_path(set), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %></td>
     </tr>
