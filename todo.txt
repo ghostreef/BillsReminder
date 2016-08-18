@@ -12,7 +12,7 @@ To do:
 - accounts with add/new combined
 - day to day spending graph because I also want to see rate
 - day to day spending budgeting
-- add category groups, required to add within means and other more advanced analysis
+- add category groups, required to add within means and other more advanced analysis √
   group examples: + - <>, states, stores, traditional categories
 - add custom validator
 
