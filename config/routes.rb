@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'application#dashboard', as: 'dashboard'
 
   patch 'bills/paid', to: 'bills#paid', as: 'paid'
-  resources :bills, :accounts
+  resources :bills
+
+  resources :accounts do
+    collection do
+      post 'create_and_update_many'
+    end
+  end
 
   resources :category_sets do
     member do

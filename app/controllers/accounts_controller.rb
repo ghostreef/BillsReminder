@@ -18,6 +18,21 @@ class AccountsController < ApplicationController
 
   end
 
+  # this is for practice
+  def create_and_update_many
+    results =  params[:accounts].map do |account|
+      if account[:id]
+        existing_account = Account.find(account[:id])
+        existing_account.update(account_hash(account)) ? "Account #{existing_account.name} successfully updated." : "Error updating account #{existing_account.name}."
+      else
+        new_account = Account.new(account_hash(account))
+        new_account.save ? "Account #{new_account.name} successfully created." : "Error creating account #{new_account.name}."
+      end
+    end
+
+    redirect_to accounts_path, flash: { notices: results }
+  end
+
   def create
     @account = Account.new(account_params)
 
@@ -47,6 +62,10 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.require(:account).permit(:username, :name, :hint)
+    account_hash.require(:account)
+  end
+
+  def account_hash(hash)
+    hash.permit(:username, :name, :hint)
   end
 end

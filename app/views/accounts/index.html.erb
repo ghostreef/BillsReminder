@@ -1,22 +1,50 @@
-<%= link_to 'New Account', new_account_path, class: 'link' %>
+<div class='accounts'>
+  <div class='half_column'>
+    <%= link_to 'New Account', new_account_path, class: 'link' %>
 
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Hint</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @accounts.each do |account| %>
-    <tr>
-      <td><%= account.id %></td>
-      <td><%= account.name %></td>
-      <td><%= account.username %></td>
-      <td><%= account.hint  %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Hint</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.id %></td>
+          <td><%= account.name %></td>
+          <td><%= account.username %></td>
+          <td><%= account.hint %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class='half_column last_column'>
+    <%= form_tag create_and_update_many_accounts_path do %>
+
+      <% 0.upto(1) do %>
+        <div>
+          <%= text_field_tag('accounts[]name', nil, placeholder: 'Name') %>
+          <%= text_field_tag('accounts[]username', nil, placeholder: 'Username') %>
+          <%= text_field_tag('accounts[]hint', nil, placeholder: 'Hint') %>
+        </div>
+      <% end %>
+
+      <% @accounts.take(3).each do |account| %>
+        <div>
+          <%= hidden_field_tag('accounts[]id', account.id) %>
+          <%= text_field_tag('accounts[]name', account.name, placeholder: 'Name') %>
+          <%= text_field_tag('accounts[]username', account.username, placeholder: 'Username') %>
+          <%= text_field_tag('accounts[]hint', account.hint, placeholder: 'Hint') %>
+        </div>
+      <% end %>
+
+      <%= submit_tag('Submit') %>
+    <% end %>
+  </div>
+</div>
