@@ -47,6 +47,6 @@ class CategorySetsController < ApplicationController
   end
 
   def category_set_params
-    params.require(:set).permit(:name, category_ids: [])
+    params.require(:category_set).permit(:name, category_ids: [])
   end
 end
