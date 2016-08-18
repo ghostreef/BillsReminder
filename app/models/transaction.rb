@@ -16,6 +16,8 @@ class Transaction < ActiveRecord::Base
 
   after_save :touch_category, if: :amount_changed?
 
+  after_save :clear_grand_total, if: :amount_changed?
+
   scope :unknown, -> { where(source: nil) }
 
   # we have to create an alias because sunspot uses 'id'
@@ -25,6 +27,10 @@ class Transaction < ActiveRecord::Base
     text :transaction do
       "#{raw_description} #{amount} #{transaction_id}"
     end
+  end
+
+  def self.grand_total
+    Rails.cache.fetch(['grand_total']) { Transaction.all.sum(:amount) }
   end
 
   # returns the column names a user is allowed to change
@@ -127,4 +133,9 @@ class Transaction < ActiveRecord::Base
     changed.include?('amount')
   end
 
+  private
+
+  def self.fresh_grand_total
+    Rails.delete(['grand_total'])
+  end
 end

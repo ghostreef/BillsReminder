@@ -3,7 +3,7 @@ class CategorySet < ActiveRecord::Base
   has_many :categories
 
   def inclusive?
-    inclusive
+    total == Transaction.grand_total
   end
 
   def total
