@@ -44,7 +44,16 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save ? redirect_to(@category) : render(:new)
+    if params[:commit] == 'SUBMIT'
+      @category.save ? redirect_to(@category) : render(:new)
+    elsif params[:commit] == 'PREVIEW'
+      s_ids = params[:category][:source_ids].reject { |c| c.empty? }
+      p_ids = params[:category][:purpose_ids].reject { |c| c.empty? }
+
+      # it is not possible to do category.transaction because this category has no id for the mapping table
+      @transactions = Transaction.where{(source_id.in s_ids) | (purpose_id.in p_ids)}
+      render(:new)
+    end
   end
 
   def edit

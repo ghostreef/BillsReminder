@@ -47,5 +47,10 @@
   </p>
 
   <%= f.submit 'SUBMIT' %>
+  <%= f.submit 'PREVIEW' %>
+<% end %>
 
+
+<% if @transactions.present? %>
+  <%= render 'transactions/transactions', transactions: @transactions %>
 <% end %>
