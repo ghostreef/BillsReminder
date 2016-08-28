@@ -2,6 +2,24 @@ class TransactionsController < ApplicationController
 
   before_action :find_transaction, only: [:show, :edit, :update, :destroy]
 
+  # did you start the server? bundle exec rake sunspot:solr:start
+  def random
+    month = params.fetch(:month, Date.today.month)
+    year = Date.today.year
+
+    sources = ['Comcast', 'Dolcezza', 'Exxon', 'Gartner', 'Google Music', 'Giant', 'Target',
+               'Town', 'Beer & Wine', 'Toyota Financial', 'Waterside Towers', 'Dominion Power', 'ASOS', 'Uber',
+               'Alan Dinkin', 'Sweet Leaf', 'Random Transfer']
+
+    sources.each_with_index do |source, index|
+      date = Transaction.format_date("#{month}/#{index+1}/#{year}")
+      amount = Random.rand(50) * 10
+      Transaction.create(date: date, amount: amount, raw_description: source)
+    end
+
+    redirect_to transactions_path
+  end
+
   def index
     @start_date = params.fetch(:start_date, Date.today - 1.month)
     @end_date = params.fetch(:end_date, Date.today)

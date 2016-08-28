@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   resources :transactions do
     collection do
+      post 'random'
       post 'import'
       post 'parse'
       get 'breakdown'
