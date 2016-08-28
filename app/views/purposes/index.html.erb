@@ -7,6 +7,15 @@
     </div>
   <% end %>
 
+  <% if @purposes.empty? %>
+    <%= form_tag create_many_purposes_path do %>
+      <% Purpose::SUGGESTED_DEFAULTS.each do |purpose| %>
+        <%= hidden_field_tag('purposes[][name]', purpose, id: nil) %>
+      <% end %>
+      <%= submit_tag('Create Defaults', class: 'submit') %>
+    <% end %>
+  <% end %>
+  
   <p><i class="fa fa-info-circle"></i> TIP: Press tab after typing to add another purpose.</p>
 
   <%= form_tag create_many_purposes_path, class: 'create_purpose_form' do %>
