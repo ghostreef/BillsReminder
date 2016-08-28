@@ -16,7 +16,7 @@ class Transaction < ActiveRecord::Base
 
   after_save :touch_category, if: :amount_changed?
 
-  after_save :clear_grand_total, if: :amount_changed?
+  # after_save :clear_grand_total, if: :amount_changed?
 
   scope :unknown, -> { where(source: nil) }
 
