@@ -62,7 +62,7 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    account_hash.require(:account)
+    account_hash(params.require(:account))
   end
 
   def account_hash(hash)
