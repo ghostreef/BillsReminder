@@ -2,6 +2,9 @@
 class Purpose < ActiveRecord::Base
   validates :name, uniqueness: true, length: { minimum: 1 }
 
+  SUGGESTED_DEFAULTS = ['external transfer', 'internal transfer', 'income', 'services rendered', 'goods rendered',
+                        'credit card payment', 'loan payment', 'anonymous', 'miscellaneous']
+
   # this must be done first or you get a mysql error
   before_destroy :clean_join_table
 
