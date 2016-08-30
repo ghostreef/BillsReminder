@@ -115,6 +115,16 @@ class SourcesController < ApplicationController
     end
   end
 
+  def seed
+    file = File.read('data/sources.json')
+    data = JSON.parse(file)
+    purposes = Purpose.pluck(:name, :id).to_h
+
+    data.each do |datum|
+      Source.create(source_hash(datum).merge(purpose_id: purposes[datum['purpose']]))
+    end
+  end
+
   private
 
   def find_source

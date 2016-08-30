@@ -48,6 +48,15 @@ class PurposesController < ApplicationController
     end
   end
 
+  def seed
+    file = File.read('data/purposes.json')
+    data = JSON.parse(file)
+
+    data.each do |datum|
+      Purpose.create(purpose_hash(datum))
+    end
+  end
+
   private
 
   def find_purpose

@@ -72,6 +72,20 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def seed
+    file = File.read('data/categories.json')
+    data = JSON.parse(file)
+
+    purposes = Purpose.pluck(:name, :id).to_h
+    sources = Source.pluck(:name, :id).to_h
+
+    data.each do |datum|
+      purpose_ids = purposes.values_at(*datum['purposes'])
+      source_ids = sources.values_at(*datum['sources'])
+      Category.create(category_hash(datum).merge(purpose_ids: purpose_ids, source_ids: source_ids))
+    end
+  end
+
   private
 
   def find_category
