@@ -132,6 +132,20 @@ class TransactionsController < ApplicationController
     render 'transactions'
   end
 
+  def seed(month)
+    month = month || Date.today.month
+    year = Date.today.year
+
+    file = File.read('data/sources.json')
+    data = JSON.parse(file)
+
+    data.each_with_index do |datum, index|
+      date = Transaction.format_date("#{month}/#{index+1}/#{year}")
+      amount = Random.rand(50) * 10
+      Transaction.create(date: date, amount: amount, raw_description: datum['source'])
+    end
+  end
+
   private
 
   def data_to_pie_graph(data)
