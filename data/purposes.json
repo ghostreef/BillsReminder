@@ -1,0 +1,26 @@
+[
+  {
+    "name": "anonymous"
+  },
+  {
+    "name": "income"
+  },
+  {
+    "name": "credit card payment"
+  },
+  {
+    "name": "loan payment"
+  },
+  {
+    "name": "goods rendered"
+  },
+  {
+    "name": "services rendered"
+  },
+  {
+    "name": "external transfer"
+  },
+  {
+    "name": "internal transfer"
+  }
+]

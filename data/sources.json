@@ -1,0 +1,122 @@
+[
+  {
+    "name": "American Express",
+    "regex": "American Express",
+    "purpose": "credit card payment"
+  },
+  {
+    "name": "ASOS",
+    "regex": "ASOS",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "ATM Withdrawal",
+    "regex": "ATM Withdrawal",
+    "purpose": "anonymous"
+  },
+  {
+    "name": "Beer & Wine",
+    "regex": "beer||wine",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Comcast",
+    "regex": "Comcast",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "Dolcezza",
+    "regex": "Dolcezza",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Dominion Power",
+    "regex": "Dominion Power",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "Exxon",
+    "regex": "Exxon",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Gartner",
+    "regex": "Gartner",
+    "purpose": "income"
+  },
+  {
+    "name": "Giant",
+    "regex": "Giant",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Google Music",
+    "regex": "Google Music",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "IRA Transfer",
+    "regex": "IRA Transfer",
+    "purpose": "external transfer"
+  },
+  {
+    "name": "John Smith MD",
+    "regex": "John Smith MD",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "Pizza( Palace)?",
+    "regex": "Pizza Palace",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Savings Transfer",
+    "regex": "Savings Transfer",
+    "purpose": "internal transfer"
+  },
+  {
+    "name": "Starbucks",
+    "regex": "Starbucks",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Sushi",
+    "regex": "Sushi",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Sweet ?Leaf",
+    "regex": "Sweet Leaf",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Target",
+    "regex": "Target",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Toyota Financial",
+    "regex": "Toyota Financial",
+    "purpose": "loan payment"
+  },
+  {
+    "name": "Town",
+    "regex": "Town",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "Uber",
+    "regex": "Uber",
+    "purpose": "services rendered"
+  },
+  {
+    "name": "Uniqlo",
+    "regex": "Uniqlo",
+    "purpose": "goods rendered"
+  },
+  {
+    "name": "Riverside Towers",
+    "regex": "Riverside Towers",
+    "purpose": "services rendered"
+  }
+]

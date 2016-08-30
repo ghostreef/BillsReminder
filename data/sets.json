@@ -1,0 +1,19 @@
+[
+  {
+    "name": "flow",
+    "categories": ["income", "expenses", "transfers"]
+  },
+  {
+    "name": "geography",
+    "categories": ["MD", "DC", "VA"]
+  },
+  {
+    "name": "traditional",
+    "categories": ["alcohol", "car", "clothing", "coffee", "entertainment", "gas", "grocery", "home", "goods", "restaurants", "medical", "transportation", "utility", "rent", "miscellaneous & unknown"]
+  },
+  {
+    "name": "stores",
+    "categories": ["Comcast", "Dolcezza", "Exxon", "Gartner", "Google Music", "Giant", "Target", "Town", "Beer & Wine", "Toyota Financial", "Riverside Towers", "Dominion Power", "ASOS", "Uber",
+      "John Smith MD", "Sweet Leaf", "Savings Transfer", "IRA Transfer", "American Express", "ATM Withdrawal", "Starbucks", "Pizza Palace", "Sushi", "Uniqlo"]
+  }
+]

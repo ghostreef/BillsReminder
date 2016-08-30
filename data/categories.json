@@ -1,0 +1,104 @@
+[
+  {
+    "name": "alcohol",
+    "graph": true,
+    "sources": ["Beer & Wine"],
+    "purposes": []
+  },
+  {
+    "name": "car",
+    "graph": true,
+    "sources": ["Toyota Financial"],
+    "purposes": []
+  },
+  {
+    "name": "clothing",
+    "graph": true,
+    "sources": ["ASOS", "Uniqlo"],
+    "purposes": []
+  },
+  {
+    "name": "coffee",
+    "graph": true,
+    "sources": ["Dolcezza", "Starbucks"],
+    "purposes": []
+  },
+  {
+    "name": "entertainment",
+    "graph": true,
+    "sources": ["Google Music", "Town"],
+    "purposes": []
+  },
+  {
+    "name": "expenses",
+    "graph": true,
+    "sources": [],
+    "purposes": ["services rendered", "goods rendered", "credit card payment", "loan payment", "anonymous"]
+  },
+  {
+    "name": "gas",
+    "graph": true,
+    "sources": ["Exxon"],
+    "purposes": []
+  },
+  {
+    "name": "grocery",
+    "graph": true,
+    "sources": ["Giant"],
+    "purposes": []
+  },
+  {
+    "name": "home goods",
+    "graph": true,
+    "sources": ["Target"],
+    "purposes": []
+  },
+  {
+    "name": "income",
+    "graph": true,
+    "sources": [],
+    "purposes": ["income"]
+  },
+  {
+    "name": "restaurants",
+    "graph": true,
+    "sources": ["Sweet Leaf", "Pizza Palace", "Sushi"],
+    "purposes": []
+  },
+  {
+    "name": "transfers",
+    "graph": true,
+    "sources": [],
+    "purposes": ["external transfer", "internal transfer"]
+  },
+  {
+    "name": "medial",
+    "graph": true,
+    "sources": ["John Smith MD"],
+    "purposes": []
+  },
+  {
+    "name": "transportation",
+    "graph": true,
+    "sources": ["Uber"],
+    "purposes": []
+  },
+  {
+    "name": "utility",
+    "graph": true,
+    "sources": ["Comcast", "Dominion Power"],
+    "purposes": []
+  },
+  {
+    "name": "rent",
+    "graph": true,
+    "sources": ["Waterside Towers"],
+    "purposes": []
+  },
+  {
+    "name": "miscellaneous & unknown",
+    "graph": true,
+    "sources": ["American Express", "ATM Withdrawal"],
+    "purposes": []
+  }
+]
