@@ -48,6 +48,12 @@ class PurposesController < ApplicationController
     end
   end
 
+  def delete_all
+    ActiveRecord::Base.connection.execute('DELETE * FROM categories_purposes')
+    ActiveRecord::Base.connection.execute('DELETE * FROM categories_sources')
+    Purpose.delete_all
+  end
+
   def seed
     file = File.read('data/purposes.json')
     data = JSON.parse(file)

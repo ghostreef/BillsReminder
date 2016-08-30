@@ -72,6 +72,12 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def delete_all
+    ActiveRecord::Base.connection.execute('DELETE * FROM categories_purposes')
+    ActiveRecord::Base.connection.execute('DELETE * FROM categories_sources')
+    Category.delete_all
+  end
+
   def seed
     file = File.read('data/categories.json')
     data = JSON.parse(file)

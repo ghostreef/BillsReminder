@@ -46,6 +46,10 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def delete_all
+    Transaction.delete_all
+  end
+
   def import
     # error check
     if params[:file].nil?
