@@ -72,7 +72,7 @@ class TransactionsController < ApplicationController
 
     # error check
     unless params[:file].original_filename =~ /\.csv$/
-      redirect_to transactions_path, notice: 'Invalid format.' and return
+      redirect_to transactions_path, notice: 'Invalid file type.' and return
     end
 
     # to be sure
