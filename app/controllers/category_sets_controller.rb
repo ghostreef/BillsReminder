@@ -41,18 +41,6 @@ class CategorySetsController < ApplicationController
     @pies = [title: @set.name, points: points]
   end
 
-  def seed
-    file = File.read('data/sets.json')
-    data = JSON.parse(file)
-
-    categories = Category.pluck(:name, :id).to_h
-
-    data.each do |datum|
-      category_ids = categories.values_at(*datum['categories'])
-      CategorySet.create(category_set_hash(datum).merge(category_ids: category_ids))
-    end
-  end
-
   private
 
   def find_set
