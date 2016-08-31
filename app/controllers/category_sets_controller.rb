@@ -36,10 +36,6 @@ class CategorySetsController < ApplicationController
     end
   end
 
-  def delete_all
-    CategorySet.delete_all
-  end
-
   def graph
     points = @set.categories.map { |category| { key: category.name, y: category.total.to_f } }
     @pies = [title: @set.name, points: points]
