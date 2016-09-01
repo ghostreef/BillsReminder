@@ -17,13 +17,6 @@
     <div class='flash-error'>There is no enabled parser!</div>
   <% end %>
 
-  <!-- move to before action later -->
-  <%= content_tag(:div, 'A good place to start is by creating some purposes.', class: 'flash-notice') if Purpose.count == 0 %>
-  <%= content_tag(:div, 'Sources show where a transaction originated from, add some under the sources tab.', class: 'flash-notice') if Source.count == 0 %>
-  <%= content_tag(:div, "Looks like you're ready to begin uploading some transactions.", class: 'flash-notice') if Source.count != 0 &&  Purpose.count != 0 %>
-  <%= content_tag(:div, 'Categories help you group your transactions by purpose(s) or source(s) and are useful to see trends in spending. Create some categories under the categories tab.', class: 'flash-notice') if Source.count != 0 &&  Purpose.count != 0 %>
-  <%= content_tag(:div, 'Categories are not always mutually exclusive. Use sets to group your categories into sets.', class: 'flash-notice') if CategorySet.count == 0 && Category.count != 0 %>
-
   <div class="outer-container">
     <%= render 'header' %>
   </div>
