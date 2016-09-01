@@ -9,34 +9,25 @@ class Transaction < ActiveRecord::Base
   validates :date, :raw_description, presence: true
   validates :amount, numericality: true
 
-  after_save :sync_source, if: :source_changed?
-  after_save :touch_category, if: :amount_changed?
-  # after_save :clear_grand_total, if: :amount_changed?
-  # after_create :parse
+  after_save :sync_source, if: :source_changed? # this will sync source when changed (for performance)
+  after_save :touch_category, if: :amount_changed? # this will flush the categories cache
 
-  scope :unknown, -> { where(source: nil) }
+  alias_attribute :transaction_id, :id  # this alias is for sunspot, 'id' is reserved in sunspot
 
-  # we have to create an alias because sunspot uses 'id'
-  alias_attribute :transaction_id, :id
-  
   searchable do
     text :transaction do
       "#{raw_description} #{amount} #{transaction_id}"
     end
   end
 
-  def self.grand_total
-    Rails.cache.fetch(['grand_total']) { Transaction.all.sum(:amount) }
-  end
-
-  # returns the column names a user is allowed to change
   def self.changeable
+    # returns changeable column names
     Transaction.column_names.keep_if { |x| x.scan(/_at\z|_id\z|\Araw_|\Aid\z/).empty? }
   end
 
-  # returns the attributes that are derived from the 3 main required attributes
-  #  date, description, and amount are required for a complete transaction object, maybe not useful
   def self.derivable
+    # an attribute is either given or derived
+    # given attributes are (date, amount, raw_description), everything else is derived
     Transaction.changeable - %w(raw_description date amount)
   end
 
@@ -48,6 +39,8 @@ class Transaction < ActiveRecord::Base
     @date_format = date
   end
 
+  # instead of overriding the setters for date and amount, I decided to add helper methods to do formatting because I
+  # don't want it to be magical
   def self.format_date(date)
     Date.strptime(date, Transaction.date_format) rescue 'invalid date'
   end
@@ -56,60 +49,18 @@ class Transaction < ActiveRecord::Base
     amount.to_s.delete('$').to_f.round(2)
   end
 
-  def guess_source(description=raw_description)
-    result = nil
-    Source.order(popularity: :desc).each do |source|
-      if description =~ /#{source.regex}/i
-        result = source
-        break
-      end
-    end
-
-    result
-  end
-
-  # Feels wrong that guess_purpose relies on guess_source, but purpose comes from source.
-  def guess_purpose
-    # use most recent source guess, if none available make the guess, the guess may still be nil
-    (source || guess_source).try(:default_purpose)
-  end
-
-
-  def split_description(description=raw_description)
-    regexp = Regexp.new(Parser.parser.split_transformation.regex)
-    description.split(regexp).map(&:strip).delete_if(&:empty?)
-  end
-
-  def strip_description(description=raw_description)
-    # x['Purchase'] = '', regex and string, errors on no match
-    # x.slice!('Card'), regex and string, returns removed match
-    # x.gsub('Card', ''), regex and string
-    # x.sub('Card', ''), regex and string
-    # x.delete('Card'), only string
-    # x =~ /Card/, this matches
-    # as you can see there are so many ways to do this
-
-    regex = Parser.parser.strip_transformations.pluck(:regex).map { |r| "(#{r})" }.join('|')
-    # gsub is required to remove multiples
-    description.gsub(/#{regex}/, '')
-  end
-
-  # ATM parse sets source, purpose, and description using the raw_description
-  def parse
-    description = split_description(strip_description)
-
-    source = nil
-    description.each do |chunk|
-      source = guess_source(chunk)
-      break if source.present?
-    end
-    
-    # how do I join with regex
-    update(description: description.join('  '), source: source, purpose: source.try(:default_purpose))
-  end
-
   def absolute_amount
     amount.abs
+  end
+
+  private
+
+  def source_changed?
+    changed.include?('source_id')
+  end
+
+  def amount_changed?
+    changed.include?('amount')
   end
 
   def sync_source
@@ -117,21 +68,7 @@ class Transaction < ActiveRecord::Base
     (Source.find(source_id).increment(:popularity).increment(:total, amount).save) if source_id.present?
   end
 
-  def source_changed?
-    changed.include?('source_id')
-  end
-
   def touch_category
     categories.map(&:touch)
-  end
-
-  def amount_changed?
-    changed.include?('amount')
-  end
-
-  private
-
-  def self.fresh_grand_total
-    Rails.delete(['grand_total'])
   end
 end

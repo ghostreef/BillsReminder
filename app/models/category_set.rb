@@ -2,8 +2,9 @@ class CategorySet < ActiveRecord::Base
   validates :name, presence: true
   has_many :categories
 
+  # does this set include all transactions?
   def inclusive?
-    total == Transaction.grand_total
+    false
   end
 
   def total

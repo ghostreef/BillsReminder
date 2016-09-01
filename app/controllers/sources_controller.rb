@@ -89,7 +89,7 @@ class SourcesController < ApplicationController
 
   # maybe this belongs in transaction controller
   def guess
-    unknown = Transaction.unknown
+    unknown = Transaction.where(source: nil)
 
     splitter = Parser.parser.split_transformation.regex
 
