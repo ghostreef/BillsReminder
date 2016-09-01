@@ -5,14 +5,12 @@ class Transformation < ActiveRecord::Base
 
   has_and_belongs_to_many :parsers
   belongs_to :transformation
+
   alias_attribute :implies, :transformation
 
   before_create :set_default_values
-
   before_save :evaluate_complexity, if: :regex_changed?
-
   after_destroy :clean_join_table
-
   before_destroy :update_parsers
 
   # these give us Transformation.date, Transformation.split...
