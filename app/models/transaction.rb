@@ -1,22 +1,18 @@
 # rails g model Transaction date:date amount:decimal raw_description:string description:string source:references purpose:references
 class Transaction < ActiveRecord::Base
+  DEFAULT_DATE_FORMAT = '%m/%d/%Y'
+
   belongs_to :source
   belongs_to :purpose
-
   has_many :categories, through: :source
 
   validates :date, :raw_description, presence: true
   validates :amount, numericality: true
 
-  DEFAULT_DATE_FORMAT = '%m/%d/%Y'
-
-  # after_create :parse
-
   after_save :sync_source, if: :source_changed?
-
   after_save :touch_category, if: :amount_changed?
-
   # after_save :clear_grand_total, if: :amount_changed?
+  # after_create :parse
 
   scope :unknown, -> { where(source: nil) }
 
