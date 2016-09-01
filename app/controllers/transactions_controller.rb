@@ -7,6 +7,7 @@ class TransactionsController < ApplicationController
     @end_date = params.fetch(:end_date, Date.today)
 
     @transactions = Transaction.where(date: @start_date..@end_date).order(:date)
+    @count = Transaction.count
   end
 
   def search
