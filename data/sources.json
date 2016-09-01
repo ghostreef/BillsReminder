@@ -65,8 +65,8 @@
     "purpose": "services rendered"
   },
   {
-    "name": "Pizza( Palace)?",
-    "regex": "Pizza Palace",
+    "name": "Pizza Palace",
+    "regex": "Pizza( Palace)?",
     "purpose": "goods rendered"
   },
   {

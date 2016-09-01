@@ -96,7 +96,7 @@
     "purposes": []
   },
   {
-    "name": "miscellaneous & unknown",
+    "name": "misc & unknown",
     "graph": true,
     "sources": ["American Express", "ATM Withdrawal"],
     "purposes": []
