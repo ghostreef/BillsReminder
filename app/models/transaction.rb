@@ -1,6 +1,6 @@
 # rails g model Transaction date:date amount:decimal raw_description:string description:string source:references purpose:references
 class Transaction < ActiveRecord::Base
-  DEFAULT_DATE_FORMAT = '%m/%d/%Y'
+  @date_format = '%m/%d/%Y'
 
   belongs_to :source
   belongs_to :purpose
@@ -40,12 +40,12 @@ class Transaction < ActiveRecord::Base
     Transaction.changeable - %w(raw_description date amount)
   end
 
-  # gets the date format
   def self.date_format
-    parser = Parser.parser
+    @date_format
+  end
 
-    # how bad is this coupling?
-    parser.present? && parser.date_transformation.present? ? parser.date_transformation.regex : DEFAULT_DATE_FORMAT
+  def self.date_format=(date)
+    @date_format = date
   end
 
   def self.format_date(date)
