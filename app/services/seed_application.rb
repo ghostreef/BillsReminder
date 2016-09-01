@@ -44,7 +44,7 @@ class SeedApplication
       data.each_with_index do |datum, index|
         date = Transaction.format_date("#{month}/#{index+1}/#{year}")
         amount = Random.rand(50) * 10
-        Transaction.create(date: date, amount: amount, raw_description: datum['name'])
+        Transaction.create(date: date, amount: amount, raw_description: datum['name'], description: Parser.parse_description(datum['name']))
       end
     end
 

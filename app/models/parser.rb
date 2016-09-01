@@ -1,5 +1,5 @@
 class Parser < ActiveRecord::Base
-  validates :name, length: {minimum: 1}
+  validates :name, length: { minimum: 1 }
 
   has_and_belongs_to_many :transformations
 
@@ -18,6 +18,10 @@ class Parser < ActiveRecord::Base
 
   def self.parser
     Parser.find_by_status(Parser.statuses[:enabled])
+  end
+
+  def self.parse_description(description)
+    split_description(strip_description(description)).join('  ')
   end
 
   def strip_transformations
@@ -63,6 +67,25 @@ class Parser < ActiveRecord::Base
   end
 
   private
+
+  def self.strip_description(description)
+    # x['Purchase'] = '', regex and string, errors on no match
+    # x.slice!('Card'), regex and string, returns removed match
+    # x.gsub('Card', ''), regex and string
+    # x.sub('Card', ''), regex and string
+    # x.delete('Card'), only string
+    # x =~ /Card/, this matches
+    # as you can see there are so many ways to do this
+
+    regex = Parser.parser.strip_transformations.pluck(:regex).map { |r| "(#{r})" }.join('|')
+    # gsub is required to remove multiples
+    description.gsub(/#{regex}/, '')
+  end
+
+  def self.split_description(description)
+    regexp = Regexp.new(Parser.parser.split_transformation.regex)
+    description.split(regexp).map(&:strip).delete_if(&:empty?)
+  end
 
   def status_changed?
     changed.include?('status')
