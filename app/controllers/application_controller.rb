@@ -6,4 +6,9 @@ class ApplicationController < ActionController::Base
   def dashboard
 
   end
+
+  def seed
+    s = SeedApplication.new
+    s.obliterate
+  end
 end

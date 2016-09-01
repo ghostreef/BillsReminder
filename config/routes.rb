@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'application#dashboard'
+  get '/seed', to: 'application#seed', as: 'seed'
   get '/dashboard', to: 'application#dashboard', as: 'dashboard'
 
   patch 'bills/paid', to: 'bills#paid', as: 'paid'

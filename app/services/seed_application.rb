@@ -3,15 +3,17 @@ class SeedApplication
 
   end
 
+  # order matters here, delete all doesn't trigger callbacks
+  # destroy_all does trigger callbacks but has to call destroy on each row...pretty slow
   def obliterate
-    ActiveRecord::Base.connection.execute('DELETE * FROM categories_purposes')
-    ActiveRecord::Base.connection.execute('DELETE * FROM categories_sources')
+    ActiveRecord::Base.connection.execute('DELETE FROM categories_purposes')
+    ActiveRecord::Base.connection.execute('DELETE FROM categories_sources')
 
-    CategorySet.delete_all
+    Transaction.delete_all
     Category.delete_all
+    CategorySet.delete_all
     Source.delete_all
     Purpose.delete_all
-    Transaction.delete_all
   end
 
 
