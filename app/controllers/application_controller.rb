@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def seed
     s = SeedApplication.new
     s.obliterate
-    # s.seed
+    s.seed
     redirect_to dashboard_path
   end
 

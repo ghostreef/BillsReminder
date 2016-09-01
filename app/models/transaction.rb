@@ -10,7 +10,7 @@ class Transaction < ActiveRecord::Base
 
   DEFAULT_DATE_FORMAT = '%m/%d/%Y'
 
-  after_create :parse
+  # after_create :parse
 
   after_save :sync_source, if: :source_changed?
 

@@ -21,29 +21,30 @@ class SeedApplication
     file = File.read('data/purposes.json')
     data = JSON.parse(file)
 
-    purposes = data.map do |datum|
+    purposes = data.map { |datum|
       p = Purpose.create(datum)
       [p.name, p.id]
-    end
+    }.to_h
 
 
     file = File.read('data/sources.json')
     data = JSON.parse(file)
 
-    sources = data.map do |datum|
-      datum[:purpose_id] = purposes[datum.delete['purpose']]
+    sources = data.map { |datum|
+      datum[:purpose_id] = purposes[datum.delete('purpose')]
       s = Source.create(datum)
       [s.name, s.id]
-    end
+    }.to_h
 
     month = Date.today.month
     year = Date.today.year
 
-    [(month - 2)..month].each do |month|
+
+    (month - 2).upto(month).each do |month|
       data.each_with_index do |datum, index|
         date = Transaction.format_date("#{month}/#{index+1}/#{year}")
         amount = Random.rand(50) * 10
-        Transaction.create(date: date, amount: amount, raw_description: datum['source'])
+        Transaction.create(date: date, amount: amount, raw_description: datum['name'])
       end
     end
 
@@ -51,7 +52,7 @@ class SeedApplication
     file = File.read('data/categories.json')
     data = JSON.parse(file)
 
-    categories = data.map do |datum|
+    categories = data.map { |datum|
       purpose_ids = purposes.values_at(*datum.delete('purposes'))
       source_ids = sources.values_at(*datum.delete('sources'))
 
@@ -60,7 +61,7 @@ class SeedApplication
 
       c = Category.create(datum)
       [c.name, c.id]
-    end
+    }.to_h
 
     file = File.read('data/sets.json')
     data = JSON.parse(file)
