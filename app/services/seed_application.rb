@@ -1,4 +1,4 @@
-class SeedAppService
+class SeedApplication
   def initialize
 
   end
