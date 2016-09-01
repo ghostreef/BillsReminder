@@ -85,8 +85,8 @@
     "purpose": "goods rendered"
   },
   {
-    "name": "Sweet ?Leaf",
-    "regex": "Sweet Leaf",
+    "name": "Sweet Leaf",
+    "regex": "Sweet ?Leaf",
     "purpose": "goods rendered"
   },
   {
