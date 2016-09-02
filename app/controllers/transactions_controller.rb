@@ -6,7 +6,12 @@ class TransactionsController < ApplicationController
     @start_date = params.fetch(:start_date, Date.today - 1.month)
     @end_date = params.fetch(:end_date, Date.today)
 
-    @transactions = Transaction.where(date: @start_date..@end_date).order(:date)
+    @transactions = if params[:all] == 'true'
+      Transaction.order(:date)
+    else
+      Transaction.where(date: @start_date..@end_date).order(:date)
+    end
+
     @count = Transaction.count
   end
 

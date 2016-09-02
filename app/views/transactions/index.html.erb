@@ -13,6 +13,11 @@
   <div class='whole_column  last_column'>
     <%= render 'date_range', start_date: @start_date, end_date: @end_date %>
 
+    <%= form_tag('', class: 'inline', method: 'get', enforce_utf8: false) do %>
+      <%= hidden_field_tag :all, true %>
+      <%= submit_tag 'Show All', class: 'submit', name: '' %>
+    <% end %>
+
     <%= form_tag(parse_transactions_path(transaction_ids: @transactions.where(source: nil).map(&:id)), class: 'inline') do %>
       <%= submit_tag 'Reparse Unknown' %>
     <% end %>
