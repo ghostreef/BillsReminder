@@ -45,7 +45,8 @@ class SeedApplication
         date = Transaction.format_date("#{month}/#{index+1}/#{year}")
         amount = Random.rand(50) * 10
         description = parser.parse_description(datum['name'])
-        Transaction.create(date: date, amount: amount, raw_description: datum['name'], description: description)
+        source = parser.parse_source(description)
+        Transaction.create(date: date, amount: amount, raw_description: datum['name'], description: description, source: source)
       end
     end
 

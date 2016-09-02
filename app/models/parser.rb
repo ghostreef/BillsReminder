@@ -10,24 +10,27 @@ class Parser < ActiveRecord::Base
   serialize :search_order, JSON
   serialize :expected_order, JSON
 
-  enum status: {
-           enabled: 0,
-           disabled: 1,
-           incomplete: 2
-       }
+  enum status: { enabled: 0, disabled: 1, incomplete: 2 }
 
   def self.parser
     Parser.find_by_status(Parser.statuses[:enabled])
   end
 
-
   def parse_description(description)
-    split_description(strip_description(description)).join(' ')
+    split_description(strip_description(description)).join('  ')
   end
 
+  def parse_source(description)
+    # ugh coupling
+    sources = Source.order(popularity: :desc)
 
-  def transform_transformations
-    transformations.transform
+    sources.each do |source|
+      if description =~ /#{source.regex}/i
+        return source
+      end
+    end
+
+    return nil
   end
 
   def date_transformations
@@ -74,7 +77,7 @@ class Parser < ActiveRecord::Base
   end
 
   def split_description(description)
-    regexp = Regexp.new(transformations.split.regex)
+    regexp = Regexp.new(transformations.split.first.regex)
     description.split(regexp).map(&:strip).delete_if(&:empty?)
   end
 
