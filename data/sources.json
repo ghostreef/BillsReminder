@@ -16,7 +16,7 @@
   },
   {
     "name": "Beer & Wine",
-    "regex": "beer||wine",
+    "regex": "beer|wine",
     "purpose": "goods rendered"
   },
   {
