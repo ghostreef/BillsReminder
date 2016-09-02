@@ -16,3 +16,27 @@
     display: inline-block;
   }
 }
+
+.js-transactions {
+  border-top: 2px solid transparent;
+  &.selected {
+    border-right: 2px solid darkmagenta;
+  }
+}
+
+.js-running_total {
+  border: 2px solid darkmagenta;
+  display: inline-block;
+  padding: .25em;
+
+  position: absolute;
+  left: 102%;
+
+  &:before {
+    content: '$';
+  }
+}
+
+.transactions_table {
+  position: relative;
+}
