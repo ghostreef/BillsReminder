@@ -2,103 +2,341 @@
   {
     "name": "alcohol",
     "graph": true,
-    "sources": ["Beer & Wine"],
+    "sources": [
+      "Beer & Wine"
+    ],
     "purposes": []
   },
   {
     "name": "car",
     "graph": true,
-    "sources": ["Toyota Financial"],
+    "sources": [
+      "Toyota Financial"
+    ],
     "purposes": []
   },
   {
     "name": "clothing",
     "graph": true,
-    "sources": ["ASOS", "Uniqlo"],
+    "sources": [
+      "ASOS",
+      "Uniqlo"
+    ],
     "purposes": []
   },
   {
     "name": "coffee",
     "graph": true,
-    "sources": ["Dolcezza", "Starbucks"],
+    "sources": [
+      "Dolcezza",
+      "Starbucks"
+    ],
     "purposes": []
   },
   {
     "name": "entertainment",
     "graph": true,
-    "sources": ["Google Music", "Town"],
+    "sources": [
+      "Google Music",
+      "Town"
+    ],
     "purposes": []
   },
   {
     "name": "expenses",
     "graph": true,
     "sources": [],
-    "purposes": ["services rendered", "goods rendered", "credit card payment", "loan payment", "anonymous"]
+    "purposes": [
+      "services rendered",
+      "goods rendered",
+      "credit card payment",
+      "loan payment",
+      "anonymous"
+    ]
   },
   {
     "name": "gas",
     "graph": true,
-    "sources": ["Exxon"],
+    "sources": [
+      "Exxon"
+    ],
     "purposes": []
   },
   {
     "name": "grocery",
     "graph": true,
-    "sources": ["Giant"],
+    "sources": [
+      "Giant"
+    ],
     "purposes": []
   },
   {
     "name": "home goods",
     "graph": true,
-    "sources": ["Target"],
+    "sources": [
+      "Target"
+    ],
     "purposes": []
   },
   {
     "name": "income",
     "graph": true,
     "sources": [],
-    "purposes": ["income"]
+    "purposes": [
+      "income"
+    ]
   },
   {
     "name": "restaurants",
     "graph": true,
-    "sources": ["Sweet Leaf", "Pizza Palace", "Sushi"],
+    "sources": [
+      "Sweet Leaf",
+      "Pizza Palace",
+      "Sushi"
+    ],
     "purposes": []
   },
   {
     "name": "transfers",
     "graph": true,
     "sources": [],
-    "purposes": ["external transfer", "internal transfer"]
+    "purposes": [
+      "external transfer",
+      "internal transfer"
+    ]
   },
   {
-    "name": "medial",
+    "name": "medical",
     "graph": true,
-    "sources": ["John Smith MD"],
+    "sources": [
+      "John Smith MD"
+    ],
     "purposes": []
   },
   {
     "name": "transportation",
     "graph": true,
-    "sources": ["Uber"],
+    "sources": [
+      "Uber"
+    ],
     "purposes": []
   },
   {
     "name": "utility",
     "graph": true,
-    "sources": ["Comcast", "Dominion Power"],
+    "sources": [
+      "Comcast",
+      "Dominion Power"
+    ],
     "purposes": []
   },
   {
     "name": "rent",
     "graph": true,
-    "sources": ["Riverside Towers"],
+    "sources": [
+      "Riverside Towers"
+    ],
     "purposes": []
   },
   {
     "name": "misc & unknown",
     "graph": true,
-    "sources": ["American Express", "ATM Withdrawal"],
+    "sources": [
+      "American Express",
+      "ATM Withdrawal"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "American Express",
+    "graph": true,
+    "sources": [
+      "American Express"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "ASOS",
+    "graph": true,
+    "sources": [
+      "ASOS"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "ATM Withdrawal",
+    "graph": true,
+    "sources": [
+      "ATM Withdrawal"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Beer & Wine",
+    "graph": true,
+    "sources": [
+      "Beer & Wine"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Comcast",
+    "graph": true,
+    "sources": [
+      "Comcast"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Dolcezza",
+    "graph": true,
+    "sources": [
+      "Dolcezza"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Dominion Power",
+    "graph": true,
+    "sources": [
+      "Dominion Power"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Exxon",
+    "graph": true,
+    "sources": [
+      "Exxon"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Gartner",
+    "graph": true,
+    "sources": [
+      "Gartner"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Giant",
+    "graph": true,
+    "sources": [
+      "Giant"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Google Music",
+    "graph": true,
+    "sources": [
+      "Google Music"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "IRA Transfer",
+    "graph": true,
+    "sources": [
+      "IRA Transfer"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "John Smith MD",
+    "graph": true,
+    "sources": [
+      "John Smith MD"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Pizza Palace",
+    "graph": true,
+    "sources": [
+      "Pizza Palace"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Riverside Towers",
+    "graph": true,
+    "sources": [
+      "Riverside Towers"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Savings Transfer",
+    "graph": true,
+    "sources": [
+      "Savings Transfer"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Starbucks",
+    "graph": true,
+    "sources": [
+      "Starbucks"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Sushi",
+    "graph": true,
+    "sources": [
+      "Sushi"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Sweet Leaf",
+    "graph": true,
+    "sources": [
+      "Sweet Leaf"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Target",
+    "graph": true,
+    "sources": [
+      "Target"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Town",
+    "graph": true,
+    "sources": [
+      "Town"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Toyota Financial",
+    "graph": true,
+    "sources": [
+      "Toyota Financial"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Uber",
+    "graph": true,
+    "sources": [
+      "Uber"
+    ],
+    "purposes": []
+  },
+  {
+    "name": "Uniqlo",
+    "graph": true,
+    "sources": [
+      "Uniqlo"
+    ],
     "purposes": []
   }
 ]

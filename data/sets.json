@@ -9,7 +9,7 @@
   },
   {
     "name": "traditional",
-    "categories": ["alcohol", "car", "clothing", "coffee", "entertainment", "gas", "grocery", "home", "goods", "restaurants", "medical", "transportation", "utility", "rent", "miscellaneous & unknown"]
+    "categories": ["alcohol", "car", "clothing", "coffee", "entertainment", "gas", "grocery", "home goods", "restaurants", "medical", "transportation", "utility", "rent", "misc & unknown"]
   },
   {
     "name": "stores",
