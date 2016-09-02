@@ -4,7 +4,6 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.order(:name)
-    @pies = [{ points: @categories.map { |category| {key: category.name, y: category.total.abs.to_f} } }]
   end
 
   def show
