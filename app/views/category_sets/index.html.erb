@@ -1,4 +1,20 @@
-<%= link_to 'New Set', new_category_set_path, class: 'link' %>
+<% grand_total =  Transaction.all.sum(:amount) %>
+
+<% @sets.each do |set| next if set.categories.empty? %>
+  <%= set.sources.pluck(:name) %>
+  <%= set.purposes.pluck(:name) %>
+
+  <%= set.missing.pluck(:description) %>
+  <% total = set.categories.inject(0){|sum,x| sum + x.cached_total } %>
+
+  <fieldset class='set <%= ('complete' if grand_total == total ) %>'>
+    <legend><%= set.name %> <%= number_to_currency total %> </legend>
+    <%= render 'categories/categories', categories: set.categories %>
+  </fieldset>
+<% end %>
+
+
+
 
 <table>
   <thead>

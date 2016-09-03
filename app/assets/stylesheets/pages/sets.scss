@@ -1,0 +1,16 @@
+.set {
+  border: 1px solid crimson;
+  margin-bottom: 1em;
+
+  legend {
+    color: crimson;
+  }
+
+  &.complete {
+    border-color: green;
+    
+    legend {
+      color: green;
+    }
+  }
+}
