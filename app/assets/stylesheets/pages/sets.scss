@@ -4,6 +4,9 @@
 
   legend {
     color: crimson;
+    .taiga {
+      vertical-align: inherit;
+    }
   }
 
   &.complete {
