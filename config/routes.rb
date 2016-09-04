@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :category_sets do
     member do
       get 'graph'
+      get 'missing'
     end
   end
 

@@ -47,7 +47,7 @@ class Category < ActiveRecord::Base
     touch if persisted?
   end
 
-  # by default all categories should be graph able
+  # by default all categories should be graphable
   def set_default_values
     self.graph ||= '1'
   end

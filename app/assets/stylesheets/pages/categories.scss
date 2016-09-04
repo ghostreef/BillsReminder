@@ -8,6 +8,10 @@
     margin-bottom: .5em;
     margin-right: .5em;
 
+    &.missing {
+      background-color: #bfddef;
+    }
+
     .actions_container {
       position: absolute;
       top: 0;
