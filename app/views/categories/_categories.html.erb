@@ -15,7 +15,22 @@
           <%= link_to('j', category_path(category), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
         </div>
       </div>
-
     </li>
+  <% end %>
+
+  <% if fake_category.present? %>
+  <li class='missing'>
+    <p><%= fake_category.name %></p>
+
+    <p><%= number_to_currency(fake_category.transactions.sum(:amount)) %></p>
+
+    <div class='overlay'></div>
+
+    <div class='actions_container'>
+      <div class='actions'>
+        <%= link_to('u', missing_category_set_path(set), class: 'taiga', remote: true) %>
+      </div>
+    </div>
+  </li>
   <% end %>
 </ul>

@@ -10,6 +10,8 @@
       <%= link_to('h', edit_category_set_path(set), class: 'taiga') %>
       <%= link_to('j', category_set_path(set), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
     </legend>
-    <%= render 'categories/categories', categories: set.categories %>
+
+    <% fake_category = set.missing.present? ? Category.new(name: 'missing', transactions: set.missing) : nil %>
+    <%= render 'categories/categories', categories: set.categories, fake_category: fake_category, set: set %>
   </fieldset>
 <% end %>
