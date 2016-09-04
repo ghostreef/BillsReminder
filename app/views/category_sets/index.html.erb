@@ -8,7 +8,7 @@
 
   <% total = set.categories.inject(0){|sum,x| sum + x.cached_total } %>
 
-  <fieldset class='set <%= ('complete' if grand_total == total ) %>'>
+  <fieldset class='set <%= ('complete' if grand_total == total ) %> <%= "js-set_#{set.id}" %>'>
     <legend>
       <%= set.name %> <%= number_to_currency total %>
       <%= link_to('E', graph_category_set_path(set), class: 'taiga') %>
