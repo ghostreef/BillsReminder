@@ -6,7 +6,7 @@ class CategorySet < ActiveRecord::Base
   has_many :purposes, through: :categories
 
   # does this set include all transactions?
-  def inclusive?
+  def complete?
     false
   end
 
@@ -18,22 +18,14 @@ class CategorySet < ActiveRecord::Base
   def missing
     source_ids = sources.pluck(:id)
     purpose_ids = purposes.pluck(:id)
+    # if a set is a collection of sources and purposes (through categories), any transaction without that source AND purpose
+    # is not included in this set
     Transaction.where.not(source_id: source_ids, purpose_id: purpose_ids)
   end
 
-
   def overlap
-    return [] if sources.empty? || purposes.empty?
-
-    # a set is really a collection of sources and purposes (through categories)
-    # if there are repeats or if source implies a purpose or a purpose implies a source
-    # then somewhere a transaction is being counted more than once
-    source_names = sources.pluck(:name) + purposes.map {|p| p.source.name}
-    purpose_names = purposes.pluck(:name) + sources.map {|s| s.purpose.name}
-
-    duplicate_sources = source_names - Set.new(source_names)
-    duplicate_purposes = purpose_names - Set.new(purpose_names)
-    
-    duplicate_sources + duplicate_purposes
+    # this is kinda brute force
+    transaction_ids = categories.map { |category| category.transactions.pluck(:id) }.flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
+    Transaction.find(transaction_ids)
   end
 end
