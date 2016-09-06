@@ -1,5 +1,18 @@
-<%= simple_form_for @set do |f| %>
-  <%= f.input :name %>
-  <%= f.association :categories, as: :check_boxes %>
-  <%= f.button :submit %>
+<%= form_for @set do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <div>
+    <%= f.label :categories %>
+    <p>Categories highlighted in purple have already been assigned a set, selecting it will re-assign it to this set.</p>
+    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b| %>
+      <div class='<%= 'assigned' if b.object.category_set_id %>'><%= b.check_box %> <%= b.label(class: 'inline-block') %></div>
+    <% end %>
+  </div>
+
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>
