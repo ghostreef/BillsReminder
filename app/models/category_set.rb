@@ -5,6 +5,8 @@ class CategorySet < ActiveRecord::Base
   has_many :sources, through: :categories
   has_many :purposes, through: :categories
 
+  before_destroy :clear_associations
+
   # does this set include all transactions?
   def complete?
     false
@@ -27,5 +29,12 @@ class CategorySet < ActiveRecord::Base
     # this is kinda brute force
     transaction_ids = categories.map { |category| category.transactions.pluck(:id) }.flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
     Transaction.find(transaction_ids)
+  end
+
+  private
+
+  # isn't there a way to do this in rails?
+  def clear_associations
+    self.categories = []
   end
 end
