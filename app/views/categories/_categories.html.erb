@@ -18,7 +18,7 @@
     </li>
   <% end %>
 
-  <% if defined? fake_category %>
+  <% if defined?(fake_category) && fake_category.present? %>
   <li class='missing'>
     <p><%= fake_category.name %></p>
 
