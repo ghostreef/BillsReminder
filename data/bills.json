@@ -1,0 +1,56 @@
+[
+  {
+    "description": "Whatever",
+    "paid": false,
+    "auto_pay": false,
+    "term_unit": "months",
+    "term_number": 1,
+    "final_bill": null,
+    "link": "http://www.whatever.com"
+  },
+  {
+    "description": "Rent",
+    "paid": true,
+    "auto_pay": false,
+    "term_unit": "months",
+    "term_number": 1,
+    "final_bill": null,
+    "link": "http://www.google.com"
+  },
+  {
+    "description": "Internet",
+    "paid": false,
+    "auto_pay": false,
+    "term_unit": "months",
+    "term_number": 1,
+    "final_bill": null,
+    "link": "http://www.amazon.com"
+  },
+  {
+    "description": "Groceries",
+    "paid": false,
+    "auto_pay": false,
+    "term_unit": "weeks",
+    "term_number": 2,
+    "final_bill": null,
+    "link": "http://www.hellofresh.com"
+  },
+  {
+    "description": "Dry Cleaners",
+    "paid": false,
+    "auto_pay": true,
+    "term_unit": "days",
+    "term_number": 3,
+    "final_bill": null,
+    "link": "http://www.321zips.com/"
+  },
+  {
+    "description": "Website Hosting",
+    "paid": false,
+    "auto_pay": false,
+    "term_unit": "years",
+    "term_number": 1,
+    "final_bill": null,
+    "link": "http://www.digitalocean.com"
+  }
+]

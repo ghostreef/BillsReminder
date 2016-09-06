@@ -9,6 +9,7 @@ class SeedApplication
     ActiveRecord::Base.connection.execute('DELETE FROM categories_purposes')
     ActiveRecord::Base.connection.execute('DELETE FROM categories_sources')
 
+    Bill.delete_all
     Transaction.delete_all
     Category.delete_all
     CategorySet.delete_all
@@ -18,6 +19,15 @@ class SeedApplication
 
 
   def seed
+    file = File.read('data/bills.json')
+    data = JSON.parse(file)
+    
+    data.each_with_index do |datum, index|
+      datum[:amount] = Random.rand(50)
+      datum[:due_date] = (Date.today - 1.week) + index.week
+      Bill.new(datum).save(validate: false)
+    end
+
     file = File.read('data/purposes.json')
     data = JSON.parse(file)
 

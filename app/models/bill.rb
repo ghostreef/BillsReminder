@@ -24,7 +24,7 @@ class Bill < ActiveRecord::Base
   # if there is no source given, then description is required
   # source cannot be required because it may not be possible to derive it
   def description_or_source_required
-    if source.nil?
+    if source.nil? && description.nil?
       errors.add(:description, 'is required if source is not provided')
     end
   end
