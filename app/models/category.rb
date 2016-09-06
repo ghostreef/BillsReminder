@@ -29,8 +29,12 @@ class Category < ActiveRecord::Base
     transactions.select('abs(sum(amount)) as total, year(date) as year, month(date) as month').group('year, month')
   end
 
-  def total
-    transactions.sum(:amount)
+  def total(start_date=nil,end_date=nil)
+    if start_date.present? and end_date.present?
+      transactions.where(date: start_date..end_date).sum(:amount)
+    else
+      transactions.sum(:amount)
+    end
   end
 
   # using rails cache to cache total, note the association callbacks, compare and contrast this with source total

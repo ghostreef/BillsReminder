@@ -39,27 +39,28 @@ class CategorySetsController < ApplicationController
   def graph
     # points = @set.categories.map { |category| { key: category.name, y: category.total.to_f } }
     # @pies = [title: @set.name, points: points]
+
     # TODO refactor, sql doesn't work on purposes
     @pies = []
 
     (0..2).step(1) do |num|
       date = Date.today - num.months
 
-      data = Transaction.joins(:categories).where(categories: {id: @set.categories.pluck(:id)})
-                 .group('categories.name').select('categories.name as name, abs(sum(transactions.amount)) as total')
+      # data = Transaction.where(date: date.beginning_of_month..date.end_of_month).joins(:categories).where(categories: {id: @set.categories.pluck(:id)})
+      #            .group('categories.name').select('categories.name as name, abs(sum(transactions.amount)) as total')
+      #
+      #
+      #
+      # raise data.inspect
 
-
+      data = @set.categories.map do |category|
+        {key: category.name, y: category.total(date.beginning_of_month, date.end_of_month).to_f}
+      end
 
       title = "#{I18n.t("date.abbr_month_names")[date.month]} #{date.year}"
 
-      @pies << {title: title, points: data.map { |point| { key: point.name, y: point.total.to_f } }}
+      @pies << {title: title, points: data }
     end
-  end
-
-  def graph_date
-    @set = CategorySet.find(params[:id].to_i)
-
-
   end
 
   def missing
