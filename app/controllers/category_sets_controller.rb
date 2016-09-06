@@ -83,7 +83,7 @@ class CategorySetsController < ApplicationController
   end
 
   def category_set_params
-    category_set_hash.require(:category_set)
+    category_set_hash(params.require(:category_set))
   end
 
   def category_set_hash(hash)
