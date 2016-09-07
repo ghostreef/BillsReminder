@@ -1,6 +1,6 @@
 class CategorySetsController < ApplicationController
 
-  before_action :find_set, only: [:show, :edit, :update, :destroy, :graph, :missing]
+  before_action :find_set, only: [:show, :edit, :update, :destroy, :graph, :transactions]
 
   def index
     @sets = CategorySet.order(:name)
@@ -63,8 +63,16 @@ class CategorySetsController < ApplicationController
     end
   end
 
-  def missing
-    @transactions = @set.missing
+  # don't lke this, fix later, should be in transactions controller, should avoid trees
+  def transactions
+    case params[:name]
+      when 'missing'
+        @transactions = @set.missing
+      when 'overlap'
+        @transactions = @set.overlap
+      else
+        @transactions = []
+    end
 
     respond_to do |format|
       format.js
