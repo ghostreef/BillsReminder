@@ -22,7 +22,10 @@ class CategorySet < ActiveRecord::Base
     purpose_ids = purposes.pluck(:id)
     # if a set is a collection of sources and purposes (through categories), any transaction without that source AND purpose
     # is not included in this set
-    Transaction.where.not(source_id: source_ids, purpose_id: purpose_ids)
+
+    # Transaction.where.not(source_id: source_ids, purpose_id: purpose_ids).where{(source_id.eq nil) | (purpose_id.eq nil)}
+    
+    Transaction.where{ ((source_id.eq nil) | (purpose_id.eq nil)) | ((source_id.not_in source_ids) & (purpose_id.not_in purpose_ids))}
   end
 
   def overlapping_transactions
