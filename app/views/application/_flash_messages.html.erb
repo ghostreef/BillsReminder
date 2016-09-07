@@ -1,5 +1,5 @@
 <!-- all or list -->
-<% flash.each do |key, value| %>
+<% flash.each do |key, value| next if Array(value).empty? %>
   <%= content_tag(:div, class: "flash-#{key.singularize}") do %>
     <% Array(value).each do |msg| %>
       <div><%= msg %></div>
