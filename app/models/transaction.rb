@@ -51,7 +51,7 @@ class Transaction < ActiveRecord::Base
 
   # add caching here
   def self.grand_total
-    Transaction.all.sum(:amount)
+    Transaction.all.inject(0) { |sum, p| sum + p.absolute_amount }
   end
 
   def absolute_amount

@@ -35,9 +35,9 @@ class Category < ActiveRecord::Base
 
   def total(start_date=nil,end_date=nil)
     if start_date.present? and end_date.present?
-      transactions.where(date: start_date..end_date).sum(:amount)
+      transactions.where(date: start_date..end_date).inject(0) { |sum, p| sum + p.absolute_amount }
     else
-      transactions.sum(:amount)
+      transactions.inject(0) { |sum, p| sum + p.absolute_amount }
     end
   end
 
