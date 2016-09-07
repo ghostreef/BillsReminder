@@ -49,6 +49,11 @@ class Transaction < ActiveRecord::Base
     amount.to_s.delete('$').to_f.round(2)
   end
 
+  # add caching here
+  def self.grand_total
+    Transaction.all.sum(:amount)
+  end
+
   def absolute_amount
     amount.abs
   end

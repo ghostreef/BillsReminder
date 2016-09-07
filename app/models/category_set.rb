@@ -9,12 +9,12 @@ class CategorySet < ActiveRecord::Base
 
   # does this set include all transactions?
   def complete?
-    false
+    total == Transaction.grand_total
   end
 
   def total
     # call flatten so we can use enumerable::sum, total is a virtual attribute
-    categories.flatten.sum(&:total)
+    categories.flatten.sum(&:cached_total)
   end
 
   def missing
