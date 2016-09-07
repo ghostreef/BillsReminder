@@ -4,6 +4,7 @@ class CategorySetsController < ApplicationController
 
   def index
     @sets = CategorySet.order(:name)
+    flash[:notice] = "Transaction Grand Total: $#{Transaction.grand_total}"
   end
 
   def show
