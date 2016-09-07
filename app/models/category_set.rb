@@ -17,7 +17,7 @@ class CategorySet < ActiveRecord::Base
     categories.flatten.sum(&:cached_total)
   end
 
-  def missing
+  def missing_transactions
     source_ids = sources.pluck(:id)
     purpose_ids = purposes.pluck(:id)
     # if a set is a collection of sources and purposes (through categories), any transaction without that source AND purpose
@@ -25,7 +25,7 @@ class CategorySet < ActiveRecord::Base
     Transaction.where.not(source_id: source_ids, purpose_id: purpose_ids)
   end
 
-  def overlap
+  def overlapping_transactions
     # this is kinda brute force
     transaction_ids = categories.map { |category| category.transactions.pluck(:id) }.flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
     Transaction.find(transaction_ids)
@@ -41,6 +41,14 @@ class CategorySet < ActiveRecord::Base
   def overlapping_purposes
     purposes = categories.map(&:purposes).flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
     purposes.map { |purpose| [purpose.id, purpose.name] }.to_h
+  end
+
+  def missing_category
+    Category.new(name: 'missing', transactions: missing_transactions)
+  end
+
+  def overlapping_category
+    Category.new(name: 'overlapping', transactions: overlapping_transactions)
   end
 
   private

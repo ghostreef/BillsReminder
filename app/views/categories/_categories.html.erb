@@ -1,6 +1,19 @@
+<% locals ||= {} %>
+<% missing_category = locals.fetch(:missing_category, nil) %>
+<% overlapping_category = locals.fetch(:overlapping_category, nil) %>
+
+
+<% if defined?(set) &&  set.present? %>
+  <% sources = set.overlapping_sources.keys %>
+  <% purposes = set.overlapping_purposes.keys %>
+ <% else %>
+  <% sources = [] %>
+  <% purposes = [] %>
+  <% end %>
+
 <ul class='categories_list'>
   <% categories.each do |category| %>
-    <li>
+    <li class='<%#= 'conflicting' if (sources & category.sources.pluck(:id)).any? || (purposes & category.purposes.pluck(:id)).any? %>'>
       <p><%= category.name %></p>
 
       <p><%= number_to_currency(category.cached_total) %></p>
@@ -18,19 +31,34 @@
     </li>
   <% end %>
 
-  <% if defined?(fake_category) && fake_category.present? %>
-  <li class='missing'>
-    <p><%= fake_category.name %></p>
+  <% if missing_category && !missing_category.transactions.empty? %>
+    <li class='missing'>
+      <p><%= missing_category.name %></p>
+      <p><%= number_to_currency(missing_category.transactions.sum(:amount)) %></p>
 
-    <p><%= number_to_currency(fake_category.transactions.sum(:amount)) %></p>
+      <div class='overlay'></div>
 
-    <div class='overlay'></div>
-
-    <div class='actions_container'>
-      <div class='actions'>
-        <%= link_to('u', transactions_category_set_path(set, name: 'missing'), class: 'taiga', remote: true) %>
+      <div class='actions_container'>
+        <div class='actions'>
+          <%= link_to('u', transactions_category_set_path(categories.first.category_set, name: 'missing'), class: 'taiga', remote: true) %>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   <% end %>
+
+  <% if overlapping_category && !overlapping_category.transactions.empty? %>
+    <li class='missing'>
+      <p><%= overlapping_category.name %></p>
+      <p><%= number_to_currency(overlapping_category.transactions.sum(&:amount)) %></p>
+
+      <div class='overlay'></div>
+
+      <div class='actions_container'>
+        <div class='actions'>
+          <%= link_to('u', transactions_category_set_path(categories.first.category_set, name: 'overlapping'), class: 'taiga', remote: true) %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+
 </ul>
