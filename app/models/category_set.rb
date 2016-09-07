@@ -31,6 +31,18 @@ class CategorySet < ActiveRecord::Base
     Transaction.find(transaction_ids)
   end
 
+  # shallow check
+  def overlapping_sources
+    sources = categories.map(&:sources).flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
+    sources.map { |source| [source.id, source.name] }.to_h
+  end
+
+  # shallow check
+  def overlapping_purposes
+    purposes = categories.map(&:purposes).flatten.group_by{ |e| e }.select { |k, v| v.size > 1 }.keys
+    purposes.map { |purpose| [purpose.id, purpose.name] }.to_h
+  end
+
   private
 
   # isn't there a way to do this in rails?
