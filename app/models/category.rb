@@ -10,6 +10,10 @@ class Category < ActiveRecord::Base
 
   before_create :set_default_values
 
+  def self.clear_cache
+    Rails.cache.delete_matched(/category-total/)
+  end
+
   def transactions
     if id.present?
       s_ids = sources.pluck(:id)
@@ -41,7 +45,7 @@ class Category < ActiveRecord::Base
   # any time a source or purpose is added or removed from a category, the cache must be cleared
   # any time a transaction that is associated to this category is changed, the cache must be cleared
   def cached_total
-    Rails.cache.fetch([self, 'total']) { transactions.sum(:amount) }
+    Rails.cache.fetch([self, 'category-total']) { transactions.inject(0) { |sum, p| sum + p.absolute_amount } }
   end
 
   private
