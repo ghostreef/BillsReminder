@@ -68,6 +68,8 @@ class TransactionsController < ApplicationController
     flash[:success] = flash[:error] = 0
     flash[:errors] = []
 
+    parser = Parser.parser
+
     # begin parsing file
     require 'CSV'
     CSV.foreach(params[:file].tempfile, headers: true) do |row|
@@ -79,7 +81,15 @@ class TransactionsController < ApplicationController
       # the problem with this is that the headers are the keys, and the keys may change
       date = Transaction.format_date(row_hash['Date'])
       amount = Transaction.format_amount(row_hash['Amount'])
-      transaction = Transaction.new(date: date, amount: amount, raw_description: row_hash['Description'])
+
+      description = parser.parse_description(row_hash['Description'])
+      source = parser.parse_source(description)
+      purpose = source.nil? ? nil: source.purpose
+
+
+      transaction = Transaction.new(date: date, amount: amount, raw_description: row_hash['Description'], description: description, source: source, purpose: purpose)
+
+
 
       if transaction.save
         flash[:success] += 1
@@ -100,6 +110,9 @@ class TransactionsController < ApplicationController
     if params[:all] == 'true'
       transactions = Transaction.all
       message = 'Re-parsed all transactions.'
+    elsif params[:all] == 'unknown'
+      transactions = @transactions = Transaction.where{(source_id.eq nil) | (purpose_id.eq nil)}
+      message = 'Re-parsed unknown transactions.'
     else
       # sanitize input
       ids = params[:transaction_ids].map {|id| id.to_i}
@@ -108,7 +121,11 @@ class TransactionsController < ApplicationController
     end
 
     transactions.each do |transaction|
-      transaction.parse
+      parser = Parser.parser
+
+      source = parser.parse_source(transaction.description)
+      purpose = source.nil? ? nil: source.purpose
+      transaction.update(source: source, purpose: purpose)
     end
 
     redirect_to transactions_path, notice: message

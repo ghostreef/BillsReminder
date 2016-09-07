@@ -18,7 +18,7 @@
       <%= submit_tag 'Show All', class: 'submit', name: '' %>
     <% end %>
 
-    <%= form_tag(parse_transactions_path(transaction_ids: @transactions.where(source: nil).map(&:id)), class: 'inline') do %>
+    <%= form_tag(parse_transactions_path(all: 'unknown'), class: 'inline') do %>
       <%= submit_tag 'Reparse Unknown' %>
     <% end %>
 
