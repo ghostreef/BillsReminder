@@ -30,8 +30,8 @@
 
 <script>
   $('.js-transactions').click(function() {
-    var amount = parseFloat($('.js-amount', this).html().replace('$', ''));
-    var current = parseFloat($('.js-running_total').html().replace('$', '')) || 0;
+    var amount = parseFloat($('.js-amount', this).html().replace(/,|\$/g, ''));
+    var current = parseFloat($('.js-running_total').html().replace(/,|\$/g, '')) || 0;
     var total = $(this).hasClass('selected') ? current - amount : current + amount;
 
     $(this).toggleClass('selected');
