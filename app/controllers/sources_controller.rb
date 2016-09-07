@@ -126,7 +126,7 @@ class SourcesController < ApplicationController
   end
 
   def source_params
-    source_hash.require(:source)
+    source_hash(params.require(:source))
   end
 
   def source_hash(hash)
