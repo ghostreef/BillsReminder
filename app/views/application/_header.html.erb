@@ -37,7 +37,11 @@
           <li><%= link_to 'New Source', new_source_path %></li>
         </ul>
       </li>
-      <li><%= active_link_to 'Purposes', purposes_path %></li>
+      <li class='more'><%= active_link_to 'Purposes', purposes_path %>
+        <ul>
+          <li><%= link_to 'Monthly Breakdown', breakdown_purposes_path %></li>
+        </ul>
+      </li>
       <li class='more'><%= active_link_to 'Transformations', transformations_path %>
         <ul>
           <li><%= link_to 'New Transformation', new_transformation_path %></li>

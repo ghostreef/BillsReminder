@@ -13,6 +13,10 @@ class Purpose < ActiveRecord::Base
   has_many :transactions
   has_and_belongs_to_many :categories
 
+  def self.default_purpose
+    Purpose.where(default: true).first
+  end
+
   def custom_error_messages
     errors.map do |attribute, error|
       "#{attribute} '#{send(attribute)}' #{error}."

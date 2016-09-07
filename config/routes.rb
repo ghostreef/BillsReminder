@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :purposes, except: [:show, :new] do
     collection do
       post 'create_many'
+      get 'breakdown'
     end
   end
 
