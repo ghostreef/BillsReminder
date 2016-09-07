@@ -7,6 +7,8 @@
       <%= link_to('j', category_set_path(set), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
     </legend>
 
-    <%= render 'categories/categories', categories: set.categories, locals: {missing_category: set.missing_category, overlapping_category: set.overlapping_category} %>
+    <%= render 'categories/categories', categories: set.categories,
+               locals: {missing_category: set.missing_category, overlapping_category: set.overlapping_category,
+                        overlapping_sources: set.overlapping_sources.keys, overlapping_purposes: set.overlapping_purposes.keys} %>
   </fieldset>
 <% end %>

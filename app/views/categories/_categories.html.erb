@@ -1,19 +1,12 @@
 <% locals ||= {} %>
 <% missing_category = locals.fetch(:missing_category, nil) %>
 <% overlapping_category = locals.fetch(:overlapping_category, nil) %>
-
-
-<% if defined?(set) &&  set.present? %>
-  <% sources = set.overlapping_sources.keys %>
-  <% purposes = set.overlapping_purposes.keys %>
- <% else %>
-  <% sources = [] %>
-  <% purposes = [] %>
-  <% end %>
+<% overlapping_sources = locals.fetch(:overlapping_sources, []) %>
+<% overlapping_purposes = locals.fetch(:overlapping_purposes, []) %>
 
 <ul class='categories_list'>
   <% categories.each do |category| %>
-    <li class='<%#= 'conflicting' if (sources & category.sources.pluck(:id)).any? || (purposes & category.purposes.pluck(:id)).any? %>'>
+    <li class='<%= 'conflicting' if (overlapping_sources & category.sources.pluck(:id)).any? || (overlapping_purposes & category.purposes.pluck(:id)).any? %>'>
       <p><%= category.name %></p>
 
       <p><%= number_to_currency(category.cached_total) %></p>
