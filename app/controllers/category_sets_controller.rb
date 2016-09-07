@@ -69,7 +69,7 @@ class CategorySetsController < ApplicationController
       when 'missing'
         @transactions = @set.missing_transactions
       when 'overlapping'
-        @transactions = @set.overlap_transactions
+        @transactions = @set.overlapping_transactions
       else
         @transactions = []
     end
