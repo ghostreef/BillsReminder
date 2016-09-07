@@ -67,9 +67,9 @@ class CategorySetsController < ApplicationController
   def transactions
     case params[:name]
       when 'missing'
-        @transactions = @set.missing
-      when 'overlap'
-        @transactions = @set.overlap
+        @transactions = @set.missing_transactions
+      when 'overlapping'
+        @transactions = @set.overlap_transactions
       else
         @transactions = []
     end
