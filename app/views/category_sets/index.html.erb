@@ -1,7 +1,7 @@
 <% @sets.each do |set| next if set.categories.empty? %>
   <fieldset class='set <%= ('complete' if set.complete?) %> <%= "js-set_#{set.id}" %>'>
     <legend>
-      <%= set.name %> <%= number_to_currency total %>
+      <%= set.name %> <%= number_to_currency set.total %>
       <%= link_to('E', graph_category_set_path(set), class: 'taiga') %>
       <%= link_to('h', edit_category_set_path(set), class: 'taiga') %>
       <%= link_to('j', category_set_path(set), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
