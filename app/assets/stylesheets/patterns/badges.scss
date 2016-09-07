@@ -36,6 +36,7 @@
 .badge_list {
   li {
     @extend .green_badge;
+    min-width: 19.5em;
 
     &.disabled {
       @extend .blue_badge

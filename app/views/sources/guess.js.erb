@@ -1,5 +1,5 @@
 <% @guesses.each do |guess| %>
   $('.js-add_fieldset').click();
   $('.js-regex:last').val('<%= guess %>');
-  $('.js-purpose:last').val(5);
+  $('.js-purpose:last').val(<%= Purpose.default_purpose.id %>);
 <% end %>

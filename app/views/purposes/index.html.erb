@@ -26,11 +26,17 @@
   <ul class='badge_list'>
     <% @purposes.each do |purpose| %>
       <li>
-        <%= form_for purpose, remote: true, html: {class: "js-purpose_form js-purpose_form_#{purpose.id} edit_purpose"} do |f| %>
+        <%= form_for purpose, remote: true, html: {class: "js-purpose_form js-purpose_form_#{purpose.id} edit_purpose_form"} do |f| %>
           <%= f.text_field :name, disabled: true, class: 'js-input purpose_name' %>
           <%= f.submit 'F', class: 'taiga default hide js-submit' %>
         <% end %>
         <div class='actions'>
+          <% unless purpose.default %>
+            <%= form_for purpose, html: {class: 'inline'} do |f| %>
+              <%= f.hidden_field :default, value: true %>
+              <%= f.submit 'r', class: 'taiga default' %>
+            <% end %>
+          <% end %>
           <%= link_to('h', '#', remote: true, class: "js-edit_purpose js-edit_purpose_form_#{purpose.id} taiga", data: {id: purpose.id}) %>
           <%= link_to('j', purpose_path(purpose), method: :delete, data: {confirm: 'Are you sure?'}, class: 'taiga') %>
         </div>

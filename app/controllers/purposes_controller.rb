@@ -35,7 +35,7 @@ class PurposesController < ApplicationController
     # do @purposes.errors.empty? ? redirect_to purposes_path : render 'edit' end
     respond_to do |format|
       format.json { render json: response }
-      format.html
+      format.html { redirect_to purposes_path }
     end
   end
   
@@ -63,6 +63,6 @@ class PurposesController < ApplicationController
   end
 
   def purpose_hash(hash)
-    hash.permit(:name)
+    hash.permit(:name, :default)
   end
 end
