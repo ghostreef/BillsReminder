@@ -40,7 +40,7 @@
   <% end %>
 
   <% if overlapping_category && !overlapping_category.transactions.empty? %>
-    <li class='missing'>
+    <li class='overlapping'>
       <p><%= overlapping_category.name %></p>
       <p><%= number_to_currency(overlapping_category.transactions.sum(&:amount)) %></p>
 

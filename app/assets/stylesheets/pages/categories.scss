@@ -13,7 +13,11 @@
     }
 
     &.conflicting {
-      background-color: #fff6bf;
+      background-image: repeating-linear-gradient(-45deg,#fff6bf,#fff6bf 10px, #e1eccb 10px, #e1eccb 20px);
+    }
+
+    &.overlapping {
+      background-color: #fbe3e4;
     }
 
     .actions_container {
