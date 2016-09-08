@@ -60,6 +60,8 @@ class PurposesController < ApplicationController
 
       @pies << {title: title, points: data_to_pie_graph(data)}
     end
+
+    render 'graphs/breakdown'
   end
 
   private

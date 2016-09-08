@@ -148,6 +148,7 @@ class TransactionsController < ApplicationController
       @pies << {title: title, points: data_to_pie_graph(data)}
     end
 
+    render 'graphs/breakdown'
   end
 
   def unknown
