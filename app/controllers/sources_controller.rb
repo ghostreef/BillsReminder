@@ -95,7 +95,7 @@ class SourcesController < ApplicationController
 
     @guesses = unknown.map { |u|
       u.description.split(/#{splitter}/).first
-    }.uniq
+    }.uniq.sort
 
     respond_to do |format|
       format.js
