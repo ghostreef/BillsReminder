@@ -71,6 +71,10 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def clear_cache
+    Category.clear_cache
+  end
+
   private
 
   def find_category

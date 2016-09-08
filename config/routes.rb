@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :categories do
     collection do
       get 'trends'
+      get 'clear_cache'
     end
     member do
       get 'graph'
