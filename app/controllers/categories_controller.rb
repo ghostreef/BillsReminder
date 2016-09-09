@@ -73,6 +73,7 @@ class CategoriesController < ApplicationController
 
   def clear_cache
     Category.clear_cache
+    redirect_to categories_path
   end
 
   private

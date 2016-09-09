@@ -23,6 +23,9 @@ $(document).ready(function () {
 
 // copy text from regex field and move over to name field
 $(document).on('click', '.js-fill_in_name', function () {
+    if($(this).siblings('.js-regex').val() == ''){
+        return;
+    }
     var regex = $(this).siblings('.js-regex').val().split(' ');
 
     for(var i = 0; i < regex.length; i++) {
@@ -32,6 +35,10 @@ $(document).on('click', '.js-fill_in_name', function () {
     regex = regex.join(' ');
 
     $(this).siblings('.js-name').val(regex);
+});
+
+$(document).on('click', '.js-fill_in_all', function () {
+    $('.js-fill_in_name').click();
 });
 
 $(document).on('click', '.js-remove_source', function () {

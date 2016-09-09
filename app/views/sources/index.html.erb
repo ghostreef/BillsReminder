@@ -8,6 +8,7 @@
     <%= button_tag('ADD', class: 'js-add_fieldset', type: 'button') %>
     <%= submit_tag('CREATE') %>
 
+    <div><i class="fa fa-arrow-circle-left js-fill_in_all"></i></div>
     <%= field_set_tag nil, class: 'js-source_fieldset' do %>
       <%= text_field_tag('sources[]name', nil, class: 'js-name', placeholder: 'Name') %>
       <i class="fa fa-arrow-circle-o-left js-fill_in_name"></i>

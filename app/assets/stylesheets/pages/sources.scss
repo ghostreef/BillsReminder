@@ -3,7 +3,11 @@
     margin-bottom: 1em;
   }
 
-  .js-fill_in_name, .js-remove_source {
+  .js-fill_in_name, .js-remove_source, .js-fill_in_all {
     cursor: pointer;
+  }
+
+  .js-fill_in_all {
+    margin-left: 10.7em;
   }
 }
