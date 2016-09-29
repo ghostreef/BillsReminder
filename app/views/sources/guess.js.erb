@@ -2,7 +2,7 @@
   <% @guesses.each do |guess| %>
     $('.js-add_fieldset').click();
     $('.js-regex:last').val('<%= guess %>');
-    $('.js-purpose:last').val(<%= Purpose.default_purpose.id %>);
+    $('.js-purpose:last').val(<%= Purpose.default_purpose.try(:id) %>);
   <% end %>
 <% else %>
   $('.js-flash_point').after('<div class="flash-notice"><div>There are no unknown transactions.</div></div>');
