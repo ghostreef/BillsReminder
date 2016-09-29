@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :helpful_tips
+  http_basic_authenticate_with name: Rails.application.secrets.username, password: Rails.application.secrets.password
+
   def dashboard
 
   end
