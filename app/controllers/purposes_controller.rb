@@ -51,12 +51,12 @@ class PurposesController < ApplicationController
   def breakdown
     @pies = []
 
-    (0..5).step(1) do |num|
+    (0..8).step(1) do |num|
       date = Date.today - num.months
       data = Transaction.where(date: date.beginning_of_month..date.end_of_month).joins(:purpose)
-                 .group('purposes.name').select('purposes.name as name, abs(sum(transactions.amount)) as total')
+                 .group('purposes.name').select('purposes.name as name, abs(sum(transactions.amount)) as total, sum(transactions.amount) as rel_total')
 
-      title = "#{I18n.t("date.abbr_month_names")[date.month]} #{date.year}"
+      title = "#{I18n.t('date.abbr_month_names')[date.month]} #{date.year} (#{data.map(&:rel_total).sum.to_f})"
 
       @pies << {title: title, points: data_to_pie_graph(data)}
     end
