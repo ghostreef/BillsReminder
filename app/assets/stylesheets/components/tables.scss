@@ -2,6 +2,8 @@ table {
   color: $dark_slate;
   border-collapse: collapse;
 
+  @extend .f15;
+
   th, td {
     padding: 0.2em .4em;
   }
