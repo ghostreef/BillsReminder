@@ -1,10 +1,10 @@
 To do:
-- messages for empty pages
-- add unknown category
+- messages for empty pages √
+- add unknown category √
 - add location and region
-- rethink associations
-- add relative amounts
-- add within means
+- rethink associations √
+- add relative amounts √
+- add within means √
 - finish category total caching √
 - add search √
 - using locality and region add figured tax paid
@@ -15,5 +15,12 @@ To do:
 - add category groups, required to add within means and other more advanced analysis
   group examples: + - <>, states, stores, traditional categories √
 - add custom validator
+- add graphs of choice, like for sources I prefer a bar chart
+- add priority/importance to transaction
+- add select to transactions
+- add email reminder for bills
+- update design, looks a bit cartoony
+- show popularity for purpose
+- work on making more things responsive
 
 I think I'm done.
